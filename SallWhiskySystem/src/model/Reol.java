@@ -9,17 +9,24 @@ public class Reol implements
         java.io.Serializable {
 
     private int nummer;
-    private Map<Hylde,Integer> hylder = new HashMap<>();
+    private Map<Integer,Hylde> hylder = new HashMap<>();
+    private Lager lager;
 
-    public Reol(int nummer) {
+    public Reol(int nummer, Lager lager) {
         this.nummer = nummer;
+        this.lager = lager;
+
     }
 
     public void addHylde(Hylde hylde){
-        hylder.put(hylde,hylde.getNummer());
+        hylder.put(hylde.getNummer(),hylde);
     }
 
     public void sletHylde(Hylde hylde){
         hylder.remove(hylde.getNummer());
+    }
+
+    public Hylde getHylde(int hyldeNummer){
+        return hylder.get(hyldeNummer);
     }
 }
