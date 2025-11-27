@@ -23,14 +23,26 @@ public class LagerPane extends GridPane {
         Label lFade = new Label("Fade");
         this.add(lFade,0,0);
 
-        this.add(lWfade,0,1);
+        this.add(tFlager,2,1);
+        Label lLager = new Label("Lager ");
+        this.add(lLager,1,1);
+
+        this.add(tFReol,2,2);
+        Label lReol = new Label("Reol ");
+        this.add(lReol,1,2);
+
+        this.add(tFHylde,2,3);
+        Label lHylde = new Label("Hylde ");
+        this.add(lHylde,1,3);
+
+        this.add(lWfade,0,1,1,6);
 
         Label LTest2 = new Label("Test 2");
         this.add(LTest2,3,6);
 
-        updateLWFade();
+        //updateLWFade();
     }
-
+/*
     private void updateLWFade() {
         if(tFlager.getCharacters().isEmpty()){
             lWfade.getItems().setAll(Controller.getFade());
@@ -48,4 +60,8 @@ public class LagerPane extends GridPane {
         }
 
     }
+
+ */
+
+
 }
