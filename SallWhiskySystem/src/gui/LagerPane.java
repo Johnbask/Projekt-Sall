@@ -41,7 +41,7 @@ public class LagerPane extends GridPane {
         } else if (tFHylde.getCharacters().isEmpty()) {
             lWfade.getItems().setAll(Controller.getLager(tFlager.getText()).getReol(Integer.parseInt(tFReol.getText())).getFade());
         } else if (!tFlager.getText().isEmpty()) {
-            lWfade.getItems().setAll(Controller.getLager(tFlager.getText()).getFade();
+            lWfade.getItems().setAll(Controller.getLager(tFlager.getText()).getFade());
         }
         else{
             // error mesage
