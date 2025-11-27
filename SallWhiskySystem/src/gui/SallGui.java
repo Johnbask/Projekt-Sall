@@ -28,9 +28,26 @@ public class SallGui extends Application {
     private void initTabPane(TabPane tabPane) {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        Tab tabKonference = new Tab("Storage");
-        tabPane.getTabs().add(tabKonference);
+        // Lager Tab
+        Tab tabLager = new Tab("Lager");
+        tabPane.getTabs().add(tabLager);
         LagerPane lagerPane = new LagerPane();
-        tabKonference.setContent(lagerPane);
+        tabLager.setContent(lagerPane);
+
+        // Fade Tab
+        Tab tabFade = new Tab("Fade");
+        tabPane.getTabs().add(tabFade);
+        FadePane fadePane = new FadePane();
+        tabFade.setContent(fadePane);
+
+
+        // Medarbejder Tab
+
+        // Destillering Tab
+
+        // Flaske Tab
+
+
+
     }
 }
