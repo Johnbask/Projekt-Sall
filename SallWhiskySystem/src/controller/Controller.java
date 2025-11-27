@@ -17,6 +17,16 @@ public class Controller {
         return Storage.getLagere();
     }
 
+    public static Lager getLager(int x){
+        List<Lager> lagers = getLager();
+        for (Lager lager : lagers) {
+            if(lager.getLagerId == x){
+                return lager;
+            }
+        }
+        return null;
+    }
+
     public static Lager opretLager(String adresse,  String  navn){
         Lager lager= new Lager(adresse,navn);
         Storage.addLager(lager);
