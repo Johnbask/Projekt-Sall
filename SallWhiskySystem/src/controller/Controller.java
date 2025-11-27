@@ -33,22 +33,28 @@ public class Controller {
         return lager;
     }
 
+
     public static void addReolerTilLager(Lager lager, int num){
         for (int i = 0; i < num; i++) {
             lager.addReol(lager.getReoler().size()+1);
         }
     }
+
+
     public static void addHylderTilReol(Reol reol, int num){
         for (int i = 0; i < num; i++) {
             reol.addHylde(reol.getHylder().size()+1);
         }
     }
 
+    // should throw exception if the lager doesnt exist
     public static Reol FindReolPåLager (Lager lager, int num){
 
         return lager.getReol(num);
     }
 
+
+    // should throw exception if the reol or hylde doesnt exist
     public static Hylde FindHyldePåReolFraLager (Lager lager, int reolNummer, int hyldeNummer){
 
         return lager.getReol(reolNummer).getHylde(hyldeNummer);
