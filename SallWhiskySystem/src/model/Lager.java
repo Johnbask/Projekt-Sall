@@ -18,8 +18,8 @@ public class Lager implements
         this.navn = navn;
     }
 
-    public void addReol(int x,Reol reol){
-        reoler.put(x,reol);
+    public void addReol(int x){
+        reoler.put(x,new Reol(x,this));
     }
 
     public Reol getReol(int x){
