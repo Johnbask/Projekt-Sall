@@ -61,6 +61,13 @@ public class Controller {
         return lager.getReol(reolNummer).getHylde(hyldeNummer);
     }
 
+    // opret fad
+    public static Fad opretFad(int id,Hylde hylde){
+        Fad fad = new Fad(id,hylde);
+        Storage.addFade(fad);
+        return fad;
+    }
+
 
 
 

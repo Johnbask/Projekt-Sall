@@ -47,11 +47,11 @@ public class LagerPane extends GridPane {
         if(tFlager.getCharacters().isEmpty()){
             lWfade.getItems().setAll(Controller.getFade());
         } else if (!tFlager.getCharacters().isEmpty()&&!tFReol.getCharacters().isEmpty()&&!tFHylde.getCharacters().isEmpty()){
-            lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getReol(Integer.parseInt(tFReol.getText())).getHylde(Integer.parseInt(tFHylde.getText())).getFade());
+            lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getReol(Integer.parseInt(tFReol.getText())).getHylde(Integer.parseInt(tFHylde.getText())).getFad());
         } else if (tFHylde.getCharacters().isEmpty()) {
             lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getReol(Integer.parseInt(tFReol.getText())).getFade());
         } else if (!tFlager.getText().isEmpty()) {
-            lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getFad());
+            lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getFade());
         }
         else{
             System.out.println("ERROR");// skal erstats med try catch

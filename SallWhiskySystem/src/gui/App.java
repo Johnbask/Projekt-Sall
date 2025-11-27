@@ -2,9 +2,18 @@ package gui;
 
 import controller.Controller;
 import javafx.application.Application;
+import model.Fad;
+import model.Hylde;
 import model.Lager;
+import model.Reol;
+import storage.Storage;
 
 import javax.naming.ldap.Control;
+import java.security.Key;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
@@ -38,7 +47,41 @@ public class App {
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,3),2);
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,4),2);
 
+        for (int i = 0; i < 20; i++) {
+            Controller.opretFad(i,findledigHylde());
+        }
 
+
+    }
+
+
+    // hælpemetode finder ledig hylde
+    // retunere null hvis denne ikke findes
+    public static Hylde findledigHylde(){
+        ArrayList<Lager> lagers = new ArrayList<>();
+        Map<Integer,Reol> reols = new HashMap();
+        Map<Integer,Hylde> hylders = new HashMap<>();
+        lagers.addAll(Controller.getLager());
+        for (Lager lager : lagers) {
+              reols.putAll(lager.getReoler());
+        }
+        reols.forEach((id, reol)-> hylders.putAll(reol.getHylder()));
+
+        for(Hylde hylde : hylders.values()){
+            if(hylde.getFad() == null){
+                return hylde;
+            }
+        }
+
+        return null;
+
+
+        //    // Find første hylde uden fad
+        //    for (Hylde hylde : hylders.values()) {
+        //        if (hylde.getFad() == null) {
+        //            return hylde;
+        //        }
+        //    }
 
     }
 }

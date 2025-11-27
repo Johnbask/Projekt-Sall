@@ -1,7 +1,5 @@
 package model;
-
-import com.sun.scenario.effect.impl.state.AccessHelper;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +39,13 @@ public class Lager implements
 
     public int getLagerId() {
         return LagerId;
+    }
+
+    public List<Fad> getFade(){
+      List<Fad> res = new ArrayList<>();
+      reoler.forEach((key, reol)->
+              reol.getHylder().forEach((nummer, hylde) ->
+              res.add(hylde.getFad())));
+      return res;
     }
 }
