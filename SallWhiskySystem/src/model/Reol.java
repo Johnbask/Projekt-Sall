@@ -18,8 +18,8 @@ public class Reol implements
 
     }
 
-    public void addHylde(Hylde hylde){
-        hylder.put(hylde.getNummer(),hylde);
+    public void addHylde(int x){
+        hylder.put(x,new Hylde(x,this));
     }
 
     public void sletHylde(Hylde hylde){
