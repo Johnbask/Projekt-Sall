@@ -6,6 +6,7 @@ import model.Lager;
 import model.Reol;
 import storage.Storage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -20,7 +21,7 @@ public class Controller {
     public static Lager getLager(int x){
         List<Lager> lagers = getLager();
         for (Lager lager : lagers) {
-            if(lager.getLagerId == x){
+            if(lager.getLagerId() == x){
                 return lager;
             }
         }

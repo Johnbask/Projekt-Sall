@@ -51,7 +51,7 @@ public class LagerPane extends GridPane {
         } else if (tFHylde.getCharacters().isEmpty()) {
             lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getReol(Integer.parseInt(tFReol.getText())).getFade());
         } else if (!tFlager.getText().isEmpty()) {
-            lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getFade());
+            lWfade.getItems().setAll(Controller.getLager(Integer.parseInt(tFlager.getText())).getFad());
         }
         else{
             System.out.println("ERROR");// skal erstats med try catch
