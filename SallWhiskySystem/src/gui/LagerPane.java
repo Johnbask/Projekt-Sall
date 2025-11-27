@@ -44,7 +44,7 @@ public class LagerPane extends GridPane {
             lWfade.getItems().setAll(Controller.getLager(tFlager.getText()).getFade());
         }
         else{
-            // error mesage
+            System.out.println("ERROR");// skal erstats med try catch
         }
 
     }
