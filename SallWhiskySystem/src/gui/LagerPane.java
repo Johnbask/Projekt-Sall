@@ -40,9 +40,9 @@ public class LagerPane extends GridPane {
         Label LTest2 = new Label("Test 2");
         this.add(LTest2,3,6);
 
-        //updateLWFade();
+        updateLWFade();
     }
-/*
+
     private void updateLWFade() {
         if(tFlager.getCharacters().isEmpty()){
             lWfade.getItems().setAll(Controller.getFade());
@@ -61,7 +61,6 @@ public class LagerPane extends GridPane {
 
     }
 
- */
 
 
 }
