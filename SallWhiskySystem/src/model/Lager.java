@@ -26,6 +26,10 @@ public class Lager implements
         return reoler.get(x);
     }
 
+    public Map<Integer, Reol> getReoler() {
+        return reoler;
+    }
+
     public void removeReol(int x){
         reoler.remove(x);
     }
