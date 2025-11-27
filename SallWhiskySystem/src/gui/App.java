@@ -1,6 +1,9 @@
 package gui;
 
+import controller.Controller;
 import javafx.application.Application;
+
+import javax.naming.ldap.Control;
 
 public class App {
     public static void main(String[] args) {
@@ -12,6 +15,9 @@ public class App {
     }
 
     public static void initStorage(){
+
+
+       // Controller.opretLager()
 
     }
 }
