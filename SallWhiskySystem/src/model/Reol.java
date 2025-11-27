@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Reol {
+public class Reol implements
+        java.io.Serializable {
 
     private int nummer;
     private Map<Hylde,Integer> hylder = new HashMap<>();

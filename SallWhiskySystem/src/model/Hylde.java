@@ -1,6 +1,7 @@
 package model;
 
-public class Hylde {
+public class Hylde implements
+        java.io.Serializable {
 
 
     private int nummer;

@@ -1,6 +1,7 @@
 package model;
 
-public class Lager {
+public class Lager implements
+        java.io.Serializable {
 
     private String adresse;
     private int LagerId;
