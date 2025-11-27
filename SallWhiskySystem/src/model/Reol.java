@@ -29,4 +29,16 @@ public class Reol implements
     public Hylde getHylde(int hyldeNummer){
         return hylder.get(hyldeNummer);
     }
+
+    public int getNummer() {
+        return nummer;
+    }
+
+    public Map<Integer, Hylde> getHylder() {
+        return hylder;
+    }
+
+    public Lager getLager() {
+        return lager;
+    }
 }
