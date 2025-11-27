@@ -39,8 +39,7 @@ public class Lager implements
         reoler.remove(x);
     }
 
-
-
-
-
+    public int getLagerId() {
+        return LagerId;
+    }
 }
