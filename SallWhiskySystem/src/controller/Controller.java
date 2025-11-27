@@ -1,6 +1,7 @@
 package controller;
 
 import model.Fad;
+import model.Hylde;
 import model.Lager;
 import model.Reol;
 import storage.Storage;
@@ -16,8 +17,8 @@ public class Controller {
         return Storage.getLagere();
     }
 
-    public static Lager opretLager(String adresse, int lagerId,  String  navn){
-        Lager lager= new Lager(adresse,lagerId,navn);
+    public static Lager opretLager(String adresse,  String  navn){
+        Lager lager= new Lager(adresse,navn);
         Storage.addLager(lager);
         return lager;
     }
@@ -32,6 +33,21 @@ public class Controller {
             reol.addHylde(reol.getHylder().size()+1);
         }
     }
+
+    public static Reol FindReolPåLager (Lager lager, int num){
+
+        return lager.getReol(num);
+    }
+
+    public static Hylde FindHyldePåReolFraLager (Lager lager, int reolNummer, int hyldeNummer){
+
+        return lager.getReol(reolNummer).getHylde(hyldeNummer);
+    }
+
+
+
+
+
 
 }
 

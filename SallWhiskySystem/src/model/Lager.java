@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.scenario.effect.impl.state.AccessHelper;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,14 +9,17 @@ import java.util.Map;
 public class Lager implements
         java.io.Serializable {
 
+    public static int AntalLagere=1;
+
     private String adresse;
     private int LagerId;
     private  String navn;
     private Map<Integer,Reol> reoler = new HashMap<>();
 
-    public Lager(String adresse, int lagerId, String navn) {
+    public Lager(String adresse, String navn) {
         this.adresse = adresse;
-        LagerId = lagerId;
+        LagerId = AntalLagere;
+        AntalLagere++;
         this.navn = navn;
     }
 
