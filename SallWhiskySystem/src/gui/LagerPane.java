@@ -48,5 +48,4 @@ public class LagerPane extends GridPane {
         }
 
     }
-
 }
