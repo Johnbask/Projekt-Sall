@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Storage {
 
-    static List<Lager> lagere = new ArrayList<>();
-    static List<Fad> fade = new ArrayList<>();
+    static List<Lager> lagere;
+    static List<Fad> fade;
 
     public static void addLager(Lager lager){
         lagere.add(lager);
@@ -62,12 +62,8 @@ public class Storage {
              ObjectOutputStream objOut =
                      new ObjectOutputStream(fileOut)
         ){
-
             objOut.writeObject(lagere);
             objOut.writeObject(fade);
-
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

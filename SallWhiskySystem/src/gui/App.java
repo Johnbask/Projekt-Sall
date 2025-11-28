@@ -24,8 +24,6 @@ public class App {
 
 // SKAL forbindes til controller istedet så metoden kalder controller der kalder storage
         Storage.readStorage();
-
-
 // opret lagere
         /*Lager SHlager = Controller.opretLager("Sønderhøj 30","Det første lager");
         Lager SanderLager = Controller.opretLager("Serup Tinghøjvej 1", "Det bedste Lager");
