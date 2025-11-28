@@ -1,7 +1,9 @@
 package gui;
 
 import controller.Controller;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -13,6 +15,7 @@ public class LagerPane extends GridPane {
     private final TextField tFlager = new TextField();
     private final TextField tFReol = new TextField();
     private final TextField tFHylde = new TextField();
+    private final Button bFlytFad = new Button("Flyt Fad");
 
     public LagerPane(){
         this.setPadding(new Insets(20));
@@ -35,20 +38,32 @@ public class LagerPane extends GridPane {
         tFReol.textProperty().addListener(observable-> updateLWFade());
         tFReol.editableProperty().setValue(false);
 
-
         this.add(tFHylde,2,3);
         Label lHylde = new Label("Hylde id");
         this.add(lHylde,1,3);
         tFHylde.textProperty().addListener(observable -> updateLWFade());
         tFReol.editableProperty().setValue(false);
 
-
         this.add(lWfade,0,1,1,6);
+        ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
+        lWfade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
 
-        Label LTest2 = new Label("Test 2");
-        this.add(LTest2,3,6);
+
+        this.add(bFlytFad,0,7);
+        bFlytFad.setDisable(true);
+        bFlytFad.setOnAction(event -> flytFadPane(lWfade.getSelectionModel().getSelectedItem()));
+
+
 
         updateLWFade();
+    }
+
+    private void selectedFadChanged() {
+        if(lWfade.getSelectionModel().getSelectedItem() != null){
+            bFlytFad.setDisable(false);
+        }else{
+            bFlytFad.setDisable(true);
+        }
     }
 
     public void updateEditabel(){
@@ -89,10 +104,9 @@ public class LagerPane extends GridPane {
 
     }
 
-    public void flytFadPane(){
-
-
-
+    public void flytFadPane(Fad fad){
+        FlytFadPane flytFadPane = new FlytFadPane("FlytFad",fad);
+        flytFadPane.showAndWait();
     }
 
 
