@@ -69,6 +69,15 @@ public class Controller {
     }
 
 
+    public static void writeStorage(){
+        Storage.writeStorage();
+    }
+
+    public static void readStorage(){
+        Storage.readStorage();
+    }
+
+
 
 
 
