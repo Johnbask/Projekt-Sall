@@ -6,6 +6,7 @@ import model.Fad;
 import model.Hylde;
 import model.Lager;
 import model.Reol;
+import storage.Storage;
 
 import java.util.*;
 
@@ -20,8 +21,13 @@ public class App {
 
     public static void initStorage(){
 
+
+// SKAL forbindes til controller istedet så metoden kalder controller der kalder storage
+        Storage.readStorage();
+
+
 // opret lagere
-        Lager SHlager = Controller.opretLager("Sønderhøj 30","Det første lager");
+        /*Lager SHlager = Controller.opretLager("Sønderhøj 30","Det første lager");
         Lager SanderLager = Controller.opretLager("Serup Tinghøjvej 1", "Det bedste Lager");
 
 
@@ -40,13 +46,18 @@ public class App {
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,2),2);
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,3),2);
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,4),2);
-
+*/
 
         int i = 0;
         while (findledigHylde()!= null){
             Controller.opretFad(i,findledigHylde());
             i++;
         }
+
+
+// write storage
+ Storage.writeStorage();
+
 
     }
 

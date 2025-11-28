@@ -3,6 +3,7 @@ package storage;
 import model.Fad;
 import model.Lager;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Storage {
     public static void addLager(Lager lager){
         lagere.add(lager);
     }
+
     public static void removeLager(Lager lager){
         lagere.remove(lager);
     }
@@ -33,5 +35,43 @@ public class Storage {
 
     public static void removeFade(Fad fad) {
         fade.remove(fad);
+    }
+
+
+
+
+
+
+    public static void  readStorage(){
+        try (FileInputStream fileIn =
+                     new FileInputStream("storage.txt");
+             ObjectInputStream objIn =
+                     new ObjectInputStream(fileIn)
+        ) {
+            lagere = (ArrayList) objIn.readObject();
+            fade = (ArrayList) objIn.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static void  writeStorage(){
+        try (FileOutputStream fileOut =
+                     new FileOutputStream("storage.txt");
+             ObjectOutputStream objOut =
+                     new ObjectOutputStream(fileOut)
+        ){
+
+            objOut.writeObject(lagere);
+            objOut.writeObject(fade);
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }
