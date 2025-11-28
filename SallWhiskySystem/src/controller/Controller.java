@@ -50,7 +50,6 @@ public class Controller {
 
     // should throw exception if the lager doesnt exist
     public static Reol FindReolPåLager (Lager lager, int num){
-
         return lager.getReol(num);
     }
 
