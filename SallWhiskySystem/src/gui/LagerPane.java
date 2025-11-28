@@ -19,6 +19,7 @@ public class LagerPane extends GridPane {
         this.setHgap(20);
         this.setVgap(10);
         this.setGridLinesVisible(false);
+        System.out.println("test");
 
         Label lFade = new Label("Fade");
         this.add(lFade,0,0);

@@ -32,4 +32,7 @@ public class Hylde implements
         this.fad=null;
     }
 
+    public Reol getReol() {
+        return reol;
+    }
 }

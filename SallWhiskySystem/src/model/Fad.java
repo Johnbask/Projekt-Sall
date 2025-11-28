@@ -11,9 +11,8 @@ public class Fad implements
 
     @Override
     public String toString() {
-        return "Fad{" +
-                "fadId=" + fadId +
-                '}';
+        return
+                "fad"+ fadId + " Hylde"+ hylde.getNummer() + " reol" + hylde.getReol().getNummer()+" lager"+ hylde.getReol().getLager().getLagerId() ;
     }
 }
 
