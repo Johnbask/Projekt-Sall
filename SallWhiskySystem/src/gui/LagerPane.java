@@ -1,7 +1,6 @@
 package gui;
 
 import controller.Controller;
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -34,12 +33,15 @@ public class LagerPane extends GridPane {
         Label lReol = new Label("Reol id");
         this.add(lReol,1,2);
         tFReol.textProperty().addListener(observable-> updateLWFade());
+        tFReol.editableProperty().setValue(false);
 
 
         this.add(tFHylde,2,3);
         Label lHylde = new Label("Hylde id");
         this.add(lHylde,1,3);
         tFHylde.textProperty().addListener(observable -> updateLWFade());
+        tFReol.editableProperty().setValue(false);
+
 
         this.add(lWfade,0,1,1,6);
 
@@ -49,7 +51,29 @@ public class LagerPane extends GridPane {
         updateLWFade();
     }
 
+    public void updateEditabel(){
+
+        if(!tFlager.getText().isBlank()){
+            tFReol.setEditable(true);
+        }
+        if (!tFReol.getText().isBlank()){
+            tFHylde.setEditable(true);
+        }
+        if(tFlager.getText().isBlank()){
+            tFReol.setEditable(false);
+            if(!tFReol.getText().isBlank()) tFReol.clear();
+            tFHylde.setEditable(false);
+            if(!tFHylde.getText().isBlank()) tFHylde.clear();
+        }
+        if(tFReol.getText().isBlank()){
+            tFHylde.setEditable(false);
+            if(!tFHylde.getText().isBlank()) tFHylde.clear();
+        }
+
+    }
+
     private void updateLWFade() {
+        updateEditabel();
         if(tFlager.getCharacters().isEmpty()){
             lWfade.getItems().setAll(Controller.getFade());
         } else if (!tFlager.getCharacters().isEmpty()&&!tFReol.getCharacters().isEmpty()&&!tFHylde.getCharacters().isEmpty()){
@@ -65,6 +89,11 @@ public class LagerPane extends GridPane {
 
     }
 
+    public void flytFadPane(){
+
+
+
+    }
 
 
 }
