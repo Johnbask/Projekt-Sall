@@ -64,6 +64,8 @@ public class Controller {
     // opret fad
     public static Fad opretFad(int id,Hylde hylde){
         Fad fad = new Fad(id,hylde);
+        hylde.addFad(fad);
+        System.out.println("test");
         Storage.addFade(fad);
         return fad;
     }

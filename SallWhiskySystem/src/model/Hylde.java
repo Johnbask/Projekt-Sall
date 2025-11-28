@@ -1,13 +1,12 @@
 package model;
 
-import java.util.List;
 
 public class Hylde implements
         java.io.Serializable {
 
 
     private int nummer;
-    private Fad fad;
+    private Fad fad = null;
     private Reol reol;
 
 

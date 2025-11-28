@@ -47,9 +47,13 @@ public class App {
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,3),2);
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,4),2);
 
-        for (int i = 0; i < 20; i++) {
+        int i = 0;
+        while (findledigHylde()!= null){
             Controller.opretFad(i,findledigHylde());
+            i++;
         }
+
+
 
 
     }
@@ -74,14 +78,5 @@ public class App {
         }
 
         return null;
-
-
-        //    // Find første hylde uden fad
-        //    for (Hylde hylde : hylders.values()) {
-        //        if (hylde.getFad() == null) {
-        //            return hylde;
-        //        }
-        //    }
-
     }
 }
