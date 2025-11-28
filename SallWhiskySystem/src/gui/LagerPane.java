@@ -89,6 +89,11 @@ public class LagerPane extends GridPane {
 
     }
 
+    public void flytFadPane(){
+
+
+
+    }
 
 
 }
