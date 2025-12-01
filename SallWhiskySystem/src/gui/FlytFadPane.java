@@ -100,6 +100,7 @@ public class FlytFadPane extends Stage {
     private void selectedLagerChanged() {
         if(lWLager.getSelectionModel().getSelectedItem() !=null){
             opdaterLWReol();
+            bFlyt.setDisable(true);
         }
     }
 
@@ -108,10 +109,8 @@ public class FlytFadPane extends Stage {
             tommeReoler.clear();
             lWLager.getSelectionModel().getSelectedItem().getReoler().forEach((key ,reol) -> {if(chekOmHarTomme(reol))tommeReoler.add(reol);});
             lWReol.getItems().setAll(tommeReoler);
-        }else {
-            lWReol.getItems().removeAll();
-            lWHylde.getItems().removeAll();
         }
+
     }
 
     // funktion der chekker om en reol har en eller flere tomme hylder
