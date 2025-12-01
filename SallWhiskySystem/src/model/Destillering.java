@@ -20,6 +20,15 @@ public class Destillering {
     //tror den her forbindelse ikke skal være her men better safe than sorry
     private  List<Destilat> destilatList;
 
+    public Destillering(int newMakeId, LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, String kommentar) {
+        this.newMakeId = newMakeId;
+        this.startDato = startDato;
+        this.slutDato = slutDato;
+        this.mængdeProduceret = mængdeProduceret;
+        this.alkoholProcent = alkoholProcent;
+        this.kommentar = kommentar;
+    }
+
     public void setKommentar(String kommentar) {
         this.kommentar = kommentar;
     }
