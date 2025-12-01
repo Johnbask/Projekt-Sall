@@ -11,7 +11,7 @@ import model.Fad;
 
 public class SporbarhedPane extends GridPane {
     private final ListView<Fad> lwFade = new ListView<>();
-    private final TextField txfFade = new TextField("Search Fade");
+    private final TextField txfFade = new TextField();
     private final Button btnSøg = new Button("Search");
 
     public SporbarhedPane() {
@@ -22,9 +22,14 @@ public class SporbarhedPane extends GridPane {
 
         this.add(new Label("Fade"), 0, 0);
         this.add(lwFade, 0, 1);
-        this.add(new Label("Search Fade"), 0, 2);
-        this.add(txfFade, 0, 3);
-        this.add(btnSøg, 1, 3);
+        this.add(new Label("Søg Fade:"), 0, 2);
+        this.add(txfFade, 0, 2);
+        this.add(btnSøg, 0, 2);
+
+        txfFade.setTranslateX(60);
+        txfFade.setMaxWidth(110);
+        txfFade.setPromptText("Søg Fade");
+        btnSøg.setTranslateX(180);
 
         updateLwFade();
     }
