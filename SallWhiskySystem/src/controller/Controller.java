@@ -1,11 +1,9 @@
 package controller;
 
-import model.Fad;
-import model.Hylde;
-import model.Lager;
-import model.Reol;
+import model.*;
 import storage.Storage;
 
+import javax.management.monitor.GaugeMonitor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +59,10 @@ public class Controller {
     }
 
     // opret fad
-    public static Fad opretFad(int id,Hylde hylde){
-        Fad fad = new Fad(id,hylde);
+    // TODO færdiggøre
+    public static Fad opretFad(double liter, String materiale, int fadId, List<String> tidligereIndhold, String leverandør,
+                               Destilat gamleDestillater,  Hylde hylde, LageringsHist lageringsHists, Omhældning omhældning){
+        Fad fad = new Fad(liter, materiale, fadId, tidligereIndhold, leverandør, gamleDestillater, hylde, lageringsHists, omhældning);
         hylde.addFad(fad);
         Storage.addFade(fad);
         return fad;

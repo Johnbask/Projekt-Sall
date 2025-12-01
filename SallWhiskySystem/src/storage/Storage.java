@@ -107,12 +107,14 @@ public class Storage {
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,3),2);
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,4),2);
 
-
+/*
         int i = 0;
         while (findledigHylde()!= null){
             Controller.opretFad(i+1,findledigHylde());
             i++;
         }
+
+ */
 
 
         Controller.addReolerTilLager(SHlager,1);
