@@ -1,5 +1,6 @@
 package gui;
 
+import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -8,6 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.Fad;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
 
 public class LagerPane extends GridPane {
     private final ListView<Fad> lWfade = new ListView<>();
@@ -46,10 +51,11 @@ public class LagerPane extends GridPane {
         tFHylde.textProperty().addListener(observable -> updateLWFade());
         tFReol.editableProperty().setValue(false);
 
+
         Label lFad = new Label("Fad id");
         this.add(lFad,1,4);
         this.add(tFad,2,4);
-        tFad.textProperty().addListener(observable -> findFadMedId(lWfade.getSelectionModel().getSelectedItem()));
+        tFad.textProperty().addListener(observable -> findFadMedId());
 
         this.add(lWfade,0,1,1,6);
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
@@ -76,10 +82,25 @@ public class LagerPane extends GridPane {
         bOpretFad.setOnAction(event -> opretFadPane());
 
 
+
+
+
+
         updateLWFade();
     }
 
-    private void findFadMedId(Fad selectedItem) {
+    private void findFadMedId() {
+
+try {
+
+    List<Fad> fade = new ArrayList<>();
+    Controller.getFade().forEach(fad ->
+    {if (fad.getFadId()==Integer.parseInt(tFad.getText())){fade.add(fad);}});
+    lWfade.getItems().setAll(fade);
+
+}catch (IllegalArgumentException e){
+    System.out.println("success");
+}
 
 
     }
