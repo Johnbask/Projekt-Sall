@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.Fad;
+import org.w3c.dom.Text;
 import storage.Storage;
 
 public class LagerPane extends GridPane {
@@ -15,6 +16,7 @@ public class LagerPane extends GridPane {
     private final TextField tFlager = new TextField();
     private final TextField tFReol = new TextField();
     private final TextField tFHylde = new TextField();
+    private TextField  tFad = new TextField();
     private final Button bFlytFad = new Button("Flyt Fad");
     private final Button bSletFad = new Button("Slet Fad");
     private final Button bOpretFad = new Button("Opret Fad");
@@ -46,6 +48,11 @@ public class LagerPane extends GridPane {
         tFHylde.textProperty().addListener(observable -> updateLWFade());
         tFReol.editableProperty().setValue(false);
 
+        Label lFad = new Label("Fad navn");
+        this.add(lFad,1,4);
+        this.add(tFad,2,4);
+        tFad.textProperty().addListener(observable -> findFadMedNavn());
+
         this.add(lWfade,0,1,1,6);
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
         lWfade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
@@ -72,6 +79,11 @@ public class LagerPane extends GridPane {
 
 
         updateLWFade();
+    }
+
+    private void findFadMedNavn() {
+
+
     }
 
     private void opretFadPane() {
