@@ -34,4 +34,9 @@ public class Hylde implements
     public Reol getReol() {
         return reol;
     }
+
+    @Override
+    public String toString() {
+        return "Hylde " + nummer;
+    }
 }
