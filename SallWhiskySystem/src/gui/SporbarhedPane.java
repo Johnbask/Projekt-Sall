@@ -9,12 +9,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import model.Fad;
 
-public class FadePane extends GridPane {
+public class SporbarhedPane extends GridPane {
     private final ListView<Fad> lwFade = new ListView<>();
     private final TextField txfFade = new TextField("Search Fade");
     private final Button btnSøg = new Button("Search");
 
-    public FadePane() {
+    public SporbarhedPane() {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);

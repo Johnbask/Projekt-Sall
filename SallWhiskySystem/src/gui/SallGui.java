@@ -34,11 +34,11 @@ public class SallGui extends Application {
         LagerPane lagerPane = new LagerPane();
         tabLager.setContent(lagerPane);
 
-        // Fade Tab
-        Tab tabFade = new Tab("Fade");
-        tabPane.getTabs().add(tabFade);
-        FadePane fadePane = new FadePane();
-        tabFade.setContent(fadePane);
+        // Sporbarhed Tab
+        Tab tabSporbarhed = new Tab("Sporbarhed");
+        tabPane.getTabs().add(tabSporbarhed);
+        SporbarhedPane sporbarhedPane = new SporbarhedPane();
+        tabSporbarhed.setContent(sporbarhedPane);
 
 
         // Medarbejder Tab
