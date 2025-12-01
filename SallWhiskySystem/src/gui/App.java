@@ -26,11 +26,10 @@ public class App {
         Controller.readStorage();
 
 
-
-
-
 // write storage
  Controller.writeStorage();
+
+
 
 
     }
@@ -84,5 +83,13 @@ public class App {
             Controller.opretFad(i,findledigHylde());
             i++;
         }
+
+
+        Controller.addReolerTilLager(SHlager,1);
+        Controller.addReolerTilLager(SanderLager,1);
+        Controller.addHylderTilReol(Controller.FindReolPåLager(SHlager,5),7);
+        Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,5),2);
+
+
     }
 }

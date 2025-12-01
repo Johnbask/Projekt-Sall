@@ -22,5 +22,9 @@ public class Fad implements
     public Hylde getHylde() {
         return hylde;
     }
+
+    public void setHylde(Hylde hylde) {
+        this.hylde = hylde;
+    }
 }
 
