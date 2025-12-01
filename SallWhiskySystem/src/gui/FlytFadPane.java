@@ -1,6 +1,8 @@
 package gui;
 
 import controller.Controller;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +16,9 @@ import model.Fad;
 import model.Hylde;
 import model.Lager;
 import model.Reol;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlytFadPane extends Stage {
 
@@ -34,6 +39,7 @@ public class FlytFadPane extends Stage {
     private final ListView<Reol> lWReol = new ListView<>();
     private final ListView<Hylde> lWHylde = new ListView<>();
     private final Button bFlyt = new Button("Flyt");
+    public List<Reol> tommeReoler = new ArrayList<>();
 
     public void initContent(GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -48,6 +54,9 @@ public class FlytFadPane extends Stage {
         pane.add(lLager,0,1);
         pane.add(lWLager,0,2);
         lWLager.getItems().setAll(Controller.getLager());
+        ChangeListener<Lager> listenerLager = (ov, o, n) -> this.selectedLagerChanged();
+        lWLager.getSelectionModel().selectedItemProperty().addListener(listenerLager);
+
 
         Label lReol = new Label("Tomme reoler");
         pane.add(lReol,1,1);
@@ -57,6 +66,35 @@ public class FlytFadPane extends Stage {
         pane.add(lHylde,2,1);
         pane.add(lWHylde,2,2);
 
+        pane.add(bFlyt,0,3,1,3);
+
     }
+
+    private void selectedLagerChanged() {
+        if(lWLager.getSelectionModel().getSelectedItem() !=null){
+            opdaterLWReol();
+        }
+    }
+
+    private void opdaterLWReol(){
+        if(lWLager.getSelectionModel().getSelectedItem() != null){
+            tommeReoler.clear();
+            lWLager.getSelectionModel().getSelectedItem().getReoler().forEach((key ,reol)-> {if(chekOmHarTomme(reol))tommeReoler.add(reol);});
+            lWReol.getItems().setAll(tommeReoler);
+        }
+    }
+
+
+    // funktion der chekker om en reol har en eller flere tomme hylder
+    private boolean chekOmHarTomme(Reol reol){
+        // TODO
+        return true;
+    }
+
+    private void opdaterLWHylder(){
+        //TODO
+    }
+
+
 
 }
