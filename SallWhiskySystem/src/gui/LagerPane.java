@@ -94,6 +94,7 @@ public class LagerPane extends GridPane {
     private void sletFad(Fad fad) {
         Controller.sletFad(fad);
        updateLWFade();
+       Controller.writeStorage();
 
     }
 
@@ -149,6 +150,7 @@ public class LagerPane extends GridPane {
     public void flytFadPane(Fad fad){
         FlytFadPane flytFadPane = new FlytFadPane("FlytFad",fad);
         flytFadPane.showAndWait();
+        Controller.writeStorage();
     }
 
 
