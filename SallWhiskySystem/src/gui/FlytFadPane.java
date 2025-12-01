@@ -4,9 +4,7 @@ import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -129,7 +127,15 @@ public class FlytFadPane extends Stage {
     }
 
     public void flyt(){
-        fadet.setHylde(lWHylde.getSelectionModel().getSelectedItem());
-        this.hide();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("you usuer u wannna move that");
+        alert.showAndWait();
+        if(alert.getResult().equals(ButtonType.OK)){
+            fadet.setHylde(lWHylde.getSelectionModel().getSelectedItem());
+            this.hide();
+            alert.hide();
+        }else{
+            alert.hide();
+        }
     }
 }
