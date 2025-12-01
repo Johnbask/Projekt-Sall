@@ -39,17 +39,12 @@ public class Storage {
         fade.remove(fad);
     }
 
-
-
-
-
-
     public static void  readStorage(){
         try (FileInputStream fileIn =
                      new FileInputStream("SallWhiskySystem/src/storage/storage.txt");
              ObjectInputStream objIn =
-                     new ObjectInputStream(fileIn)
-        ) {
+                     new ObjectInputStream(fileIn))
+        {
             if (objIn.available()==0){
                 lagere= new ArrayList<>();
                 fade=new ArrayList<>();
@@ -60,9 +55,8 @@ public class Storage {
                 fade = (ArrayList) objIn.readObject();
             }
 
-
-
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Catch readStorage");
             throw new RuntimeException(e);
         }
 
@@ -77,7 +71,8 @@ public class Storage {
             objOut.writeObject(lagere);
             objOut.writeObject(fade);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Catch in writeStorage");
+            throw new RuntimeException(e.getMessage());
         }
 
 

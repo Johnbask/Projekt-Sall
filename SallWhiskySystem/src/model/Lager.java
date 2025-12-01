@@ -48,4 +48,9 @@ public class Lager implements
               res.add(hylde.getFad())));
       return res;
     }
+
+    @Override
+    public String toString() {
+        return  navn + "id : " + LagerId + "\n" + adresse ;
+    }
 }
