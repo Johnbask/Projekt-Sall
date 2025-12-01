@@ -44,7 +44,7 @@ public class Storage {
 
     public static void  readStorage(){
         try (FileInputStream fileIn =
-                     new FileInputStream("storage.txt");
+                     new FileInputStream("SallWhiskySystem/src/storage/storage.txt");
              ObjectInputStream objIn =
                      new ObjectInputStream(fileIn)
         ) {
@@ -58,7 +58,7 @@ public class Storage {
 
     public static void  writeStorage(){
         try (FileOutputStream fileOut =
-                     new FileOutputStream("storage.txt");
+                     new FileOutputStream("SallWhiskySystem/src/storage/storage.txt");
              ObjectOutputStream objOut =
                      new ObjectOutputStream(fileOut)
         ){

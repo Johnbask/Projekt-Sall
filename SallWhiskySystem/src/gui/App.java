@@ -46,11 +46,11 @@ public class App {
         Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,4),2);
 */
 
-        int i = 0;
+    /*    int i = 0;
         while (findledigHylde()!= null){
             Controller.opretFad(i,findledigHylde());
             i++;
-        }
+        }*/
 
 
 // write storage
