@@ -48,8 +48,6 @@ public class Lager implements
                       if(hylde.getFad()!= null){
                           res.add(hylde.getFad());
                       }
-
-
               }));
       return res;
     }
