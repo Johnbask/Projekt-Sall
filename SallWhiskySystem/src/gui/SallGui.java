@@ -42,6 +42,10 @@ public class SallGui extends Application {
         // Påfyldning på Fad
 
         // Fade
+        Tab tabFade = new Tab("Fade");
+        tabPane.getTabs().add(tabFade);
+        FadePane fadePane = new FadePane();
+        tabFade.setContent(fadePane);
 
         // Lager Tab
         Tab tabLager = new Tab("Lager");
