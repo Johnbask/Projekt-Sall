@@ -48,6 +48,7 @@ public class Storage {
             if (objIn.available()==0){
                 lagere= new ArrayList<>();
                 fade=new ArrayList<>();
+
                 initialStorageCreation();
             }else {
                 lagere = (ArrayList) objIn.readObject();

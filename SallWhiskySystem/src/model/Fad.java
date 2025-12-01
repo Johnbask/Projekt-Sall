@@ -14,5 +14,13 @@ public class Fad implements
         return
                 "fad"+ fadId + " Hylde"+ hylde.getNummer() + " reol" + hylde.getReol().getNummer()+" lager"+ hylde.getReol().getLager().getLagerId() ;
     }
+
+    public int getFadId() {
+        return fadId;
+    }
+
+    public Hylde getHylde() {
+        return hylde;
+    }
 }
 

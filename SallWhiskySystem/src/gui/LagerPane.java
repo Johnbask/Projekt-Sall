@@ -16,6 +16,7 @@ public class LagerPane extends GridPane {
     private final TextField tFReol = new TextField();
     private final TextField tFHylde = new TextField();
     private final Button bFlytFad = new Button("Flyt Fad");
+    private final Button bSletFad = new Button("Slet Fad");
 
     public LagerPane(){
         this.setPadding(new Insets(20));
@@ -54,8 +55,17 @@ public class LagerPane extends GridPane {
         bFlytFad.setOnAction(event -> flytFadPane(lWfade.getSelectionModel().getSelectedItem()));
 
 
+        this.add(bSletFad,2,7);
+        bSletFad.setDisable(true);
+        bSletFad.setOnAction(event -> sletFad(lWfade.getSelectionModel().getSelectedItem()));
+
 
         updateLWFade();
+    }
+
+    private void sletFad(Fad fad) {
+        
+
     }
 
     private void selectedFadChanged() {
