@@ -2,7 +2,6 @@ package gui;
 
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +18,7 @@ import model.Reol;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FlytFadPane extends Stage {
 
@@ -79,7 +79,7 @@ public class FlytFadPane extends Stage {
     private void opdaterLWReol(){
         if(lWLager.getSelectionModel().getSelectedItem() != null){
             tommeReoler.clear();
-            lWLager.getSelectionModel().getSelectedItem().getReoler().forEach((key ,reol)-> {if(chekOmHarTomme(reol))tommeReoler.add(reol);});
+            lWLager.getSelectionModel().getSelectedItem().getReoler().forEach((key ,reol) -> {if(chekOmHarTomme(reol))tommeReoler.add(reol);});
             lWReol.getItems().setAll(tommeReoler);
         }
     }
@@ -87,7 +87,7 @@ public class FlytFadPane extends Stage {
 
     // funktion der chekker om en reol har en eller flere tomme hylder
     private boolean chekOmHarTomme(Reol reol){
-        // TODO
+
         return true;
     }
 

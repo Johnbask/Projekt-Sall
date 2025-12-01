@@ -48,4 +48,9 @@ public class Reol implements
         //    hylder.forEach((key, hylde) -> reolensfade.add(hylde.getFad()));
         return reolensfade;
     }
+
+    @Override
+    public String toString() {
+        return "Reol " + nummer;
+    }
 }
