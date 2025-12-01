@@ -31,7 +31,7 @@ public class DestilleringPane extends GridPane {
     private final TextField txfBatchID = new TextField();
     private final TextArea txaKommentar = new TextArea();
     private final Button btnCreate = new Button("Create");
-
+    private final Label lblDestillering = new Label("Destillering");
 
     private void FirstSection() {
         this.setPadding(new Insets(20));
@@ -39,51 +39,54 @@ public class DestilleringPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        this.add(new Label("New Make ID: "), 0, 0);
-        this.add(txfNewMakeId, 1, 0);
+        this.add(lblDestillering, 0, 0, 2, 1);
+        lblDestillering.setStyle("-fx-font-size: 24px");
 
-        this.add(new Label("Fad Nr.:"), 0, 1);
-        this.add(txfFadNr, 1, 1);
+        this.add(new Label("New Make ID: "), 0, 1);
+        this.add(txfNewMakeId, 1, 1);
 
-        this.add(new Label("Kornsort: "), 0, 2);
-        this.add(txfKornSort, 1, 2);
+        this.add(new Label("Fad Nr.:"), 0, 2);
+        this.add(txfFadNr, 1, 2);
 
-        this.add(new Label("Start Dato: "), 0, 3);
-        this.add(dpStarDato, 1, 3);
+        this.add(new Label("Kornsort: "), 0, 3);
+        this.add(txfKornSort, 1, 3);
 
-        this.add(new Label("Mængde Liter: "), 0, 4);
-        this.add(txfMaengdeLiter, 1, 4);
+        this.add(new Label("Start Dato: "), 0, 4);
+        this.add(dpStarDato, 1, 4);
 
-        this.add(new Label("Alkohol %: "), 0, 5);
-        this.add(txfAlkoholProcent, 1, 5);
+        this.add(new Label("Mængde Liter: "), 0, 5);
+        this.add(txfMaengdeLiter, 1, 5);
 
-        this.add(new Label("Røg: "), 0, 6);
-        this.add(txfRøg, 1, 6);
+        this.add(new Label("Alkohol %: "), 0, 6);
+        this.add(txfAlkoholProcent, 1, 6);
 
-        this.add(new Label("IsSingleMalt: "), 0, 7);
+        this.add(new Label("Røg: "), 0, 7);
+        this.add(txfRøg, 1, 7);
+
+        this.add(new Label("IsSingleMalt: "), 0, 8);
         HBox hBox1 = new HBox();
         RadioButton rbnTrueSingleMalt = new RadioButton("True");
         RadioButton rbnFalseSingleMalt = new RadioButton("False");
         hBox1.getChildren().addAll(rbnTrueSingleMalt, rbnFalseSingleMalt);
-        this.add(hBox1, 1, 7);
+        this.add(hBox1, 1, 8);
         hBox1.setSpacing(10);
 
-        this.add(new Label("IsHeart: "), 0, 8);
+        this.add(new Label("IsHeart: "), 0, 9);
         HBox hBox2 = new HBox();
         RadioButton rbnTrueHeart = new RadioButton("True");
         RadioButton rbnFalseHeart = new RadioButton("False");
         hBox2.getChildren().addAll(rbnTrueHeart, rbnFalseHeart);
-        this.add(hBox2, 1, 8);
+        this.add(hBox2, 1, 9);
         hBox2.setSpacing(10);
 
-        this.add(new Label("Batch ID: "), 0, 9);
-        this.add(txfBatchID, 1, 9);
+        this.add(new Label("Batch ID: "), 0, 10);
+        this.add(txfBatchID, 1, 10);
 
-        this.add(new Label("Kommentar: "), 0, 10);
-        this.add(txaKommentar, 1, 10);
+        this.add(new Label("Kommentar: "), 0, 11);
+        this.add(txaKommentar, 1, 11);
         txaKommentar.setPrefSize(50, 100);
 
-        this.add(btnCreate, 0, 11);
+        this.add(btnCreate, 0, 12);
     }
 
     // Private fields for Second Section
@@ -122,12 +125,12 @@ public class DestilleringPane extends GridPane {
         tvDestilleringer.setItems(getData());
 
         // position in Tab
-        this.add(tvDestilleringer, 3, 0, 10, 11);
+        this.add(tvDestilleringer, 3, 1, 10, 13);
 
         // Buttons TODO: Ret positionerne af knapperne
         HBox hbo3 = new HBox();
         hbo3.getChildren().addAll(btnUpdate, btnDelete);
-        this.add(hbo3, 3, 12);
+        this.add(hbo3, 3, 14);
         hbo3.setAlignment(Pos.BASELINE_CENTER);
         hbo3.setSpacing(50);
 
