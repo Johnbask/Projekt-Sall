@@ -9,6 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.Fad;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+
 public class LagerPane extends GridPane {
     private final ListView<Fad> lWfade = new ListView<>();
     private final TextField tFlager = new TextField();
@@ -49,7 +53,7 @@ public class LagerPane extends GridPane {
         Label lFad = new Label("Fad id");
         this.add(lFad,1,4);
         this.add(tFad,2,4);
-        tFad.textProperty().addListener(observable -> findFadMedId(lWfade.getSelectionModel().getSelectedItem()));
+        tFad.textProperty().addListener(observable -> findFadMedId());
 
         this.add(lWfade,0,1,1,6);
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
@@ -79,7 +83,18 @@ public class LagerPane extends GridPane {
         updateLWFade();
     }
 
-    private void findFadMedId(Fad selectedItem) {
+    private void findFadMedId() {
+
+try {
+
+    List<Fad> fade = new ArrayList<>();
+    Controller.getFade().forEach(fad ->
+    {if (fad.getFadId()==Integer.parseInt(tFad.getText())){fade.add(fad);}});
+    lWfade.getItems().setAll(fade);
+
+}catch (IllegalArgumentException e){
+    System.out.println("success");
+}
 
 
     }
