@@ -3,12 +3,12 @@ package gui;
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import model.Fad;
+import storage.Storage;
 
 public class LagerPane extends GridPane {
     private final ListView<Fad> lWfade = new ListView<>();
@@ -17,6 +17,7 @@ public class LagerPane extends GridPane {
     private final TextField tFHylde = new TextField();
     private final Button bFlytFad = new Button("Flyt Fad");
     private final Button bSletFad = new Button("Slet Fad");
+    private final Button bOpretFad = new Button("Opret Fad");
 
     public LagerPane(){
         this.setPadding(new Insets(20));
@@ -49,30 +50,49 @@ public class LagerPane extends GridPane {
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
         lWfade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
 
+        HBox hBox = new HBox();
+        hBox.getChildren().add(bFlytFad);
+        hBox.getChildren().add(bSletFad);
+        hBox.getChildren().add(bOpretFad);
+       this.add(hBox,0,7);
+       hBox.setTranslateX(-10);
+       hBox.setSpacing(15);
+       hBox.setAlignment(Pos.CENTER);
 
-        this.add(bFlytFad,0,7);
+      //  this.add(bFlytFad,1,7);
         bFlytFad.setDisable(true);
         bFlytFad.setOnAction(event -> flytFadPane(lWfade.getSelectionModel().getSelectedItem()));
 
 
-        this.add(bSletFad,2,7);
+    //    this.add(bSletFad,2,7);
         bSletFad.setDisable(true);
         bSletFad.setOnAction(event -> sletFad(lWfade.getSelectionModel().getSelectedItem()));
+
+        bOpretFad.setOnAction(event -> opretFadPane());
 
 
         updateLWFade();
     }
 
+    private void opretFadPane() {
+        OpretFadPane opretFadPane = new OpretFadPane("OpretFad");
+        opretFadPane.showAndWait();
+    }
+
     private void sletFad(Fad fad) {
-        
+        Controller.sletFad(fad);
+       updateLWFade();
 
     }
 
     private void selectedFadChanged() {
         if(lWfade.getSelectionModel().getSelectedItem() != null){
             bFlytFad.setDisable(false);
+            bSletFad.setDisable(false);
         }else{
             bFlytFad.setDisable(true);
+            bFlytFad.setDisable(true);
+
         }
     }
 

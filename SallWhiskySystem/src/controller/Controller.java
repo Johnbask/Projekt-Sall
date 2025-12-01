@@ -78,6 +78,11 @@ public class Controller {
     }
 
 
+    public static void sletFad(Fad fad){
+        fad.getHylde().sletFad();
+        Storage.getFade().remove(fad);
+    }
+
 
 
 
