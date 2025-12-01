@@ -1,5 +1,6 @@
 package gui;
 
+import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -50,6 +51,7 @@ public class LagerPane extends GridPane {
         tFHylde.textProperty().addListener(observable -> updateLWFade());
         tFReol.editableProperty().setValue(false);
 
+
         Label lFad = new Label("Fad id");
         this.add(lFad,1,4);
         this.add(tFad,2,4);
@@ -78,6 +80,10 @@ public class LagerPane extends GridPane {
         bSletFad.setOnAction(event -> sletFad(lWfade.getSelectionModel().getSelectedItem()));
 
         bOpretFad.setOnAction(event -> opretFadPane());
+
+
+
+
 
 
         updateLWFade();
