@@ -7,6 +7,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static gui.App.initialStorageCreation;
+
 public class Storage {
 
     static List<Lager> lagere;
@@ -48,8 +50,17 @@ public class Storage {
              ObjectInputStream objIn =
                      new ObjectInputStream(fileIn)
         ) {
-            lagere = (ArrayList) objIn.readObject();
-            fade = (ArrayList) objIn.readObject();
+            if (objIn.available()==0){
+                lagere= new ArrayList<>();
+                fade=new ArrayList<>();
+                initialStorageCreation();
+            }else {
+                lagere = (ArrayList) objIn.readObject();
+                fade = (ArrayList) objIn.readObject();
+            }
+
+
+
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
