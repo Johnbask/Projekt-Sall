@@ -44,8 +44,10 @@ public class Reol implements
 
     public List<Fad> getFade(){
         List<Fad> reolensfade = new ArrayList<>();
-        hylder.forEach((key,Hylde)-> reolensfade.add(Hylde.getFad()));
-        //    hylder.forEach((key, hylde) -> reolensfade.add(hylde.getFad()));
+        hylder.forEach((key,hylde)->{
+                if(hylde.getFad()!=null)reolensfade.add(hylde.getFad());
+                }
+                );
         return reolensfade;
     }
 
