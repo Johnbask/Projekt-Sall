@@ -110,7 +110,7 @@ public class Storage {
 
         int i = 0;
         while (findledigHylde()!= null){
-            Controller.opretFad(i,findledigHylde());
+            Controller.opretFad(i+1,findledigHylde());
             i++;
         }
 
