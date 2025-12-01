@@ -44,8 +44,11 @@ public class Lager implements
     public List<Fad> getFade(){
       List<Fad> res = new ArrayList<>();
       reoler.forEach((key, reol)->
-              reol.getHylder().forEach((nummer, hylde) ->
-              res.add(hylde.getFad())));
+              reol.getHylder().forEach((nummer, hylde) ->{
+                      if(hylde.getFad()!= null){
+                          res.add(hylde.getFad());
+                      }
+              }));
       return res;
     }
 
