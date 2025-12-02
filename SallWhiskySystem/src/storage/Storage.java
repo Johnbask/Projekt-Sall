@@ -93,17 +93,16 @@ public class Storage {
         Controller.addReolerTilLager(SanderLager,4);
         // FindReolPåLager tager et lager og en int, int svare til reolens plads i lagere. Den retunere den Reol
         // addHylderTilReol tilføjere flere hylder til en reol
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SHlager,1),5);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SHlager,2),4);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SHlager,3),3);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SHlager,4),7);
 
+        Controller.addHylderTilReol(SHlager.getReol(1),5);
+        Controller.addHylderTilReol(SHlager.getReol(2),4);
+        Controller.addHylderTilReol(SHlager.getReol(3),3);
+        Controller.addHylderTilReol(SHlager.getReol(4),7);
 
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,1),2);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,2),2);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,3),2);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,4),2);
-
+        Controller.addHylderTilReol(SanderLager.getReol(1),2);
+        Controller.addHylderTilReol(SanderLager.getReol(2),2);
+        Controller.addHylderTilReol(SanderLager.getReol(3),2);
+        Controller.addHylderTilReol(SanderLager.getReol(4),2);
 
         Fad fad1=  Controller.opretFad(75, Trætype.WHITEOAK,1,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
         Fad fad2=  Controller.opretFad(75, Trætype.WHITEOAK,2,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
@@ -133,8 +132,8 @@ public class Storage {
 
         Controller.addReolerTilLager(SHlager,1);
         Controller.addReolerTilLager(SanderLager,1);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SHlager,5),7);
-        Controller.addHylderTilReol(Controller.FindReolPåLager(SanderLager,5),2);
+        Controller.addHylderTilReol(SHlager.getReol(5),7);
+        Controller.addHylderTilReol(SanderLager.getReol(5),2);
 
 
     }

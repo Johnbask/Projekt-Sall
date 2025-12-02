@@ -47,14 +47,16 @@ public class Controller {
     }
 
     // should throw exception if the lager doesnt exist
+    /*
     public static Reol FindReolPåLager (Lager lager, int num){
         return lager.getReol(num);
     }
+    */
+    //Metod remade in Lager klassen
 
 
     // should throw exception if the reol or hylde doesnt exist
     public static Hylde FindHyldePåReolFraLager (Lager lager, int reolNummer, int hyldeNummer){
-
         return lager.getReol(reolNummer).getHylde(hyldeNummer);
     }
 
