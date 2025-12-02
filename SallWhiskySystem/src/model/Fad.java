@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Fad implements
         java.io.Serializable {
-    public static int antalFade = Storage.getFade().size();
+    public static int antalFade =1;
 
     private double liter;
     private Trætype materiale;
@@ -24,10 +24,11 @@ public class Fad implements
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
 
-    public Fad(double liter, Trætype materiale, int fadId, List<String> tidligereIndhold, String leverandør) {
+    public Fad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør) {
         this.liter = liter;
         this.materiale = materiale;
-        this.fadId = fadId;
+        this.fadId = antalFade;
+        antalFade++;
         this.tidligereIndhold = tidligereIndhold;
         this.leverandør = leverandør;
     }
