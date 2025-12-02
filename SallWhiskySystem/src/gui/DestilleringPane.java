@@ -41,7 +41,7 @@ public class DestilleringPane extends GridPane {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(false);
+        this.setGridLinesVisible(true);
 
         this.add(lblDestillering, 0, 0, 2, 1);
         lblDestillering.setStyle("-fx-font-size: 24px");
@@ -120,7 +120,7 @@ public class DestilleringPane extends GridPane {
         TableView<Destillering> tvDestilleringer = new TableView<>();
 
         // Created Columns
-        TableColumn<Destillering, Integer> colNewMakeId = new TableColumn<>("New Make ID");
+        TableColumn<Destillering, Integer> colNewMakeId = new TableColumn<>("New\nMake ID");
         colNewMakeId.setCellValueFactory(new PropertyValueFactory<>("newMakeId"));
 
         /*
@@ -138,12 +138,12 @@ public class DestilleringPane extends GridPane {
             LocalDate start = d.getStartDato();
             LocalDate slut = d.getSlutDato();
 
-            String result = start + "\n" + slut;
+            String result = start + "\n➡ " + slut;
 
             return new SimpleStringProperty(result);
         });
 
-        TableColumn<Destillering, Double> colMaengdeLiter = new TableColumn<>("Mængde Liter");
+        TableColumn<Destillering, Double> colMaengdeLiter = new TableColumn<>("Mængde\nLiter");
         colMaengdeLiter.setCellValueFactory(new PropertyValueFactory<>("mængdeProduceret"));
 
         TableColumn<Destillering, Double> colAlkoholProcent = new TableColumn<>("Alkohol %");
@@ -160,7 +160,7 @@ public class DestilleringPane extends GridPane {
         tvDestilleringer.setItems(getData());
 
         // position in Tab
-        this.add(tvDestilleringer, 3, 1, 6, 13);
+        this.add(tvDestilleringer, 3, 1, 3, 13);
 
         // Buttons TODO: Ret positionerne af knapperne
 
