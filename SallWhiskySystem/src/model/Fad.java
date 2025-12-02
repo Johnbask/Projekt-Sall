@@ -50,5 +50,9 @@ public class Fad implements
     public void setHylde(Hylde hylde) {
         this.hylde = hylde;
     }
+
+    public boolean isEmpty() {
+        return destilat == null;
+    }
 }
 
