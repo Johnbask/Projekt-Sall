@@ -1,6 +1,7 @@
 package model;
 
 import java.security.PrivateKey;
+import java.util.List;
 
 public class Destilat {
     private Double liter;
@@ -11,6 +12,7 @@ public class Destilat {
     private String røgmateriale; //nullable
 
     // link attributter
+    List<Destilat> destilater;
     private Destillering destillering;
     private ModningsTid modningstid;
 
