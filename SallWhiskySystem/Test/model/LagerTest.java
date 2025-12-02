@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LagerTest {
 
+
+    // bare en test til at teste at vi kunne teste
     @Test
     void getLagerId() {
 
