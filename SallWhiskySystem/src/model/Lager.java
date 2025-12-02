@@ -1,4 +1,6 @@
 package model;
+import storage.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.Map;
 public class Lager implements
         java.io.Serializable {
 
-    public static int AntalLagere=1;
+    public static int AntalLagere= Storage.getLagere().size();
 
     private String adresse;
     private int LagerId;

@@ -29,6 +29,30 @@ public class Destillering {
         this.kommentar = kommentar;
     }
 
+    public int getNewMakeId() {
+        return newMakeId;
+    }
+
+    public LocalDate getStartDato() {
+        return startDato;
+    }
+
+    public LocalDate getSlutDato() {
+        return slutDato;
+    }
+
+    public double getMængdeProduceret() {
+        return mængdeProduceret;
+    }
+
+    public double getAlkoholProcent() {
+        return alkoholProcent;
+    }
+
+    public String getKommentar() {
+        return kommentar;
+    }
+
     public void setKommentar(String kommentar) {
         this.kommentar = kommentar;
     }

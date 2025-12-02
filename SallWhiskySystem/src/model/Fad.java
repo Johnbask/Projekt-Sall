@@ -1,10 +1,15 @@
 package model;
 
+import com.sun.scenario.effect.impl.state.AccessHelper;
+import storage.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Fad implements
         java.io.Serializable {
+    public static int antalFade = Storage.getFade().size();
+
     private double liter;
     private Trætype materiale;
     private int fadId;
