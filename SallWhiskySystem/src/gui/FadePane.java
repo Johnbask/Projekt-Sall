@@ -86,6 +86,7 @@ public class FadePane extends GridPane {
 
         // buttons + search field
         this.add(txfFadSøgning, 0, 12);
+        txfFadSøgning.setPromptText("Fad ID");
         this.add(btnSøg, 1, 12);
 
         HBox hBox = new HBox();

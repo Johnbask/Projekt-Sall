@@ -63,6 +63,11 @@ public class DestilleringPane extends GridPane {
         this.add(new Label("Røg: "), 0, 7);
         this.add(txfRøg, 1, 7);
 
+        // ToggleGroup to use for true false RadioButtons
+        ToggleGroup tg1 = new ToggleGroup(); // For isSingleMalt
+        ToggleGroup tg2 = new ToggleGroup(); // For IsHeart
+
+        // RadioButtons for isSingleMalt
         this.add(new Label("IsSingleMalt: "), 0, 8);
         HBox hBox1 = new HBox();
         RadioButton rbnTrueSingleMalt = new RadioButton("True");
@@ -70,7 +75,10 @@ public class DestilleringPane extends GridPane {
         hBox1.getChildren().addAll(rbnTrueSingleMalt, rbnFalseSingleMalt);
         this.add(hBox1, 1, 8);
         hBox1.setSpacing(10);
+        rbnTrueSingleMalt.setToggleGroup(tg1);
+        rbnFalseSingleMalt.setToggleGroup(tg1);
 
+        // Radiobuttons for isHeart
         this.add(new Label("IsHeart: "), 0, 9);
         HBox hBox2 = new HBox();
         RadioButton rbnTrueHeart = new RadioButton("True");
@@ -78,6 +86,8 @@ public class DestilleringPane extends GridPane {
         hBox2.getChildren().addAll(rbnTrueHeart, rbnFalseHeart);
         this.add(hBox2, 1, 9);
         hBox2.setSpacing(10);
+        rbnTrueHeart.setToggleGroup(tg2);
+        rbnFalseHeart.setToggleGroup(tg2);
 
         this.add(new Label("Batch ID: "), 0, 10);
         this.add(txfBatchID, 1, 10);
@@ -125,14 +135,27 @@ public class DestilleringPane extends GridPane {
         tvDestilleringer.setItems(getData());
 
         // position in Tab
-        this.add(tvDestilleringer, 3, 1, 10, 13);
+        this.add(tvDestilleringer, 3, 1, 3, 13);
 
         // Buttons TODO: Ret positionerne af knapperne
+
+        // HBox Method
+        /*
         HBox hbo3 = new HBox();
         hbo3.getChildren().addAll(btnUpdate, btnDelete);
         this.add(hbo3, 3, 14);
         hbo3.setAlignment(Pos.BASELINE_CENTER);
         hbo3.setSpacing(50);
+         */
+
+        // With a search field between buttons
+        this.add(btnUpdate, 3, 14);
+
+        TextField txfSøg = new TextField();
+        this.add(txfSøg, 4, 14);
+        txfSøg.setPromptText("Søg NM ID");
+
+        this.add(btnDelete, 5, 14);
 
         // TODO Rettelser af fejl fra Terminalen, når man kører App (AKA hvorfor er der mange røde linjer)
     }

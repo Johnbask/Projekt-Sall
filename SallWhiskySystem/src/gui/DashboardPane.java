@@ -37,5 +37,10 @@ public class DashboardPane extends GridPane {
 
         this.add(btnSporbarhed, 2, 1);
 
+        Label lblFjern = new Label("Fjern?");
+        lblFjern.setStyle("-fx-font-size: 24");
+
+        this.add(lblFjern, 1, 3);
+
     }
 }
