@@ -9,8 +9,7 @@ import java.util.Map;
 public class Lager implements
         java.io.Serializable {
 
-    public static int AntalLagere=1;
-
+    public static int AntalLagere = 1;
     private String adresse;
     private int LagerId;
     private  String navn;
