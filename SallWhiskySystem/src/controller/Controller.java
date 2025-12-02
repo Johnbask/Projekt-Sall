@@ -60,9 +60,9 @@ public class Controller {
 
     // opret fad
     // TODO færdiggøre
-    public static Fad opretFad(double liter, String materiale, int fadId, List<String> tidligereIndhold, String leverandør,
-                               Destilat gamleDestillater,  Hylde hylde, LageringsHist lageringsHists, Omhældning omhældning){
-        Fad fad = new Fad(liter, materiale, fadId, tidligereIndhold, leverandør, gamleDestillater, hylde, lageringsHists, omhældning);
+    public static Fad opretFad(double liter, Trætype materiale, int fadId, List<String> tidligereIndhold, String leverandør,Hylde hylde){
+        Fad fad = new Fad(liter, materiale, fadId, tidligereIndhold, leverandør);
+        fad.setHylde(hylde);
         hylde.addFad(fad);
         Storage.addFade(fad);
         return fad;
