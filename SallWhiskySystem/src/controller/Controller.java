@@ -47,26 +47,40 @@ public class Controller {
     }
 
     // should throw exception if the lager doesnt exist
-    /*
     public static Reol FindReolPåLager (Lager lager, int num){
+        if (lager== null){
+            throw  new NullPointerException("Lager not found");
+        }
+        if (0>num){
+            throw new IllegalArgumentException("Number for this function must be positive");
+        }
         return lager.getReol(num);
     }
-    */
-    //Metod remade in Lager klassen
 
 
     // should throw exception if the reol or hylde doesnt exist
     public static Hylde FindHyldePåReolFraLager (Lager lager, int reolNummer, int hyldeNummer){
+
         return lager.getReol(reolNummer).getHylde(hyldeNummer);
     }
 
     // opret fad
-    // TODO færdiggøre
+
+    // pre: Material is picked from a list of acceptable types
     public static Fad opretFad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør,Hylde hylde){
-        Fad fad = new Fad(liter, materiale, tidligereIndhold, leverandør);
-        fad.setHylde(hylde);
-        hylde.addFad(fad);
-        Storage.addFade(fad);
+        Fad fad=null;
+            if (liter>0){
+                throw  new IllegalArgumentException("Negative space doesnt exist, please use a positive integer for the liters ");
+
+            }else if (leverandør== null || hylde == null|| tidligereIndhold == null) {
+                throw new NullPointerException("One or more arguments were null");
+
+            }else {
+                fad = new Fad(liter, materiale, tidligereIndhold, leverandør);
+                fad.setHylde(hylde);
+                hylde.addFad(fad);
+                Storage.addFade(fad);
+            }
         return fad;
     }
 
