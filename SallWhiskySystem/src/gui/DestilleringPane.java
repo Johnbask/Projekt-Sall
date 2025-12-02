@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,7 +53,10 @@ public class DestilleringPane extends GridPane {
         ComboBox<Fad> cbFadNr = new ComboBox<>();
         cbFadNr.setPromptText("Vælg fad (valgfrit)");
 
-        ObservableList<Fad> emptyFads = FXCollections.observableArrayList();
+        ObservableList<Fad> emptyFads = FXCollections.observableArrayList(Controller.getEmptyFad());
+        cbFadNr.setItems(emptyFads);
+
+        this.add(cbFadNr, 1, 2);
 
         //this.add(txfFadNr, 1, 2);
 
