@@ -41,6 +41,10 @@ public class Lager implements
         return LagerId;
     }
 
+    public String getAdresse() {
+        return adresse;
+    }
+
     public List<Fad> getFade(){
       List<Fad> res = new ArrayList<>();
       reoler.forEach((key, reol)->

@@ -1,5 +1,7 @@
 package gui;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -8,7 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import model.Fad;
+import model.Hylde;
 import model.Lager;
+import model.Reol;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -49,8 +53,8 @@ public class FadePane extends GridPane {
         TableColumn<Fad, Integer> colFadID = new TableColumn<>("Fad ID");
         colFadID.setCellValueFactory(new PropertyValueFactory<>("fadId"));
 
-        TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Tidligere Indhold");
-        colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
+        TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Historik");
+        colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("historik"));
 
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
         colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("fadstørrelse"));
@@ -64,19 +68,37 @@ public class FadePane extends GridPane {
         TableColumn<Fad, LocalDate> colKøbtDato = new TableColumn<>("Købt Dato");
         colKøbtDato.setCellValueFactory(new PropertyValueFactory<>("købtdato"));
 
-        // TODO Hvordan adder man fra en anden klasse?
-        /*
-        TableColumn<Lager, String> colLokation = new TableColumn<>("Lokation");
-        colLokation.setCellValueFactory(new PropertyValueFactory<>("lokation"));
-         */
+        TableColumn<Fad, String> colLokation = new TableColumn<>("Lokation");
+        colLokation.setCellValueFactory(cell -> {
+            Fad fad = cell.getValue();
 
+            Hylde hylde = fad.getHylde();
+            if (hylde == null) return new SimpleStringProperty("Ingen lokation");
+
+            Reol reol = hylde.getReol();
+            Lager lager = (reol != null) ? reol.getLager() : null;
+
+            String hyldeNr = String.valueOf(hylde.getNummer());
+            String reolNr = (reol != null) ? String.valueOf(reol.getNummer()) : "?";
+            String lagerAdresse = (lager != null) ? lager.getAdresse() : "Ukendt";
+
+            String result = "Hylde: " + hyldeNr +
+                    "\nReol: " + reolNr +
+                    "\n" + lagerAdresse;
+
+            return new SimpleStringProperty(result);
+        });
+
+        tvFade.getColumns().addAll(colFadID, colTidligereIndhold, colFadStørrelse, colMateriale, colLeverandør, colKøbtDato, colLokation);
+        /*
         tvFade.getColumns().add(colFadID);
         tvFade.getColumns().add(colTidligereIndhold);
         tvFade.getColumns().add(colFadStørrelse);
         tvFade.getColumns().add(colMateriale);
         tvFade.getColumns().add(colLeverandør);
         tvFade.getColumns().add(colKøbtDato);
-        //tvFade.getColumns().add(colLokation);
+        tvFade.getColumns().addAll(colLokation);
+         */
 
         // Test for om det virker TODO Rettelser
         //tvFade.setItems();
