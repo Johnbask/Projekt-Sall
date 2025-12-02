@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -8,7 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import model.Destilat;
 import model.Destillering;
+import model.Fad;
 
 import java.time.LocalDate;
 
@@ -46,7 +49,12 @@ public class DestilleringPane extends GridPane {
         this.add(txfNewMakeId, 1, 1);
 
         this.add(new Label("Fad Nr.:"), 0, 2);
-        this.add(txfFadNr, 1, 2);
+        ComboBox<Fad> cbFadNr = new ComboBox<>();
+        cbFadNr.setPromptText("Vælg fad (valgfrit)");
+
+        ObservableList<Fad> emptyFads = FXCollections.observableArrayList();
+
+        //this.add(txfFadNr, 1, 2);
 
         this.add(new Label("Kornsort: "), 0, 3);
         this.add(txfKornSort, 1, 3);
@@ -111,23 +119,36 @@ public class DestilleringPane extends GridPane {
         TableColumn<Destillering, Integer> colNewMakeId = new TableColumn<>("New Make ID");
         colNewMakeId.setCellValueFactory(new PropertyValueFactory<>("newMakeId"));
 
+        /*
         TableColumn<Destillering, LocalDate> colStartDato = new TableColumn<>("StartDato");
         colStartDato.setCellValueFactory(new PropertyValueFactory<>("startDato"));
 
         TableColumn<Destillering, LocalDate> colSlutDato = new TableColumn<>("SlutDato");
         colSlutDato.setCellValueFactory(new PropertyValueFactory<>("slutDato"));
+         */
+
+        TableColumn<Destillering, String> colDatoRange = new TableColumn<>("Periode");
+        colDatoRange.setCellValueFactory(cell -> {
+            Destillering d = cell.getValue();
+
+            LocalDate start = d.getStartDato();
+            LocalDate slut = d.getSlutDato();
+
+            String result = start + "\n" + slut;
+
+            return new SimpleStringProperty(result);
+        });
 
         TableColumn<Destillering, Double> colMaengdeLiter = new TableColumn<>("Mængde Liter");
-        colMaengdeLiter.setCellValueFactory(new PropertyValueFactory<>("mængdeLiter"));
+        colMaengdeLiter.setCellValueFactory(new PropertyValueFactory<>("mængdeProduceret"));
 
         TableColumn<Destillering, Double> colAlkoholProcent = new TableColumn<>("Alkohol %");
-        colAlkoholProcent.setCellValueFactory(new PropertyValueFactory<>("alkohol%"));
+        colAlkoholProcent.setCellValueFactory(new PropertyValueFactory<>("alkoholProcent"));
 
 
         // Add columns to table
         tvDestilleringer.getColumns().add(colNewMakeId);
-        tvDestilleringer.getColumns().add(colStartDato);
-        tvDestilleringer.getColumns().add(colSlutDato);
+        tvDestilleringer.getColumns().add(colDatoRange);
         tvDestilleringer.getColumns().add(colMaengdeLiter);
         tvDestilleringer.getColumns().add(colAlkoholProcent);
 
@@ -135,7 +156,7 @@ public class DestilleringPane extends GridPane {
         tvDestilleringer.setItems(getData());
 
         // position in Tab
-        this.add(tvDestilleringer, 3, 1, 3, 13);
+        this.add(tvDestilleringer, 3, 1, 6, 13);
 
         // Buttons TODO: Ret positionerne af knapperne
 
