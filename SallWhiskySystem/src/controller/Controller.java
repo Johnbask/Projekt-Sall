@@ -99,7 +99,16 @@ public class Controller {
         Storage.getFade().remove(fad);
     }
 
+    public static List<Fad> getEmptyFad() {
+        List<Fad> result = new ArrayList<>();
+        for (Fad f : Storage.getFade()) {
+            if (f.isEmpty()) {
+                result.add(f);
+            }
+        }
 
+        return result;
+    }
 
 
 
