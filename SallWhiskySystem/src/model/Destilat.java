@@ -63,4 +63,12 @@ public class Destilat implements
     public Destillering getDestillering() {
         return destillering;
     }
+
+    public boolean getSingleMalt() {
+        return isSingleMalt;
+    }
+
+    public boolean getHeart() {
+        return isHeart;
+    }
 }
