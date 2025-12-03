@@ -96,6 +96,10 @@ public class Storage {
             objOut.writeObject(fade);
             objOut.writeObject(destilater);
             objOut.writeObject(medarbejderne);
+            Lager.setAntalLagere(lagere.size()+1);
+            Fad.setAntalFade(fade.size()+1);
+
+
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
