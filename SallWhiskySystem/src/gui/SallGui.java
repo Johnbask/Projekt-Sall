@@ -28,6 +28,8 @@ public class SallGui extends Application {
     private void initTabPane(TabPane tabPane) {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
+
+
         // Dashboard
         Tab tabDashboard = new Tab("Dashboard");
         tabPane.getTabs().add(tabDashboard);
