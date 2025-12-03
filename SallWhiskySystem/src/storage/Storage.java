@@ -15,6 +15,15 @@ public class Storage {
     static List<Fad> fade;
     static List<Destilat> destilater;
     static List<Medarbejder> medarbejderne;
+    static List<Vand> vands;
+
+    public static void addVandKilde(Vand vand){
+        vands.add(vand);
+    }
+
+    public static List<Vand> getVands(){
+        return vands;
+    }
 
     public static void addDestilat(Destilat destilat){
         destilater.add(destilat);
@@ -69,6 +78,7 @@ public class Storage {
                 fade = (ArrayList) objIn.readObject();
                 destilater = (ArrayList) objIn.readObject();
                 medarbejderne = (ArrayList) objIn.readObject();
+                vands = (ArrayList) objIn.readObject();
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -76,6 +86,7 @@ public class Storage {
             fade=new ArrayList<>();
             destilater = new ArrayList<>();
             medarbejderne = new ArrayList<>();
+            vands = new ArrayList<>();
             System.out.println("shit");
             initialStorageCreation();
             System.out.println("Catch readStorage");
@@ -96,6 +107,7 @@ public class Storage {
             objOut.writeObject(fade);
             objOut.writeObject(destilater);
             objOut.writeObject(medarbejderne);
+            objOut.writeObject(vands);
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
