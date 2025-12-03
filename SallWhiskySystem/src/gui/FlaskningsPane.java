@@ -3,6 +3,7 @@ package gui;
 import com.sun.javafx.scene.control.DoubleField;
 import controller.Controller;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -25,11 +26,21 @@ public class FlaskningsPane extends GridPane {
     private final DoubleField dFLiterVand = new DoubleField();
     private final ComboBox<Vand> cbVandKilde = new ComboBox<>();
     private final DoubleField dFFlaskeStørelse = new DoubleField();
+    private final TextField tFHistorien = new TextField();
+    private final Button bGenrateStory = new Button("Genrate Story");
+    private final Button bFlaskkiefy = new Button("Flaskiefy");
 
     private void intContent() {
 
         Label lFlaskning = new Label("Flaskning");
         this.add(lFlaskning,0,0,2,2);
+        Label lHistorie = new Label("Historien");
+        this.add(lHistorie,3,0,2,2);
+
+        this.add(tFHistorien,3,3,1,7);
+        tFHistorien.setEditable(false);
+        tFHistorien.setMinWidth(300);
+        tFHistorien.setMinHeight(300);
 
         Label lMakeNavn = new Label("Make name");
         this.add(lMakeNavn,0,3);
@@ -57,8 +68,19 @@ public class FlaskningsPane extends GridPane {
         this.add(lFlaskeStørelse,0,8);
         this.add(dFFlaskeStørelse,1,8);
 
+        this.add(bGenrateStory,0,9);
+        bGenrateStory.setOnAction(event -> this.genrateStory());
+
+        this.add(bFlaskkiefy,1,9);
+        bFlaskkiefy.setOnAction(event -> this.Flaskkiefy());
 
     }
 
+    private void Flaskkiefy() {
+    }
+
+    private void genrateStory() {
+        tFHistorien.setText("Der var en gang en gang og for enden af den gang var der en dør");
+    }
 
 }

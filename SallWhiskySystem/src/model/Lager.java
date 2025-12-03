@@ -11,6 +11,11 @@ public class Lager implements
 
     public static int AntalLagere = 1;
     private String adresse;
+
+    public static void setAntalLagere(int antalLagere) {
+        AntalLagere = antalLagere;
+    }
+
     private int LagerId;
     private  String navn;
     private Map<Integer,Reol> reoler = new HashMap<>();

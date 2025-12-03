@@ -10,6 +10,11 @@ public class Fad implements
         java.io.Serializable {
     public static int antalFade =1;
     private double liter;
+
+    public static void setAntalFade(int antalFade) {
+        Fad.antalFade = antalFade;
+    }
+
     private Trætype materiale;
     private int fadId;
     private List<String> tidligereIndhold;
@@ -100,6 +105,11 @@ public class Fad implements
 
     public void setDestilat(Destilat destilat) {
         this.destilat = destilat;
+    }
+
+    public void addTidligereIndhold(String s){
+        System.out.println(s);
+        tidligereIndhold.add(s);
     }
 }
 

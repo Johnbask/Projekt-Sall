@@ -17,11 +17,11 @@ public class Storage {
     static List<Medarbejder> medarbejderne;
     static List<Vand> vands;
 
-    public static void addVandKilde(Vand vand){
+    public static void addVandkilde(Vand vand){
         vands.add(vand);
     }
 
-    public static List<Vand> getVands(){
+    public static List<Vand> getVandKilder(){
         return vands;
     }
 
@@ -108,6 +108,10 @@ public class Storage {
             objOut.writeObject(destilater);
             objOut.writeObject(medarbejderne);
             objOut.writeObject(vands);
+            Lager.setAntalLagere(lagere.size()+1);
+            Fad.setAntalFade(fade.size()+1);
+
+
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
@@ -173,7 +177,7 @@ public class Storage {
 
         Controller.opretMedarbejder("Ruben","Gud");
         Controller.opretDestilat(100.0,true,true,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
-
+        Controller.opretVand("Toiletkummen");
 
 
     }

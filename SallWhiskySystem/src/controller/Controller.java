@@ -14,12 +14,12 @@ public class Controller {
 
     public static Vand opretVand(String kilde){
         Vand vand = new Vand(kilde);
-        Storage.addVandKilde(vand);
+        Storage.addVandkilde(vand);
         return vand;
     }
 
     public static List<Vand> getVands(){
-        return Storage.getVands();
+        return Storage.getVandKilder();
     }
 
 
@@ -100,10 +100,10 @@ public class Controller {
     // pre: Material is picked from a list of acceptable types
     public static Fad opretFad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør,Hylde hylde){
         Fad fad=null;
-            if (liter<0){
+            if (liter<=0){
                 throw  new IllegalArgumentException("Negative space doesnt exist, please use a positive integer for the liters ");
 
-            }else if (leverandør== null || hylde == null|| tidligereIndhold == null) {
+            }else if (leverandør.length()<=0 || hylde == null||materiale==null) {
                 throw new NullPointerException("One or more arguments were null");
 
             }else {
