@@ -14,6 +14,7 @@ public class Storage {
     static List<Lager> lagere;
     static List<Fad> fade;
     static List<Destilat> destilater;
+    static List<Medarbejder> medarbejderne;
 
     public static void addDestilat(Destilat destilat){
         destilater.add(destilat);
@@ -29,6 +30,14 @@ public class Storage {
 
     public static void removeLager(Lager lager){
         lagere.remove(lager);
+    }
+
+    public static void addMedarbejder(Medarbejder medarbejder){
+        medarbejderne.add(medarbejder);
+    }
+
+    public static List<Medarbejder> getMedarbejderne(){
+        return medarbejderne;
     }
 
     public static List<Lager> getLagere() {
@@ -59,12 +68,14 @@ public class Storage {
                 lagere = (ArrayList) objIn.readObject();
                 fade = (ArrayList) objIn.readObject();
                 destilater = (ArrayList) objIn.readObject();
+                medarbejderne = (ArrayList) objIn.readObject();
             }
 
         } catch (IOException | ClassNotFoundException e) {
             lagere= new ArrayList<>();
             fade=new ArrayList<>();
             destilater = new ArrayList<>();
+            medarbejderne = new ArrayList<>();
             System.out.println("shit");
             initialStorageCreation();
             System.out.println("Catch readStorage");
@@ -84,6 +95,7 @@ public class Storage {
             objOut.writeObject(lagere);
             objOut.writeObject(fade);
             objOut.writeObject(destilater);
+            objOut.writeObject(medarbejderne);
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
@@ -147,7 +159,8 @@ public class Storage {
         Controller.addHylderTilReol(SHlager.getReol(5),7);
         Controller.addHylderTilReol(SanderLager.getReol(5),2);
 
-        Controller.opretDestilat(100,true,true,1,new Destillering(1,LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,new Medarbejder("John","Pleb")));
+        Controller.opretMedarbejder("Ruben","Gud");
+        Controller.opretDestilat(100,true,true,1,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
 
 
 

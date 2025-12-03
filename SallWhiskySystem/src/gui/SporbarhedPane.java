@@ -35,7 +35,7 @@ public class SporbarhedPane extends GridPane {
         // Fad Id.
         TableColumn<Fad, Integer> colFadNr = new TableColumn<>("Fad Nr.");
         colFadNr.setCellValueFactory(new PropertyValueFactory<>("fadId"));
-
+/*
         // Batch Id
      /*   TableColumn<Fad, Integer> colBatchId = new TableColumn<>("Batch Id.");
         colBatchId.setCellValueFactory(cell -> {
@@ -43,6 +43,8 @@ public class SporbarhedPane extends GridPane {
 
             Destilat destilat = Controller
         });*/
+
+ */
 
     }
 }

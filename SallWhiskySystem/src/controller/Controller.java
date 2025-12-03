@@ -32,6 +32,16 @@ public class Controller {
         return lager;
     }
 
+    public static Medarbejder opretMedarbejder(String navn,String stilling){
+        Medarbejder medarbejder = new Medarbejder(navn,stilling);
+        Storage.addMedarbejder(medarbejder);
+        return medarbejder;
+    }
+
+    public static List<Medarbejder> getMedarbejderne(){
+        return Storage.getMedarbejderne();
+    }
+
     public static List<Destilat> getDestilater(){
         return Storage.getDestilater();
     }
