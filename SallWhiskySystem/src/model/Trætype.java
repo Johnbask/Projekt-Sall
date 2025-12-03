@@ -6,8 +6,18 @@ public enum Trætype {
     MIZUNARA("Mizunara"),
     ;
 
+    private final String sort;
 
     Trætype(String sort) {
+        this.sort = sort;
+    }
 
+    public String getSort() {
+        return sort;
+    }
+
+    @Override
+    public String toString() {
+        return sort;
     }
 }
