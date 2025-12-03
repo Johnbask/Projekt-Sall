@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import model.Destilat;
 import model.Destillering;
 import model.Fad;
@@ -22,7 +23,7 @@ public class SporbarhedPane extends GridPane {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(false);
+        this.setGridLinesVisible(true);
 
         this.add(lblTitle, 0, 0);
         lblTitle.setStyle("-fx-font-size: 24px");
@@ -55,10 +56,10 @@ public class SporbarhedPane extends GridPane {
 
          */
 
-        TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Tidligere-\nIndhold");
+        TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Tidligere Indhold");
         colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
 
-        TableColumn<Fad, String> colDestilleringsDato = new TableColumn<>("Destillerings-\nDato");
+        TableColumn<Fad, String> colDestilleringsDato = new TableColumn<>("Destillerings Dato");
         colDestilleringsDato.setCellValueFactory(cell -> {
             Fad fad = cell.getValue();
 
@@ -69,12 +70,14 @@ public class SporbarhedPane extends GridPane {
             return new SimpleStringProperty(result);
         });
 
-        tvFade.getColumns().addAll(colFadNr, colBatchId, colTidligereIndhold, colDestilleringsDato);
+        tvFade.getColumns().add(colFadNr);
+        tvFade.getColumns().add(colBatchId);
+        tvFade.getColumns().add(colTidligereIndhold);
+        tvFade.getColumns().add(colDestilleringsDato);
 
         //tvFade.setItems();
 
         this.add(tvFade, 0, 1, 1, 6);
-        tvFade.setPrefSize(320, 225);
 
     }
 
@@ -107,5 +110,6 @@ public class SporbarhedPane extends GridPane {
         TextArea txaHistorie = new TextArea();
 
         this.add(txaHistorie, 0, 7);
+        txaHistorie.setPrefSize(300, 250);
     }
 }
