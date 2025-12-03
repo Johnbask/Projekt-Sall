@@ -56,7 +56,10 @@ public class SallGui extends Application {
         // Færdige Produkter
 
         // Flaskning
-
+        Tab tabFlaskning = new Tab("Flaskning");
+        tabPane.getTabs().add(tabFlaskning);
+        FlaskningsPane flaskningsPane = new FlaskningsPane();
+        tabFlaskning.setContent(flaskningsPane);
         // Søgning
 
         // Sporbarhed Tab

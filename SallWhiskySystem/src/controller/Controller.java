@@ -12,6 +12,17 @@ public class Controller {
         return Storage.getFade();
     }
 
+    public static Vand opretVand(String kilde){
+        Vand vand = new Vand(kilde);
+        Storage.addVandKilde(vand);
+        return vand;
+    }
+
+    public static List<Vand> getVands(){
+        return Storage.getVands();
+    }
+
+
     public static List<Lager> getLager() {
         return Storage.getLagere();
     }
@@ -126,7 +137,15 @@ public class Controller {
                 result.add(f);
             }
         }
-
+        return result;
+    }
+    public static List<Fad> getFildFad() {
+        List<Fad> result = new ArrayList<>();
+        for (Fad f : Storage.getFade()) {
+            if (!f.isEmpty()) {
+                result.add(f);
+            }
+        }
         return result;
     }
 

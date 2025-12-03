@@ -9,7 +9,6 @@ import java.util.List;
 public class Fad implements
         java.io.Serializable {
     public static int antalFade =1;
-
     private double liter;
 
     public static void setAntalFade(int antalFade) {
