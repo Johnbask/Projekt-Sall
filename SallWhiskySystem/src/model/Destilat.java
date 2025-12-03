@@ -23,7 +23,6 @@ public class Destilat implements
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;
         this.destillering = destillering;
-        //
     }
 
     public void setRøgmateriale(String røgmateriale) {
