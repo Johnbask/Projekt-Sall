@@ -57,6 +57,14 @@ public class Lager implements
       return res;
     }
 
+    public String getNavn() {
+        return navn;
+    }
+
+    public static int getAntalLagere() {
+        return AntalLagere;
+    }
+
     @Override
     public String toString() {
         return  navn + "id : " + LagerId + "\n" + adresse ;

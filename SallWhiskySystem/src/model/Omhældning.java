@@ -17,4 +17,20 @@ public class Omhældning {
         this.fad = fad;
         this.medarbejder = medarbejder;
     }
+
+    public double getMængde() {
+        return mængde;
+    }
+
+    public LocalDate getDato() {
+        return dato;
+    }
+
+    public Fad getFad() {
+        return fad;
+    }
+
+    public Medarbejder getMedarbejder() {
+        return medarbejder;
+    }
 }
