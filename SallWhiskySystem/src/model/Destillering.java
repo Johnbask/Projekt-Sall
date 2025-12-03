@@ -12,7 +12,6 @@ public class Destillering implements java.io.Serializable {
     private double mængdeProduceret;
     private double alkoholProcent;
     private String kommentar;
-    private double resterndeMængde;
 
     // link attributter
     private List<Råvare> råvareList;
@@ -30,7 +29,6 @@ public class Destillering implements java.io.Serializable {
         this.mængdeProduceret = mængdeProduceret;
         this.alkoholProcent = alkoholProcent;
         this.medarbejder = medarbejder;
-        resterndeMængde = mængdeProduceret;
     }
 
     public int getNewMakeId() {
