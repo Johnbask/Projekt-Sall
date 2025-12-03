@@ -19,7 +19,7 @@ public class Fad implements
     // links
     // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
     private List<Destilat> gamleDestillater;
-    private Destilat destilat;
+    private Destilat destilat; // nuværende
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
@@ -53,6 +53,10 @@ public class Fad implements
 
     public boolean isEmpty() {
         return destilat == null;
+    }
+
+    public void setDestilat(Destilat destilat) {
+        this.destilat = destilat;
     }
 }
 
