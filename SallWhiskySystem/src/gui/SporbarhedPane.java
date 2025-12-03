@@ -28,7 +28,7 @@ public class SporbarhedPane extends GridPane {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(true);
+        this.setGridLinesVisible(false);
 
         this.add(lblTitle, 0, 0);
         lblTitle.setStyle("-fx-font-size: 24px");
@@ -144,15 +144,34 @@ public class SporbarhedPane extends GridPane {
 
     }
 
-    private void setupHistorie() {
-        TextArea txaHistorie = new TextArea();
+    private final TextArea txaHistorie = new TextArea();
 
-        this.add(txaHistorie, 0, 7);
+    private void setupHistorie() {
+        Label lblHistorie = new Label("Fad Historie");
+        lblHistorie.setStyle("-fx-font-size: 16px");
+        this.add(lblHistorie, 0, 7);
+
         txaHistorie.setPrefSize(300, 250);
+        txaHistorie.setEditable(false);
+        this.add(txaHistorie, 0, 8);
+
     }
 
     private void loadFadeDate() {
+        try {
+            List<Fad> fade = Controller.getFade();
 
+            allFadeData = FXCollections.observableArrayList(fade);
+            tvFade.setItems(allFadeData);
+
+            if (fade.isEmpty()) {
+                ShowAlert("Ingen data", "Der er ingen fad at vise.");
+            }
+
+        } catch (Exception e) {
+            ShowAlert("Fejl ved indlæsning", "Kunne ikke indlæse fad data: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void displayFadHistorie(Fad fad) {
@@ -181,9 +200,39 @@ public class SporbarhedPane extends GridPane {
         if (destilat != null) {
             historie.append("=== Aktuelt Indhold ===\n");
             historie.append("Mængde Liter: ").append(String.format("%.1f L", destilat.getLiter())).append("\n");
+            historie.append("Single Malt: ").append(destilat.getSingleMalt() ? "Ja" : "Nej").append("\n");
+            historie.append("Heart Cut:").append(destilat.getHeart() ? "Ja" : "Nej").append("\n");
 
+            if (destilat.getRøgmateriale() != null) {
+                historie.append("Røgmateriale: ").append(destilat.getRøgmateriale()).append("\n");
+            }
+
+            Destillering destillering = destilat.getDestillering();
+            if (destillering != null) {
+                historie.append("\n=== Destillerings Info ===\n");
+                historie.append("New Make ID: ").append(destillering.getNewMakeId()).append("\n");
+                historie.append("Start Dato:").append(destillering.getStartDato()).append("\n");
+                historie.append("Slut Dato: ").append(destillering.getSlutDato()).append("\n");
+                historie.append("Alkohol %: ").append(String.format("%.2f%%", destillering.getAlkoholProcent())).append("\n");
+                historie.append("Mængde produceret: ").append(String.format("%.1f L", destillering.getMængdeProduceret())).append("\n");
+
+                if (destillering.getKommentar() != null && !destillering.getKommentar().isEmpty()) {
+                    historie.append("Kommentar: ").append(destillering.getKommentar()).append("\n");
+                }
+
+                //historie.append("Destilleret af: ").append(destillering.getMedarbejder().getNavn()).append("\n");
+            }
         }
 
+        txaHistorie.setText(historie.toString());
     }
 
+
+    private void ShowAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
