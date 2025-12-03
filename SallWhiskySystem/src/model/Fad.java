@@ -10,6 +10,11 @@ public class Fad implements
         java.io.Serializable {
     public static int antalFade =1;
     private double liter;
+
+    public static void setAntalFade(int antalFade) {
+        Fad.antalFade = antalFade;
+    }
+
     private Trætype materiale;
     private int fadId;
     private List<String> tidligereIndhold;
