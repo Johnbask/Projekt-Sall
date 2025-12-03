@@ -106,5 +106,9 @@ public class Fad implements
     public void setDestilat(Destilat destilat) {
         this.destilat = destilat;
     }
+
+    public void addTidligereIndhold(String s){
+        tidligereIndhold.add(s);
+    }
 }
 

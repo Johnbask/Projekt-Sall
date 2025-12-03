@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import model.*;
 import storage.Storage;
 
@@ -41,8 +42,9 @@ public class FadePane extends GridPane {
     }
 
     // fields for first section
+    private final TextField tfxUpdate = new TextField();
     private final IntegerField ifFadSøgning = new IntegerField();
-    private final Button btnUpdate = new Button("Update");
+    private final Button btnUpdate = new Button("Update Historik");
     private final Button btnSlet = new Button("Slet");
     private  final  TableView<Fad> tvFade = new TableView<>();
     private final Label lbErr=new Label();
@@ -124,6 +126,9 @@ public class FadePane extends GridPane {
         this.add(hBox, 0, 13);
         hBox.setSpacing(10);
         btnSlet.setOnAction(event -> sletFad(tvFade.getSelectionModel().getSelectedItem()));
+
+        tfxUpdate.setPromptText("Sherry");
+        this.add(tfxUpdate,0,13);
         /*
         this.add(btnUpdate, 0, 12);
         this.add(btnSlet, 1, 12);
@@ -255,9 +260,9 @@ tvFade.getItems().setAll(Controller.getFade());
     }
 
 
-    public void updateTvAction(){
+    public void updateHistorikAction(Fad fad){
 
-
+fad.addTidligereIndhold(txfHistorik.getText());
 
 
 
