@@ -1,5 +1,13 @@
 package model;
 
 public enum Trætype {
-    WHITEOAK,QUERCUSROBUR,MIZUNARA
+    WHITE_OAK("White Oak"),
+    QUERCUSROBUR("Quercus Robur"),
+    MIZUNARA("Mizunara"),
+    ;
+
+
+    Trætype(String sort) {
+
+    }
 }

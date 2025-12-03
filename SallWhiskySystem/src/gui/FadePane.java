@@ -11,10 +11,7 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import model.Fad;
-import model.Hylde;
-import model.Lager;
-import model.Reol;
+import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -150,46 +147,27 @@ public class FadePane extends GridPane {
     }
 
     // Private Fields for second section
-    private final TextField txfFadID = new TextField();
     private final TextField txfHistorik = new TextField();
-    private final TextField txfFadstørrelse = new TextField();
-    private final TextField txfMateriale = new TextField();
+    private final IntegerField intFadstørrelse = new IntegerField();
+    private final ComboBox cbxMateriale = new ComboBox();
     private final TextField txfLeverandør = new TextField();
-    private final DatePicker dpKøbtDato = new DatePicker();
-    private final TextField txfLager = new TextField();
-    private final TextField txfReol = new TextField();
-    private final TextField txfHylde = new TextField();
 
     private final Button btnOpret = new Button("Opret");
     private final Button btnCancel = new Button("Cancel");
 
     private void SecondSection() {
-        this.add(new Label("Fad ID:"), 2, 1);
-        this.add(txfFadID, 3, 1);
-
         this.add(new Label("Historik:"), 2, 2);
         this.add(txfHistorik, 3, 2);
 
         this.add(new Label("Fadstørrelse:"), 2, 3);
-        this.add(txfFadstørrelse, 3, 3);
+        this.add(intFadstørrelse, 3, 3);
 
         this.add(new Label("Materiale: "), 2, 4);
-        this.add(txfMateriale, 3, 4);
+        this.add(cbxMateriale, 3, 4);
+        cbxMateriale.getItems().setAll(Trætype.values());
 
         this.add(new Label("Leverandør:"), 2, 5);
         this.add(txfLeverandør, 3, 5);
-
-        this.add(new Label("Købt Dato:"), 2, 6);
-        this.add(dpKøbtDato, 3, 6);
-
-        this.add(new Label("Lager:"), 2, 7);
-        this.add(txfLager, 3, 7);
-
-        this.add(new Label("Reol:"), 2, 8);
-        this.add(txfReol, 3, 8);
-
-        this.add(new Label("Hylde:"), 2, 9);
-        this.add(txfHylde, 3, 9);
 
         /*
         HBox hBox = new HBox();
@@ -200,6 +178,18 @@ public class FadePane extends GridPane {
 
         this.add(btnOpret, 2, 10);
         this.add(btnCancel, 3, 10);
+
+        btnOpret.setOnAction(event -> opretFad());
+        btnCancel.setOnAction(event -> cancelFad());
+    }
+
+    private void cancelFad() {
+        intFadstørrelse.setValue(0);
+        txfHistorik.clear();
+
+    }
+
+    private void opretFad() {
     }
 
 
