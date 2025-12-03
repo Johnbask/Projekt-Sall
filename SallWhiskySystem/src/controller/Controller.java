@@ -14,12 +14,12 @@ public class Controller {
 
     public static Vand opretVand(String kilde){
         Vand vand = new Vand(kilde);
-        Storage.addVandKilde(vand);
+        Storage.addVandkilde(vand);
         return vand;
     }
 
     public static List<Vand> getVands(){
-        return Storage.getVands();
+        return Storage.getVandKilder();
     }
 
 

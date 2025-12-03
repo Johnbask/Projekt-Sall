@@ -47,7 +47,6 @@ public class FadePane extends GridPane {
     private final Button btnUpdate = new Button("Update Historik");
     private final Button btnSlet = new Button("Slet");
     private  final  TableView<Fad> tvFade = new TableView<>();
-    private final Label lbErr=new Label();
 
 
     private void FirstSection() {
@@ -126,9 +125,11 @@ public class FadePane extends GridPane {
         this.add(hBox, 0, 13);
         hBox.setSpacing(10);
         btnSlet.setOnAction(event -> sletFad(tvFade.getSelectionModel().getSelectedItem()));
+        this.add(new Label("Søg med FadId"),1,12);
 
+        btnUpdate.setOnAction(event -> updateHistorikAction(tvFade.getSelectionModel().getSelectedItem()));
         tfxUpdate.setPromptText("Sherry");
-        this.add(tfxUpdate,0,13);
+        this.add(tfxUpdate,0,14);
         /*
         this.add(btnUpdate, 0, 12);
         this.add(btnSlet, 1, 12);
@@ -186,10 +187,6 @@ public class FadePane extends GridPane {
 
         this.add(btnOpret, 2, 10);
         this.add(btnCancel, 3, 10);
-        this.add(lbErr,3,11);
-        lbErr.setText("error");
-        lbErr.setMinWidth(100);
-        lbErr.setAlignment(Pos.CENTER);
 
 
         btnOpret.setOnAction(event -> opretFad());
@@ -261,13 +258,9 @@ tvFade.getItems().setAll(Controller.getFade());
 
 
     public void updateHistorikAction(Fad fad){
-
-fad.addTidligereIndhold(txfHistorik.getText());
-
-
-
-
-
+fad.addTidligereIndhold(tfxUpdate.getText());
+tvFade.getItems().setAll(Storage.getFade());
+Controller.writeStorage();
     }
 
 }

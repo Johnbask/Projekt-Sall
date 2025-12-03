@@ -15,6 +15,15 @@ public class Storage {
     static List<Fad> fade;
     static List<Destilat> destilater;
     static List<Medarbejder> medarbejderne;
+    static List<Vand> vands;
+
+    public static void addVandkilde(Vand vand){
+        vands.add(vand);
+    }
+
+    public static List<Vand> getVandKilder(){
+        return vands;
+    }
 
     public static void addDestilat(Destilat destilat){
         destilater.add(destilat);
@@ -69,6 +78,7 @@ public class Storage {
                 fade = (ArrayList) objIn.readObject();
                 destilater = (ArrayList) objIn.readObject();
                 medarbejderne = (ArrayList) objIn.readObject();
+                vands = (ArrayList) objIn.readObject();
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -76,6 +86,7 @@ public class Storage {
             fade=new ArrayList<>();
             destilater = new ArrayList<>();
             medarbejderne = new ArrayList<>();
+            vands = new ArrayList<>();
             System.out.println("shit");
             initialStorageCreation();
             System.out.println("Catch readStorage");
@@ -96,6 +107,7 @@ public class Storage {
             objOut.writeObject(fade);
             objOut.writeObject(destilater);
             objOut.writeObject(medarbejderne);
+            objOut.writeObject(vands);
             Lager.setAntalLagere(lagere.size()+1);
             Fad.setAntalFade(fade.size()+1);
 
@@ -165,7 +177,7 @@ public class Storage {
 
         Controller.opretMedarbejder("Ruben","Gud");
         Controller.opretDestilat(100.0,true,true,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
-
+        Controller.opretVand("Toiletkummen");
 
 
     }
