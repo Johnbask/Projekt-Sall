@@ -85,8 +85,6 @@ public class DestilleringPane extends GridPane {
         this.add(new Label("Røg: "), 0, 7);
         this.add(txfRøg, 1, 7);
 
-
-
         // RadioButtons for isSingleMalt
         this.add(new Label("IsSingleMalt: "), 0, 8);
         HBox hBox1 = new HBox();
@@ -120,14 +118,12 @@ public class DestilleringPane extends GridPane {
         this.add(bSlet,3,12);
 
         this.add(lWDestilleringer,3,1,1,11);
-        lWDestilleringer.getItems().setAll(getFrieDestileringer());
+        lWDestilleringer.getItems().setAll(getDestileringer());
     }
 
     public void updateDestilleringer(){
-        lWDestilleringer.getItems().setAll(getFrieDestileringer());
+        lWDestilleringer.getItems().setAll(getDestileringer());
     }
-
-
 
     public void updateLedigeFad(){
         cbFadNr.getItems().setAll(Controller.getEmptyFad());
@@ -140,17 +136,16 @@ public class DestilleringPane extends GridPane {
         updateLedigeFad();
         updateDestilleringer();
     }
-    private ArrayList<Destillering> getFrieDestileringer(){
-        System.out.println("test 2");
-        ArrayList<Destillering> frieDestilleringer = new ArrayList<>();
+    private ArrayList<Destillering> getDestileringer(){
+        ArrayList<Destillering> Destilleringer = new ArrayList<>();
+        ArrayList<Integer> ider = new ArrayList<>();
         for (Destilat destilat : Controller.getDestilater()) {
-            System.out.println("test 3");
-            if(!destilat.getUsed()){
-                System.out.println("test 4");
-                frieDestilleringer.add(destilat.getDestillering());
+            if(!ider.contains(destilat.getDestillering().getNewMakeId())){
+                Destilleringer.add(destilat.getDestillering());
+                ider.add(destilat.getDestillering().getNewMakeId());
             }
         }
-        return frieDestilleringer;
+        return Destilleringer;
     }
 
 }

@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import model.Destilat;
 import model.Destillering;
 import model.Fad;
@@ -22,7 +23,7 @@ public class SporbarhedPane extends GridPane {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(false);
+        this.setGridLinesVisible(true);
 
         this.add(lblTitle, 0, 0);
         lblTitle.setStyle("-fx-font-size: 24px");
@@ -55,10 +56,10 @@ public class SporbarhedPane extends GridPane {
 
          */
 
-        TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Tidligere-\nIndhold");
+        TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Tidligere Indhold");
         colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
 
-        TableColumn<Fad, String> colDestilleringsDato = new TableColumn<>("Destillerings-\nDato");
+        TableColumn<Fad, String> colDestilleringsDato = new TableColumn<>("Destillerings Dato");
         colDestilleringsDato.setCellValueFactory(cell -> {
             Fad fad = cell.getValue();
 
@@ -69,12 +70,14 @@ public class SporbarhedPane extends GridPane {
             return new SimpleStringProperty(result);
         });
 
-        tvFade.getColumns().addAll(colFadNr, colBatchId, colTidligereIndhold, colDestilleringsDato);
+        tvFade.getColumns().add(colFadNr);
+        tvFade.getColumns().add(colBatchId);
+        tvFade.getColumns().add(colTidligereIndhold);
+        tvFade.getColumns().add(colDestilleringsDato);
 
         //tvFade.setItems();
 
-        this.add(tvFade, 0, 1, 1, 6);
-        tvFade.setPrefSize(320, 225);
+        this.add(tvFade, 0, 1, 2, 6);
 
     }
 
@@ -86,20 +89,20 @@ public class SporbarhedPane extends GridPane {
 
     private void searchFields() {
         Label lblSearch = new Label("Søg");
-        this.add(lblSearch, 1, 1);
+        this.add(lblSearch, 2, 1);
         lblSearch.setStyle("-fx-Font-Size: 16px");
 
-        this.add(new Label("Fad nr."), 1, 2);
-        this.add(txfFadNr, 2, 2);
+        this.add(new Label("Fad nr."), 2, 2);
+        this.add(txfFadNr, 3, 2);
 
-        this.add(new Label("Batch ID:"), 1, 3);
-        this.add(txfBatchId, 2, 3);
+        this.add(new Label("Batch ID:"), 2, 3);
+        this.add(txfBatchId, 3, 3);
 
-        this.add(new Label("Tidligere indhold"), 1, 4);
-        this.add(txfTidligereIndhold, 2, 4);
+        this.add(new Label("Tidligere indhold"), 2, 4);
+        this.add(txfTidligereIndhold, 3, 4);
 
-        this.add(new Label("Destillerings dato"), 1, 5);
-        this.add(dpDestilleringDato, 2, 5);
+        this.add(new Label("Destillerings dato"), 2, 5);
+        this.add(dpDestilleringDato, 3, 5);
 
     }
 
@@ -107,5 +110,6 @@ public class SporbarhedPane extends GridPane {
         TextArea txaHistorie = new TextArea();
 
         this.add(txaHistorie, 0, 7);
+        txaHistorie.setPrefSize(300, 250);
     }
 }
