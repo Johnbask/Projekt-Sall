@@ -128,30 +128,30 @@ public class Storage {
         Controller.addHylderTilReol(SanderLager.getReol(3),2);
         Controller.addHylderTilReol(SanderLager.getReol(4),2);
 
-        Fad fad1=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad2=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad3=  Controller.opretFad(170, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad4=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad5=  Controller.opretFad(125, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad6=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad7=  Controller.opretFad(50, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad8=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-        Fad fad9=  Controller.opretFad(750, Trætype.WHITEOAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad1=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad2=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad3=  Controller.opretFad(170, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad4=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad5=  Controller.opretFad(125, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad6=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad7=  Controller.opretFad(50, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad8=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
+        Fad fad9=  Controller.opretFad(750, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
 
 
-        Fad fad10=  Controller.opretFad(70, Trætype.WHITEOAK,new ArrayList<>(List.of("Burbon")),"Lille Amerikans Burbon",findledigHylde());
-        Fad fad11=  Controller.opretFad(750, Trætype.WHITEOAK,new ArrayList<>(List.of("Burbon")),"Enorm Amerikans Burbon",findledigHylde());
-        Fad fad12=  Controller.opretFad(100, Trætype.WHITEOAK,new ArrayList<>(List.of("Burbon")),"Stor Amerikans Burbon",findledigHylde());
+        Fad fad10=  Controller.opretFad(70, Trætype.WHITE_OAK,new ArrayList<>(List.of("Burbon")),"Lille Amerikans Burbon",findledigHylde());
+        Fad fad11=  Controller.opretFad(750, Trætype.WHITE_OAK,new ArrayList<>(List.of("Burbon")),"Enorm Amerikans Burbon",findledigHylde());
+        Fad fad12=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Burbon")),"Stor Amerikans Burbon",findledigHylde());
 
-        Fad fad13=  Controller.opretFad(50, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad14=  Controller.opretFad(50, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad15=  Controller.opretFad(50, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad16=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad17=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad18=  Controller.opretFad(75, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad19=  Controller.opretFad(100, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad20=  Controller.opretFad(100, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-        Fad fad21=  Controller.opretFad(100, Trætype.WHITEOAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad13=  Controller.opretFad(50, Trætype.WHITE_OAK ,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad14=  Controller.opretFad(50, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad15=  Controller.opretFad(50, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad16=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad17=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad18=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad19=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad20=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
+        Fad fad21=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
 
 
         Controller.addReolerTilLager(SHlager,1);
