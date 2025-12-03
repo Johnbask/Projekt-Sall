@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
 
 public class FadePane extends GridPane {
     private final Label lblFade = new Label("Fade");
@@ -53,7 +54,7 @@ public class FadePane extends GridPane {
         colFadID.setCellValueFactory(new PropertyValueFactory<>("fadId"));
 
         TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Historik");
-        colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("leverandør"));
+        colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
 
 
 
@@ -186,10 +187,30 @@ public class FadePane extends GridPane {
     private void cancelFad() {
         intFadstørrelse.setValue(0);
         txfHistorik.clear();
+        cbxMateriale.getSelectionModel().clearSelection();
+        txfLeverandør.clear();
 
     }
 
     private void opretFad() {
+        System.out.println(intFadstørrelse.getValue()<0);
+        System.out.println(txfLeverandør.getText().isEmpty());
+        System.out.println(cbxMateriale.getSelectionModel().isEmpty());
+
+       /* if (intFadstørrelse.getValue()<0||!cbxMateriale.getSelectionModel().isEmpty()||txfLeverandør.getText().isEmpty())*/
+
+            VælgFadVindue vælgFadVindue = new VælgFadVindue("Vælg fad");
+            vælgFadVindue.showAndWait();
+            Hylde hylde= vælgFadVindue.getHylde();
+            vælgFadVindue.close();
+
+            Controller.opretFad((double) intFadstørrelse.getValue(), (Trætype) cbxMateriale.getSelectionModel().getSelectedItem(),new ArrayList<>(List.of(txfHistorik.getText()))
+                    ,txfLeverandør.getText(),hylde);
+
+
+tvFade.getItems().setAll(Controller.getFade());
+
+
     }
 
 
