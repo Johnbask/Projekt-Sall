@@ -32,6 +32,16 @@ public class Controller {
         return lager;
     }
 
+    public static List<Destilat> getDestilater(){
+        return Storage.getDestilater();
+    }
+
+    public static Destilat opretDestilat(double liter, boolean isSingelMalt, boolean isHeart,int batchId,Destillering destillering){
+        Destilat destilat = new Destilat(liter,isSingelMalt,isHeart,batchId,destillering);
+        Storage.addDestilat(destilat);
+        return destilat;
+    }
+
 
     public static void addReolerTilLager(Lager lager, int num){
         for (int i = 0; i < num; i++) {

@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Destillering {
+public class Destillering implements java.io.Serializable {
 
     private int newMakeId;
     private LocalDate startDato;
@@ -11,6 +11,7 @@ public class Destillering {
     private double mængdeProduceret;
     private double alkoholProcent;
     private String kommentar;
+    private double resterndeMængde;
 
     // link attributter
     private List<Råvare> råvareList;
@@ -20,13 +21,14 @@ public class Destillering {
     //tror den her forbindelse ikke skal være her men better safe than sorry
     private  List<Destilat> destilatList;
 
-    public Destillering(int newMakeId, LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, String kommentar) {
+    public Destillering(int newMakeId, LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, Medarbejder medarbejder) {
         this.newMakeId = newMakeId;
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.mængdeProduceret = mængdeProduceret;
         this.alkoholProcent = alkoholProcent;
-        this.kommentar = kommentar;
+        this.medarbejder = medarbejder;
+        resterndeMængde = mængdeProduceret;
     }
 
     public int getNewMakeId() {
@@ -56,4 +58,7 @@ public class Destillering {
     public void setKommentar(String kommentar) {
         this.kommentar = kommentar;
     }
+
+
+
 }
