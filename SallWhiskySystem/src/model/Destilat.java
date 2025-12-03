@@ -40,6 +40,27 @@ public class Destilat implements
         return isUsed;
     }
 
+    // Getters
+    public Double getLiter() {
+        return liter;
+    }
+
+    public int getBatchId() {
+        return batchId;
+    }
+
+    public List<Destilat> getDestilater() {
+        return destilater;
+    }
+
+    public ModningsTid getModningstid() {
+        return modningstid;
+    }
+
+    public String getRøgmateriale() {
+        return røgmateriale;
+    }
+
     public Destillering getDestillering() {
         return destillering;
     }

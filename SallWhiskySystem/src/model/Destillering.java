@@ -59,6 +59,24 @@ public class Destillering implements java.io.Serializable {
         this.kommentar = kommentar;
     }
 
+    public Medarbejder getMedarbejder() {
+        return medarbejder;
+    }
 
+    public Vand getVand() {
+        return vand;
+    }
+
+    public static int getIdMaker() {
+        return idMaker;
+    }
+
+    public List<Destilat> getDestilatList() {
+        return destilatList;
+    }
+
+    public List<Råvare> getRåvareList() {
+        return råvareList;
+    }
 
 }
