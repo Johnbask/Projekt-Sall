@@ -77,7 +77,7 @@ public class SporbarhedPane extends GridPane {
 
         //tvFade.setItems();
 
-        this.add(tvFade, 0, 1, 1, 6);
+        this.add(tvFade, 0, 1, 2, 6);
 
     }
 
@@ -89,20 +89,20 @@ public class SporbarhedPane extends GridPane {
 
     private void searchFields() {
         Label lblSearch = new Label("Søg");
-        this.add(lblSearch, 1, 1);
+        this.add(lblSearch, 2, 1);
         lblSearch.setStyle("-fx-Font-Size: 16px");
 
-        this.add(new Label("Fad nr."), 1, 2);
-        this.add(txfFadNr, 2, 2);
+        this.add(new Label("Fad nr."), 2, 2);
+        this.add(txfFadNr, 3, 2);
 
-        this.add(new Label("Batch ID:"), 1, 3);
-        this.add(txfBatchId, 2, 3);
+        this.add(new Label("Batch ID:"), 2, 3);
+        this.add(txfBatchId, 3, 3);
 
-        this.add(new Label("Tidligere indhold"), 1, 4);
-        this.add(txfTidligereIndhold, 2, 4);
+        this.add(new Label("Tidligere indhold"), 2, 4);
+        this.add(txfTidligereIndhold, 3, 4);
 
-        this.add(new Label("Destillerings dato"), 1, 5);
-        this.add(dpDestilleringDato, 2, 5);
+        this.add(new Label("Destillerings dato"), 2, 5);
+        this.add(dpDestilleringDato, 3, 5);
 
     }
 
