@@ -46,8 +46,8 @@ public class Controller {
         return Storage.getDestilater();
     }
 
-    public static Destilat opretDestilat(double liter, boolean isSingelMalt, boolean isHeart,int batchId,Destillering destillering){
-        Destilat destilat = new Destilat(liter,isSingelMalt,isHeart,batchId,destillering);
+    public static Destilat opretDestilat(double liter, boolean isSingelMalt, boolean isHeart,Destillering destillering){
+        Destilat destilat = new Destilat(liter,isSingelMalt,isHeart,destillering);
         Storage.addDestilat(destilat);
         return destilat;
     }
