@@ -16,4 +16,20 @@ public class Medarbejder {
         this.navn = navn;
         Stilling = stilling;
     }
+
+    public String getNavn() {
+        return navn;
+    }
+
+    public String getStilling() {
+        return Stilling;
+    }
+
+    public List<Destillering> getDestilleringlist() {
+        return destilleringlist;
+    }
+
+    public List<Omhældning> getOmhældningList() {
+        return omhældningList;
+    }
 }

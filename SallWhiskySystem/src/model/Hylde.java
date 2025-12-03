@@ -6,9 +6,9 @@ public class Hylde implements
 
 
     private int nummer;
+    // Links
     private Fad fad = null;
     private Reol reol;
-
 
     public Hylde(int nummer,Reol reol) {
         this.nummer = nummer;

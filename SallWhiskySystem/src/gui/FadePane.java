@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
@@ -42,19 +43,20 @@ public class FadePane extends GridPane {
     private final Button btnSøg = new Button("Søg");
     private final Button btnUpdate = new Button("Update");
     private final Button btnSlet = new Button("Slet");
+    private  final  TableView<Fad> tvFade = new TableView<>();
 
 
     private void FirstSection() {
 
-        // Create TableView
-        TableView<Fad> tvFade = new TableView<>();
 
         // Create Columns
         TableColumn<Fad, Integer> colFadID = new TableColumn<>("Fad ID");
         colFadID.setCellValueFactory(new PropertyValueFactory<>("fadId"));
 
         TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Historik");
-        colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("historik"));
+        colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("leverandør"));
+
+
 
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
         colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("fadstørrelse"));
@@ -65,8 +67,9 @@ public class FadePane extends GridPane {
         TableColumn<Fad, String> colLeverandør = new TableColumn<>("Leverandør");
         colLeverandør.setCellValueFactory(new PropertyValueFactory<>("leverandør"));
 
-        TableColumn<Fad, LocalDate> colKøbtDato = new TableColumn<>("Købt Dato");
-        colKøbtDato.setCellValueFactory(new PropertyValueFactory<>("købtdato"));
+
+    /*    TableColumn<Fad, LocalDate> colKøbtDato = new TableColumn<>("Købt Dato");
+        colKøbtDato.setCellValueFactory(new PropertyValueFactory<>("købtdato"));*/
 
         TableColumn<Fad, String> colLokation = new TableColumn<>("Lokation");
         colLokation.setCellValueFactory(cell -> {
@@ -89,19 +92,20 @@ public class FadePane extends GridPane {
             return new SimpleStringProperty(result);
         });
 
-        tvFade.getColumns().addAll(colFadID, colTidligereIndhold, colFadStørrelse, colMateriale, colLeverandør, colKøbtDato, colLokation);
-        /*
+      //tvFade.getColumns().addAll(colFadID, colTidligereIndhold, colFadStørrelse, colMateriale, colLeverandør, colLokation);
+
         tvFade.getColumns().add(colFadID);
         tvFade.getColumns().add(colTidligereIndhold);
         tvFade.getColumns().add(colFadStørrelse);
         tvFade.getColumns().add(colMateriale);
         tvFade.getColumns().add(colLeverandør);
-        tvFade.getColumns().add(colKøbtDato);
+       // tvFade.getColumns().add(colKøbtDato);
         tvFade.getColumns().addAll(colLokation);
-         */
+
+
 
         // Test for om det virker TODO Rettelser
-        //tvFade.setItems();
+        tvFade.getItems().setAll(Controller.getFade());
 
         // Add it to the pane
         this.add(tvFade, 0, 1, 2, 11);
@@ -173,6 +177,17 @@ public class FadePane extends GridPane {
 
         this.add(btnOpret, 2, 10);
         this.add(btnCancel, 3, 10);
+    }
+
+
+    public void updateTvAction(){
+
+
+
+
+
+
+
     }
 
 }

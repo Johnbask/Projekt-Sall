@@ -19,7 +19,7 @@ public class Fad implements
     // links
     // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
     private List<Destilat> gamleDestillater;
-    private Destilat destilat; // nuværende
+    private Destilat destilat;
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
@@ -38,14 +38,7 @@ public class Fad implements
         return
                 "fad"+ fadId + " Hylde" + hylde.getNummer() + " reol" + hylde.getReol().getNummer()+" lager"+ hylde.getReol().getLager().getLagerId() ;
     }
-
-    public int getFadId() {
-        return fadId;
-    }
-
-    public Hylde getHylde() {
-        return hylde;
-    }
+    
 
     public void setHylde(Hylde hylde) {
         this.hylde = hylde;
@@ -53,6 +46,57 @@ public class Fad implements
 
     public boolean isEmpty() {
         return destilat == null;
+    }
+
+    // Getters
+    // Lokalt getters
+    public static int getAntalFade() {
+        return antalFade;
+    }
+
+    public double getLiter() {
+        return liter;
+    }
+
+    public Trætype getMateriale() {
+        return materiale;
+    }
+
+    public int getFadId() {
+        return fadId;
+    }
+
+    public List<String> getTidligereIndhold() {
+        return tidligereIndhold;
+    }
+
+    public String getLeverandør() {
+        return leverandør;
+    }
+
+    // Links getters
+    public List<Destilat> getGamleDestillater() {
+        return gamleDestillater;
+    }
+
+    public Destilat getDestilat() {
+        return destilat;
+    }
+
+    public Hylde getHylde() {
+        return hylde;
+    }
+
+    public List<LageringsHist> getLageringsHists() {
+        return lageringsHists;
+    }
+
+    public List<Omhældning> getOmhældning() {
+        return omhældning;
+    }
+
+    public List<Flaske> getFlaske() {
+        return flaske;
     }
 
     public void setDestilat(Destilat destilat) {

@@ -2,17 +2,15 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import model.Destilat;
 import model.Fad;
 
 public class SporbarhedPane extends GridPane {
-    private final ListView<Fad> lwFade = new ListView<>();
-    private final TextField txfFade = new TextField();
-    private final Button btnSøg = new Button("Search");
+
+    private final Label lblTitle = new Label("Sporbarhed"); // Sporbarhed
 
     public SporbarhedPane() {
         this.setPadding(new Insets(20));
@@ -20,23 +18,31 @@ public class SporbarhedPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        this.add(new Label("Fade"), 0, 0);
-        this.add(lwFade, 0, 1);
-        this.add(new Label("Søg Fade:"), 0, 2);
-        this.add(txfFade, 0, 2);
-        this.add(btnSøg, 0, 2);
+        this.add(lblTitle, 0, 0);
+        lblTitle.setStyle("-fx-font-size: 24px");
 
-        txfFade.setTranslateX(60);
-        txfFade.setMaxWidth(110);
-        txfFade.setPromptText("Søg Fade");
-        btnSøg.setTranslateX(180);
+        tableView();
 
-        updateLwFade();
+
     }
 
-    private void updateLwFade() {
-        if (txfFade.getCharacters().isEmpty()) {
-            lwFade.getItems().setAll(Controller.getFade());
-        }
+    private void tableView() {
+        // Create Tableview
+        TableView<Fad> tvFade = new TableView<>();
+
+        // Create columns
+
+        // Fad Id.
+        TableColumn<Fad, Integer> colFadNr = new TableColumn<>("Fad Nr.");
+        colFadNr.setCellValueFactory(new PropertyValueFactory<>("fadId"));
+
+        // Batch Id
+     /*   TableColumn<Fad, Integer> colBatchId = new TableColumn<>("Batch Id.");
+        colBatchId.setCellValueFactory(cell -> {
+            Fad fad = cell.getValue();
+
+            Destilat destilat = Controller
+        });*/
+
     }
 }
