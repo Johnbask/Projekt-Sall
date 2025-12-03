@@ -6,6 +6,7 @@ import java.util.List;
 public class Destillering implements java.io.Serializable {
 
     private int newMakeId;
+    public static int idMaker = 1;
     private LocalDate startDato;
     private LocalDate slutDato;
     private double mængdeProduceret;
@@ -21,8 +22,9 @@ public class Destillering implements java.io.Serializable {
     //tror den her forbindelse ikke skal være her men better safe than sorry
     private  List<Destilat> destilatList;
 
-    public Destillering(int newMakeId, LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, Medarbejder medarbejder) {
-        this.newMakeId = newMakeId;
+    public Destillering(LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, Medarbejder medarbejder) {
+        newMakeId = idMaker;
+        idMaker++;
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.mængdeProduceret = mængdeProduceret;

@@ -13,16 +13,16 @@ import javafx.scene.layout.HBox;
 import model.Destilat;
 import model.Destillering;
 import model.Fad;
+import model.Medarbejder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DestilleringPane extends GridPane {
 
     public DestilleringPane() {
         FirstSection();
-
-        SecondSection();
     }
 
     // Private fields for First Section
@@ -30,14 +30,18 @@ public class DestilleringPane extends GridPane {
     private final TextField txfFadNr = new TextField();
     private final TextField txfKornSort = new TextField();
     private final DatePicker dpStarDato = new DatePicker();
+    private final DatePicker dpSlutDato = new DatePicker();
     private final TextField txfMaengdeLiter = new TextField();
     private final TextField txfAlkoholProcent = new TextField();
     private final TextField txfRøg = new TextField();
-    private final TextField txfBatchID = new TextField();
+    private final ComboBox<Medarbejder> cbMedarbjder = new ComboBox<>();
     private final TextArea txaKommentar = new TextArea();
     private final Button btnCreate = new Button("Create");
     private final Label lblDestillering = new Label("Destillering");
     private final ComboBox<Fad> cbFadNr = new ComboBox<>();
+    private final ListView<Destillering> lWDestilleringer = new ListView<>();
+    private final Button bSlet = new Button("Slet");
+
 
 
     private void FirstSection() {
@@ -49,22 +53,22 @@ public class DestilleringPane extends GridPane {
         this.add(lblDestillering, 0, 0, 2, 1);
         lblDestillering.setStyle("-fx-font-size: 24px");
 
-        this.add(new Label("New Make ID: "), 0, 1);
-        this.add(txfNewMakeId, 1, 1);
-
-        this.add(new Label("Fad Nr.:"), 0, 2);
+        this.add(new Label("Fad Nr.:"), 0, 1);
         cbFadNr.setPromptText("Vælg fad (valgfrit)");
         ObservableList<Fad> emptyFads = FXCollections.observableArrayList(Controller.getEmptyFad());
         cbFadNr.setItems(emptyFads);
-        this.add(cbFadNr, 1, 2);
+        this.add(cbFadNr, 1, 1);
 
         //this.add(txfFadNr, 1, 2);
 
-        this.add(new Label("Kornsort: "), 0, 3);
-        this.add(txfKornSort, 1, 3);
+        this.add(new Label("Kornsort: "), 0, 2);
+        this.add(txfKornSort, 1, 2);
 
-        this.add(new Label("Start Dato: "), 0, 4);
-        this.add(dpStarDato, 1, 4);
+        this.add(new Label("Start Dato: "), 0, 3);
+        this.add(dpStarDato, 1, 3);
+
+        this.add(new Label("Slut Dato: "), 0, 4);
+        this.add(dpSlutDato,1,4);
 
         this.add(new Label("Mængde Liter: "), 0, 5);
         this.add(txfMaengdeLiter, 1, 5);
@@ -101,8 +105,8 @@ public class DestilleringPane extends GridPane {
         rbnTrueHeart.setToggleGroup(tg2);
         rbnFalseHeart.setToggleGroup(tg2);
 
-        this.add(new Label("Batch ID: "), 0, 10);
-        this.add(txfBatchID, 1, 10);
+        this.add(new Label("Medarbejder: "), 0, 10);
+        this.add(cbMedarbjder, 1, 10);
 
         this.add(new Label("Kommentar: "), 0, 11);
         this.add(txaKommentar, 1, 11);
@@ -110,111 +114,41 @@ public class DestilleringPane extends GridPane {
 
         this.add(btnCreate, 0, 12);
         btnCreate.setOnAction(event -> createDestilat());
+
+        this.add(bSlet,3,12);
+
+        this.add(lWDestilleringer,3,1,1,11);
+        lWDestilleringer.getItems().setAll(getFrieDestileringer());
     }
 
 
 
-    // Private fields for Second Section
-    private final Button btnUpdate = new Button("Update");
-    private final Button btnDelete = new Button("Delete");
 
-    private void SecondSection() {
-        // Table View
-        TableView<Destillering> tvDestilleringer = new TableView<>();
-
-        // Created Columns
-        TableColumn<Destillering, Integer> colNewMakeId = new TableColumn<>("New\nMake ID");
-        colNewMakeId.setCellValueFactory(new PropertyValueFactory<>("newMakeId"));
-
-        /*
-        TableColumn<Destillering, LocalDate> colStartDato = new TableColumn<>("StartDato");
-        colStartDato.setCellValueFactory(new PropertyValueFactory<>("startDato"));
-
-        TableColumn<Destillering, LocalDate> colSlutDato = new TableColumn<>("SlutDato");
-        colSlutDato.setCellValueFactory(new PropertyValueFactory<>("slutDato"));
-         */
-
-        TableColumn<Destillering, String> colDatoRange = new TableColumn<>("Periode");
-        colDatoRange.setCellValueFactory(cell -> {
-            Destillering d = cell.getValue();
-
-            LocalDate start = d.getStartDato();
-            LocalDate slut = d.getSlutDato();
-
-            String result = start + "\n➡ " + slut;
-
-            return new SimpleStringProperty(result);
-        });
-
-        TableColumn<Destillering, Double> colMaengdeLiter = new TableColumn<>("Mængde\nLiter");
-        colMaengdeLiter.setCellValueFactory(new PropertyValueFactory<>("mængdeProduceret"));
-
-        TableColumn<Destillering, Double> colAlkoholProcent = new TableColumn<>("Alkohol %");
-        colAlkoholProcent.setCellValueFactory(new PropertyValueFactory<>("alkoholProcent"));
-
-
-        // Add columns to table
-        tvDestilleringer.getColumns().add(colNewMakeId);
-        tvDestilleringer.getColumns().add(colDatoRange);
-        tvDestilleringer.getColumns().add(colMaengdeLiter);
-        tvDestilleringer.getColumns().add(colAlkoholProcent);
-
-
-        tvDestilleringer.setItems(getFrieDestileringer());
-
-
-        // position in Tab
-        this.add(tvDestilleringer, 3, 1, 3, 13);
-
-        // Buttons TODO: Ret positionerne af knapperne
-
-        // HBox Method
-        /*
-        HBox hbo3 = new HBox();
-        hbo3.getChildren().addAll(btnUpdate, btnDelete);
-        this.add(hbo3, 3, 14);
-        hbo3.setAlignment(Pos.BASELINE_CENTER);
-        hbo3.setSpacing(50);
-         */
-
-        // With a search field between buttons
-        this.add(btnUpdate, 3, 14);
-
-        TextField txfSøg = new TextField();
-        this.add(txfSøg, 4, 14);
-        txfSøg.setPromptText("Søg NM ID");
-
-        this.add(btnDelete, 5, 14);
-
-        // TODO Rettelser af fejl fra Terminalen, når man kører App (AKA hvorfor er der mange røde linjer)
-    }
-    /*
-    // Test to see if it's working
-    private ObservableList<Destillering> getData() {
-        return FXCollections.observableArrayList(
-                new Destillering(1, LocalDate.of(2025,11,14), LocalDate.of(2025,11,16), 150, 60, "Test Kommentar 1"),
-                new Destillering(2, LocalDate.of(2025,12,14), LocalDate.of(2025,12,20), 180, 55, "Test Kommentar 2")
-        );
-    }
-     */
     public void updateLedigeFad(){
         cbFadNr.setItems((ObservableList<Fad>) Controller.getEmptyFad());
     }
 
     private void createDestilat() {
-        // opret en destelering og et destilalt
+
+        Destillering temp = new Destillering(dpStarDato,dpSlutDato,txfMaengdeLiter,txfAlkoholProcent,)
+
+        Controller.opretDestilat(txfMaengdeLiter,)
 
 
+
+        updateLedigeFad();
     }
-    private ObservableList<Destillering> getFrieDestileringer(){
+    private ArrayList<Destillering> getFrieDestileringer(){
         System.out.println("test 2");
-        ObservableList<Destillering> temp = null;
+        ArrayList<Destillering> frieDestilleringer = new ArrayList<>();
         for (Destilat destilat : Controller.getDestilater()) {
-            if(destilat.getUsed()){
-                temp.add(destilat.getDestillering());
+            System.out.println("test 3");
+            if(!destilat.getUsed()){
+                System.out.println("test 4");
+                frieDestilleringer.add(destilat.getDestillering());
             }
         }
-        return temp;
+        return frieDestilleringer;
     }
 
 }
