@@ -3,10 +3,7 @@ package gui;
 import com.sun.javafx.scene.control.DoubleField;
 import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import model.Fad;
 import model.Vand;
@@ -26,7 +23,7 @@ public class FlaskningsPane extends GridPane {
     private final DoubleField dFLiterVand = new DoubleField();
     private final ComboBox<Vand> cbVandKilde = new ComboBox<>();
     private final DoubleField dFFlaskeStørelse = new DoubleField();
-    private final TextField tFHistorien = new TextField();
+    private final TextArea tAHistorien = new TextArea();
     private final Button bGenrateStory = new Button("Genrate Story");
     private final Button bFlaskkiefy = new Button("Flaskiefy");
 
@@ -37,10 +34,10 @@ public class FlaskningsPane extends GridPane {
         Label lHistorie = new Label("Historien");
         this.add(lHistorie,3,0,2,2);
 
-        this.add(tFHistorien,3,3,1,7);
-        tFHistorien.setEditable(false);
-        tFHistorien.setMinWidth(300);
-        tFHistorien.setMinHeight(300);
+        this.add(tAHistorien,3,3,1,7);
+        tAHistorien.setEditable(false);
+        tAHistorien.setMinWidth(300);
+        tAHistorien.setMinHeight(300);
 
         Label lMakeNavn = new Label("Make name");
         this.add(lMakeNavn,0,3);
@@ -80,7 +77,7 @@ public class FlaskningsPane extends GridPane {
     }
 
     private void genrateStory() {
-        tFHistorien.setText("Der var en gang en gang og for enden af den gang var der en dør");
+        tAHistorien.setText("Der var en gang en gang og for enden af den gang var der en dør");
     }
 
 }
