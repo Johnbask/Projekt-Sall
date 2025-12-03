@@ -1,5 +1,6 @@
 package gui;
 
+import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,8 +15,10 @@ import model.Fad;
 import model.Hylde;
 import model.Lager;
 import model.Reol;
+import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,8 +42,7 @@ public class FadePane extends GridPane {
     }
 
     // fields for first section
-    private final TextField txfFadSøgning = new TextField();
-    private final Button btnSøg = new Button("Søg");
+    private final IntegerField ifFadSøgning = new IntegerField();
     private final Button btnUpdate = new Button("Update");
     private final Button btnSlet = new Button("Slet");
     private  final  TableView<Fad> tvFade = new TableView<>();
@@ -59,7 +61,7 @@ public class FadePane extends GridPane {
 
 
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
-        colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("fadstørrelse"));
+        colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
         TableColumn<Fad, String> colMateriale = new TableColumn<>("Materiale");
         colMateriale.setCellValueFactory(new PropertyValueFactory<>("materiale"));
@@ -102,6 +104,8 @@ public class FadePane extends GridPane {
        // tvFade.getColumns().add(colKøbtDato);
         tvFade.getColumns().addAll(colLokation);
 
+        tvFade.setMinWidth(700);
+
 
 
         // Test for om det virker TODO Rettelser
@@ -111,19 +115,38 @@ public class FadePane extends GridPane {
         this.add(tvFade, 0, 1, 2, 11);
 
         // buttons + search field
-        this.add(txfFadSøgning, 0, 12);
-        txfFadSøgning.setPromptText("Fad ID");
-        this.add(btnSøg, 1, 12);
+        this.add(ifFadSøgning, 0, 12);
+        ifFadSøgning.setPromptText("Fad ID");
+        ifFadSøgning.valueProperty().addListener(observable -> findFadMedId());
 
         HBox hBox = new HBox();
         hBox.getChildren().addAll(btnUpdate, btnSlet);
         this.add(hBox, 0, 13);
         hBox.setSpacing(10);
+        btnSlet.setOnAction(event -> sletFad(tvFade.getSelectionModel().getSelectedItem()));
         /*
         this.add(btnUpdate, 0, 12);
         this.add(btnSlet, 1, 12);
          */
 
+    }
+
+    private void sletFad(Fad fad) {
+        Controller.sletFad(fad);
+
+        Controller.writeStorage();
+        System.out.println("deleted"+fad);
+        tvFade.getItems().setAll(Controller.getFade());
+    }
+
+    private void findFadMedId() {
+        List<Fad> fade = new ArrayList<>();
+        Controller.getFade().forEach(fad ->
+        {if (fad.getFadId()==(ifFadSøgning.getValue())){fade.add(fad);}});
+        tvFade.getItems().setAll(fade);
+        if (ifFadSøgning.getValue()==0){
+            tvFade.getItems().setAll(Controller.getFade());
+        }
     }
 
     // Private Fields for second section

@@ -22,7 +22,6 @@ public class LagerPane extends GridPane {
     private final IntegerField  tFad = new IntegerField();
     private final Button bFlytFad = new Button("Flyt Fad");
     private final Button bSletFad = new Button("Slet Fad");
-    private final Button bOpretFad = new Button("Opret Fad");
 
     public LagerPane(){
         this.setPadding(new Insets(20));
@@ -63,7 +62,6 @@ public class LagerPane extends GridPane {
         HBox hBox = new HBox();
         hBox.getChildren().add(bFlytFad);
         hBox.getChildren().add(bSletFad);
-        hBox.getChildren().add(bOpretFad);
        this.add(hBox,0,7);
        hBox.setTranslateX(-10);
        hBox.setSpacing(15);
@@ -78,7 +76,6 @@ public class LagerPane extends GridPane {
         bSletFad.setDisable(true);
         bSletFad.setOnAction(event -> sletFad(lWfade.getSelectionModel().getSelectedItem()));
 
-        bOpretFad.setOnAction(event -> opretFadPane());
 
 
 
@@ -89,25 +86,16 @@ public class LagerPane extends GridPane {
     }
 
     private void findFadMedId() {
-
-try {
-
     List<Fad> fade = new ArrayList<>();
     Controller.getFade().forEach(fad ->
     {if (fad.getFadId()==(tFad.getValue())){fade.add(fad);}});
     lWfade.getItems().setAll(fade);
-
-}catch (IllegalArgumentException e){
-    System.out.println("success");
-}
-
-
+    if (tFad.getValue()==0){
+        lWfade.getItems().setAll(Controller.getFade());
+    }
     }
 
-    private void opretFadPane() {
-        OpretFadPane opretFadPane = new OpretFadPane("OpretFad");
-        opretFadPane.showAndWait();
-    }
+
 
     private void sletFad(Fad fad) {
         Controller.sletFad(fad);
