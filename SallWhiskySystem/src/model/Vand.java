@@ -1,6 +1,8 @@
 package model;
 
-public class Vand {
+import java.io.Serializable;
+
+public class Vand implements Serializable {
 
     private String kilde;
 

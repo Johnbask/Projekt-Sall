@@ -173,7 +173,7 @@ public class Storage {
 
         Controller.opretMedarbejder("Ruben","Gud");
         Controller.opretDestilat(100.0,true,true,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
-
+        Controller.opretVand("ToiletKummen");
 
 
     }

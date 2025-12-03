@@ -25,11 +25,16 @@ public class FlaskningsPane extends GridPane {
     private final DoubleField dFLiterVand = new DoubleField();
     private final ComboBox<Vand> cbVandKilde = new ComboBox<>();
     private final DoubleField dFFlaskeStørelse = new DoubleField();
+    private final TextField tFHistorien = new TextField();
 
     private void intContent() {
 
         Label lFlaskning = new Label("Flaskning");
         this.add(lFlaskning,0,0,2,2);
+        Label lHistorie = new Label("Historie");
+        this.add(lHistorie,3,0);
+
+
 
         Label lMakeNavn = new Label("Make name");
         this.add(lMakeNavn,0,3);
@@ -56,6 +61,8 @@ public class FlaskningsPane extends GridPane {
         Label lFlaskeStørelse = new Label("Flaske størlese L");
         this.add(lFlaskeStørelse,0,8);
         this.add(dFFlaskeStørelse,1,8);
+
+
 
 
     }
