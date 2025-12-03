@@ -18,11 +18,10 @@ public class Destilat implements
     private Destillering destillering;
     private ModningsTid modningstid;
 
-    public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, int batchId, Destillering destillering) {
+    public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
         this.liter = liter;
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;
-        this.batchId = batchId;
         this.destillering = destillering;
         //
     }

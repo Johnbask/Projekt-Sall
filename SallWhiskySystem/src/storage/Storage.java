@@ -160,7 +160,7 @@ public class Storage {
         Controller.addHylderTilReol(SanderLager.getReol(5),2);
 
         Controller.opretMedarbejder("Ruben","Gud");
-        Controller.opretDestilat(100,true,true,1,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
+        Controller.opretDestilat(100.0,true,true,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
 
 
 

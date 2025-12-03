@@ -44,7 +44,7 @@ public class SporbarhedPane extends GridPane {
             Destilat destilat = Controller
         });*/
 
- */
+
 
     }
 }
