@@ -36,12 +36,14 @@ public class DestilleringPane extends GridPane {
     private final TextArea txaKommentar = new TextArea();
     private final Button btnCreate = new Button("Create");
     private final Label lblDestillering = new Label("Destillering");
+    private final ComboBox<Fad> cbFadNr = new ComboBox<>();
+
 
     private void FirstSection() {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(true);
+        this.setGridLinesVisible(false);
 
         this.add(lblDestillering, 0, 0, 2, 1);
         lblDestillering.setStyle("-fx-font-size: 24px");
@@ -50,12 +52,9 @@ public class DestilleringPane extends GridPane {
         this.add(txfNewMakeId, 1, 1);
 
         this.add(new Label("Fad Nr.:"), 0, 2);
-        ComboBox<Fad> cbFadNr = new ComboBox<>();
         cbFadNr.setPromptText("Vælg fad (valgfrit)");
-
         ObservableList<Fad> emptyFads = FXCollections.observableArrayList(Controller.getEmptyFad());
         cbFadNr.setItems(emptyFads);
-
         this.add(cbFadNr, 1, 2);
 
         //this.add(txfFadNr, 1, 2);
@@ -109,7 +108,10 @@ public class DestilleringPane extends GridPane {
         txaKommentar.setPrefSize(50, 100);
 
         this.add(btnCreate, 0, 12);
+        btnCreate.setOnAction(event -> createDestilat());
     }
+
+
 
     // Private fields for Second Section
     private final Button btnUpdate = new Button("Update");
@@ -192,4 +194,14 @@ public class DestilleringPane extends GridPane {
                 new Destillering(2, LocalDate.of(2025,12,14), LocalDate.of(2025,12,20), 180, 55, "Test Kommentar 2")
         );
     }
+    public void updateLedigeFad(){
+        cbFadNr.setItems((ObservableList<Fad>) Controller.getEmptyFad());
+    }
+
+    private void createDestilat() {
+
+
+
+    }
+
 }

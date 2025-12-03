@@ -16,14 +16,21 @@ public class Destilat {
     private Destillering destillering;
     private ModningsTid modningstid;
 
-    public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, int batchId) {
+    public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, int batchId, Destillering destillering) {
         this.liter = liter;
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;
         this.batchId = batchId;
+        this.destillering = destillering;
+        //
     }
 
     public void setRøgmateriale(String røgmateriale) {
         this.røgmateriale = røgmateriale;
     }
+
+    public void addDestilat(Destilat d){
+        destilater.add(d);
+    }
+
 }
