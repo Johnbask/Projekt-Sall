@@ -4,6 +4,7 @@ import controller.Controller;
 import model.*;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,15 @@ public class Storage {
 
     static List<Lager> lagere;
     static List<Fad> fade;
+    static List<Destilat> destilater;
+
+    public static void addDestilat(Destilat destilat){
+        destilater.add(destilat);
+    }
+
+    public static List<Destilat> getDestilater(){
+        return destilater;
+    }
 
     public static void addLager(Lager lager){
         lagere.add(lager);
@@ -48,13 +58,14 @@ public class Storage {
             {
                 lagere = (ArrayList) objIn.readObject();
                 fade = (ArrayList) objIn.readObject();
+                destilater = (ArrayList) objIn.readObject();
             }
 
         } catch (IOException | ClassNotFoundException e) {
             lagere= new ArrayList<>();
             fade=new ArrayList<>();
+            destilater = new ArrayList<>();
             System.out.println("shit");
-
             initialStorageCreation();
             System.out.println("Catch readStorage");
 
@@ -72,6 +83,7 @@ public class Storage {
         ){
             objOut.writeObject(lagere);
             objOut.writeObject(fade);
+            objOut.writeObject(destilater);
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
@@ -134,6 +146,9 @@ public class Storage {
         Controller.addReolerTilLager(SanderLager,1);
         Controller.addHylderTilReol(SHlager.getReol(5),7);
         Controller.addHylderTilReol(SanderLager.getReol(5),2);
+
+        Controller.opretDestilat(100,true,true,1,new Destillering(1,LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,new Medarbejder("John","Pleb")));
+
 
 
     }

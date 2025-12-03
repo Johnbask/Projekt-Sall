@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Medarbejder {
+public class Medarbejder implements java.io.Serializable {
 
     private String navn;
     private String Stilling;

@@ -23,6 +23,7 @@ public class Fad implements
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
+    private List<Flaske> flaske = new ArrayList<>();
 
     public Fad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør) {
         this.liter = liter;
@@ -38,7 +39,6 @@ public class Fad implements
         return
                 "fad"+ fadId + " Hylde" + hylde.getNummer() + " reol" + hylde.getReol().getNummer()+" lager"+ hylde.getReol().getLager().getLagerId() ;
     }
-    
 
     public void setHylde(Hylde hylde) {
         this.hylde = hylde;

@@ -15,6 +15,7 @@ import model.Destillering;
 import model.Fad;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class DestilleringPane extends GridPane {
 
@@ -158,8 +159,9 @@ public class DestilleringPane extends GridPane {
         tvDestilleringer.getColumns().add(colMaengdeLiter);
         tvDestilleringer.getColumns().add(colAlkoholProcent);
 
-        // Test to see it's working
-        tvDestilleringer.setItems(getData());
+
+        tvDestilleringer.setItems(getFrieDestileringer());
+
 
         // position in Tab
         this.add(tvDestilleringer, 3, 1, 3, 13);
@@ -186,7 +188,7 @@ public class DestilleringPane extends GridPane {
 
         // TODO Rettelser af fejl fra Terminalen, når man kører App (AKA hvorfor er der mange røde linjer)
     }
-
+    /*
     // Test to see if it's working
     private ObservableList<Destillering> getData() {
         return FXCollections.observableArrayList(
@@ -194,14 +196,25 @@ public class DestilleringPane extends GridPane {
                 new Destillering(2, LocalDate.of(2025,12,14), LocalDate.of(2025,12,20), 180, 55, "Test Kommentar 2")
         );
     }
+     */
     public void updateLedigeFad(){
         cbFadNr.setItems((ObservableList<Fad>) Controller.getEmptyFad());
     }
 
     private void createDestilat() {
+        // opret en destelering og et destilalt
 
 
-
+    }
+    private ObservableList<Destillering> getFrieDestileringer(){
+        System.out.println("test 2");
+        ObservableList<Destillering> temp = null;
+        for (Destilat destilat : Controller.getDestilater()) {
+            if(destilat.getUsed()){
+                temp.add(destilat.getDestillering());
+            }
+        }
+        return temp;
     }
 
 }
