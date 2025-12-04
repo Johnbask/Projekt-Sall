@@ -24,7 +24,7 @@ public class Fad implements
 
     // links
     // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
-    private List<Destilat> destillater;
+    private List<Destilat> destillater = new ArrayList<>();
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
@@ -49,10 +49,13 @@ public class Fad implements
         this.hylde = hylde;
     }
 
-    public boolean isEmpty() {
-        if(destillater.isEmpty()||litterIFad <= 0){
+    public boolean isTom() {
+        System.out.println("test3");
+        if(destillater == null ||litterIFad <= 0){
+            System.out.println("test4");
             return true;
         }else{
+            System.out.println("test5");
             return false;
         }
     }
@@ -116,7 +119,13 @@ public class Fad implements
         tidligereIndhold.add(s);
     }
     public Destilat getDestilat(){
+        if(destillater.isEmpty()){
+            System.out.println("test1");
+            return null;
+        }
+        System.out.println("test2");
         return destillater.getLast();
+
     }
 
     public void addLagerHist(){

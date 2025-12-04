@@ -66,12 +66,13 @@ public class SporbarhedPane extends GridPane {
         TableColumn<Fad, Integer> colNewMakeID = new TableColumn<>("New Make ID");
         colNewMakeID.setCellValueFactory(cell -> {
             Fad fad = cell.getValue();
-
             Destilat destilat = fad.getDestilat();
-
+            if (destilat==null){
+                return null;
+            }
             if (destilat != null && destilat.getDestillering() != null) {
-                int batchId = fad.getDestilat().getBatchId();
-                return new SimpleIntegerProperty(batchId).asObject();
+                int newMakeId = fad.getDestilat().getDestillering().getNewMakeId();
+                return new SimpleIntegerProperty(newMakeId).asObject();
             }
 
             return new SimpleIntegerProperty(0).asObject();
@@ -259,7 +260,7 @@ public class SporbarhedPane extends GridPane {
         historie.append("Fad Størrelse: ").append(String.format("%.1f L", fad.getLiter())).append("\n");
         historie.append("Materiale: ").append(fad.getMateriale()).append("\n");
         historie.append("Leverandør: ").append(fad.getLeverandør()).append("\n");
-        historie.append("Status: ").append(fad.isEmpty() ? "Tomt" : "Fyldt").append("\n\n");
+        historie.append("Status: ").append(fad.isTom() ? "Tomt" : "Fyldt").append("\n\n");
 
         // Tidligere Indhold
         List<String> tidligereIndhold = fad.getTidligereIndhold();
