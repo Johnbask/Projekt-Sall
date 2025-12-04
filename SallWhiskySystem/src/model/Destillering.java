@@ -11,6 +11,8 @@ public class Destillering implements java.io.Serializable {
     private LocalDate slutDato;
     private double mængdeProduceret;
     private double alkoholProcent;
+    private String råvare;
+    private String røg;
     private String kommentar;
 
     // link attributter
@@ -21,7 +23,7 @@ public class Destillering implements java.io.Serializable {
     //tror den her forbindelse ikke skal være her men better safe than sorry
     private  List<Destilat> destilatList;
 
-    public Destillering(LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, Medarbejder medarbejder) {
+    public Destillering(LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, Medarbejder medarbejder,String råvare, String røg,String kommentar,Vand vand) {
         newMakeId = idMaker;
         idMaker++;
         this.startDato = startDato;
@@ -29,6 +31,10 @@ public class Destillering implements java.io.Serializable {
         this.mængdeProduceret = mængdeProduceret;
         this.alkoholProcent = alkoholProcent;
         this.medarbejder = medarbejder;
+        this.råvare = råvare;
+        this.røg = røg;
+        this.kommentar = kommentar;
+        this.vand = vand;
     }
 
     public int getNewMakeId() {

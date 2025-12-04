@@ -10,10 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import model.Destilat;
-import model.Destillering;
-import model.Fad;
-import model.Medarbejder;
+import model.*;
+import storage.Storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,7 +36,7 @@ public class DestilleringPane extends GridPane {
     private final TextArea txaKommentar = new TextArea();
     private final Button btnCreate = new Button("Create");
     private final Label lblDestillering = new Label("Destillering");
-    private final ComboBox<Fad> cbFadNr = new ComboBox<>();
+    private final ComboBox<Vand> cbVand = new ComboBox<>();
     private final ListView<Destillering> lWDestilleringer = new ListView<>();
     private final Button bSlet = new Button("Slet");
     // ToggleGroup to use for true false RadioButtons
@@ -60,57 +58,66 @@ public class DestilleringPane extends GridPane {
         this.add(lblDestillering, 0, 0, 2, 1);
         lblDestillering.setStyle("-fx-font-size: 24px");
 
+        /*
         this.add(new Label("Fad Nr.:"), 0, 1);
         cbFadNr.setPromptText("Vælg fad (valgfrit)");
         cbFadNr.getItems().setAll(Controller.getEmptyFad());
         this.add(cbFadNr, 1, 1);
+         */
 
         //this.add(txfFadNr, 1, 2);
 
-        this.add(new Label("Kornsort: "), 0, 2);
-        this.add(txfKornSort, 1, 2);
+        this.add(new Label("Kornsort: "), 0, 1);
+        this.add(txfKornSort, 1, 1);
 
-        this.add(new Label("Start Dato: "), 0, 3);
-        this.add(dpStarDato, 1, 3);
+        this.add(new Label("Start Dato: "), 0, 2);
+        this.add(dpStarDato, 1, 2);
 
-        this.add(new Label("Slut Dato: "), 0, 4);
-        this.add(dpSlutDato,1,4);
+        this.add(new Label("Slut Dato: "), 0, 3);
+        this.add(dpSlutDato,1,3);
 
-        this.add(new Label("Mængde Liter: "), 0, 5);
-        this.add(txfMaengdeLiter, 1, 5);
+        this.add(new Label("Mængde Liter: "), 0, 4);
+        this.add(txfMaengdeLiter, 1, 4);
 
-        this.add(new Label("Alkohol %: "), 0, 6);
-        this.add(txfAlkoholProcent, 1, 6);
+        this.add(new Label("Alkohol %: "), 0, 5);
+        this.add(txfAlkoholProcent, 1, 5);
 
-        this.add(new Label("Røg: "), 0, 7);
-        this.add(txfRøg, 1, 7);
+        this.add(new Label("Røg: "), 0, 6);
+        this.add(txfRøg, 1, 6);
 
         // RadioButtons for isSingleMalt
-        this.add(new Label("IsSingleMalt: "), 0, 8);
+        this.add(new Label("IsSingleMalt: "), 0, 7);
         HBox hBox1 = new HBox();
 
         hBox1.getChildren().addAll(rbnTrueSingleMalt, rbnFalseSingleMalt);
-        this.add(hBox1, 1, 8);
+        this.add(hBox1, 1, 7);
         hBox1.setSpacing(10);
         rbnTrueSingleMalt.setToggleGroup(tg1);
         rbnFalseSingleMalt.setToggleGroup(tg1);
 
         // Radiobuttons for isHeart
-        this.add(new Label("IsHeart: "), 0, 9);
+        this.add(new Label("IsHeart: "), 0, 8);
         HBox hBox2 = new HBox();
         hBox2.getChildren().addAll(rbnTrueHeart, rbnFalseHeart);
-        this.add(hBox2, 1, 9);
+        this.add(hBox2, 1, 8);
         hBox2.setSpacing(10);
         rbnTrueHeart.setToggleGroup(tg2);
         rbnFalseHeart.setToggleGroup(tg2);
 
-        this.add(new Label("Medarbejder: "), 0, 10);
-        this.add(cbMedarbjder, 1, 10);
+        this.add(new Label("Medarbejder: "), 0, 9);
+        this.add(cbMedarbjder, 1, 9);
         cbMedarbjder.getItems().setAll(Controller.getMedarbejderne());
 
-        this.add(new Label("Kommentar: "), 0, 11);
-        this.add(txaKommentar, 1, 11);
+        this.add(new Label("Kommentar: "), 0, 10);
+        this.add(txaKommentar, 1, 10);
         txaKommentar.setPrefSize(50, 100);
+
+
+        this.add(new Label("VandKilde"), 0, 11);
+        cbVand.setPromptText("Vælg vandkilde");
+        cbVand.getItems().setAll(Controller.getVands());
+        this.add(cbVand, 1, 11);
+
 
         this.add(btnCreate, 0, 12);
         btnCreate.setOnAction(event -> createDestilat());
@@ -124,16 +131,20 @@ public class DestilleringPane extends GridPane {
     public void updateDestilleringer(){
         lWDestilleringer.getItems().setAll(getDestileringer());
     }
-
+    /* // forældet
     public void updateLedigeFad(){
         cbFadNr.getItems().setAll(Controller.getEmptyFad());
     }
+     */
 
     private void createDestilat() {
 
-        Destillering temp = new Destillering(dpStarDato.getValue(),dpSlutDato.getValue(),Double.parseDouble(txfMaengdeLiter.getText()),Double.parseDouble(txfAlkoholProcent.getText()),cbMedarbjder.getSelectionModel().getSelectedItem());
-        Controller.opretDestilat(Double.parseDouble(txfMaengdeLiter.getText()),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),temp);
-        updateLedigeFad();
+
+
+
+        Destillering destillering = new Destillering(dpStarDato.getValue(),dpSlutDato.getValue(),Double.parseDouble(txfMaengdeLiter.getText()),Double.parseDouble(txfAlkoholProcent.getText()),cbMedarbjder.getSelectionModel().getSelectedItem(),txfKornSort.getText(),txfRøg.getText(),txaKommentar.getText(),cbVand.getSelectionModel().getSelectedItem());
+        Controller.opretDestilat(Double.parseDouble(txfMaengdeLiter.getText()),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),destillering);
+        //updateLedigeFad();
         updateDestilleringer();
     }
     private ArrayList<Destillering> getDestileringer(){

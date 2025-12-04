@@ -87,11 +87,10 @@ public class Storage {
             destilater = new ArrayList<>();
             medarbejderne = new ArrayList<>();
             vands = new ArrayList<>();
-            System.out.println("shit");
             initialStorageCreation();
-            System.out.println("Catch readStorage");
 
         } catch (Exception e){
+            System.out.println("Catch readStorage");
             throw new  RuntimeException(e);
         }
 
@@ -176,10 +175,10 @@ public class Storage {
         Controller.addHylderTilReol(SHlager.getReol(5),7);
         Controller.addHylderTilReol(SanderLager.getReol(5),2);
 
-        Controller.opretMedarbejder("Ruben","Gud");
-        Controller.opretDestilat(100.0,true,true,new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst()));
         Controller.opretVand("Toiletkummen");
-
+        Controller.opretMedarbejder("Ruben","Gud");
+        Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst(),"1","2","3",vands.getFirst());
+        Controller.opretDestilat(100.0,true,true,destillering);
 
     }
 

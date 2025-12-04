@@ -25,4 +25,9 @@ public class Vand implements Serializable {
     public Flaske getFlaske() {
         return flaske;
     }
+
+    @Override
+    public String toString() {
+        return kilde ;
+    }
 }
