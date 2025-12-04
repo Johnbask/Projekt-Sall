@@ -20,6 +20,7 @@ public class Fad implements
     private int fadId;
     private List<String> tidligereIndhold;
     private String leverandør;
+    private double litterIFad;
 
     // links
     // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
@@ -50,6 +51,13 @@ public class Fad implements
 
     public boolean isEmpty() {
         return getDestilat() == null;
+    }
+
+    public double getLitterIFad(){
+        return litterIFad;
+    }
+    public void setLitterIFad(double liter){
+        litterIFad = liter;
     }
 
     // Getters
