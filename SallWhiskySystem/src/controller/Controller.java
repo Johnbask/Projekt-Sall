@@ -133,7 +133,7 @@ public class Controller {
     public static List<Fad> getEmptyFad() {
         List<Fad> result = new ArrayList<>();
         for (Fad f : Storage.getFade()) {
-            if (f.isEmpty()) {
+            if (f.isTom()) {
                 result.add(f);
             }
         }
@@ -142,7 +142,7 @@ public class Controller {
     public static List<Fad> getFildFad() {
         List<Fad> result = new ArrayList<>();
         for (Fad f : Storage.getFade()) {
-            if (!f.isEmpty()) {
+            if (!f.isTom()) {
                 result.add(f);
             }
         }
