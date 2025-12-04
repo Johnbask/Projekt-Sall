@@ -3,6 +3,7 @@ package model;
 import com.sun.scenario.effect.impl.state.AccessHelper;
 import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,11 @@ public class Fad implements
     private int fadId;
     private List<String> tidligereIndhold;
     private String leverandør;
+    private double litterIFad;
 
     // links
     // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
-    private List<Destilat> gamleDestillater;
-    private Destilat destilat;
+    private List<Destilat> destillater;
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
@@ -49,7 +50,18 @@ public class Fad implements
     }
 
     public boolean isEmpty() {
-        return destilat == null;
+        if(destillater.isEmpty()||litterIFad <= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public double getLitterIFad(){
+        return litterIFad;
+    }
+    public void setLitterIFad(double liter){
+        litterIFad = liter;
     }
 
     // Getters
@@ -80,11 +92,7 @@ public class Fad implements
 
     // Links getters
     public List<Destilat> getGamleDestillater() {
-        return gamleDestillater;
-    }
-
-    public Destilat getDestilat() {
-        return destilat;
+        return destillater;
     }
 
     public Hylde getHylde() {
@@ -103,13 +111,16 @@ public class Fad implements
         return flaske;
     }
 
-    public void setDestilat(Destilat destilat) {
-        this.destilat = destilat;
-    }
-
     public void addTidligereIndhold(String s){
         System.out.println(s);
         tidligereIndhold.add(s);
+    }
+    public Destilat getDestilat(){
+        return destillater.getLast();
+    }
+
+    public void addLagerHist(){
+        lageringsHists.add(new LageringsHist(LocalDate.now(),hylde));
     }
 }
 

@@ -131,6 +131,7 @@ public class FlytFadPane extends Stage {
         alert.showAndWait();
         if(alert.getResult().equals(ButtonType.OK)){
             fadet.setHylde(lWHylde.getSelectionModel().getSelectedItem());
+            fadet.addLagerHist();
             this.hide();
             alert.hide();
         }else{

@@ -11,9 +11,9 @@ public class LageringsHist implements Serializable {
     private Fad fad;
     private Hylde hylde;
 
-    public LageringsHist(LocalDate startDato, LocalDate slutDato) {
+    public LageringsHist(LocalDate startDato,Hylde hylde) {
         this.startDato = startDato;
-        this.slutDato = slutDato;
+        this.hylde = hylde;
     }
 
     public LocalDate getStartDato() {
