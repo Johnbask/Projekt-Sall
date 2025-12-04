@@ -244,9 +244,9 @@ public class FadePane extends GridPane {
             Hylde hylde= vælgFadVindue.getHylde();
             vælgFadVindue.close();
 
-            Controller.opretFad((double) intFadstørrelse.getValue(), (Trætype) cbxMateriale.getSelectionModel().getSelectedItem(),new ArrayList<>(List.of(txfHistorik.getText()))
+            Fad fad = Controller.opretFad((double) intFadstørrelse.getValue(), (Trætype) cbxMateriale.getSelectionModel().getSelectedItem(),new ArrayList<>(List.of(txfHistorik.getText()))
                     ,txfLeverandør.getText(),hylde);
-
+            fad.addLagerHist();
         }
 
 

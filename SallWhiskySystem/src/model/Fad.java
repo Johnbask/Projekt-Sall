@@ -3,6 +3,7 @@ package model;
 import com.sun.scenario.effect.impl.state.AccessHelper;
 import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +111,10 @@ public class Fad implements
     public void addTidligereIndhold(String s){
         System.out.println(s);
         tidligereIndhold.add(s);
+    }
+
+    public void addLagerHist(){
+        lageringsHists.add(new LageringsHist(LocalDate.now(),hylde));
     }
 }
 
