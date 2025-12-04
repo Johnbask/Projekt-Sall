@@ -29,13 +29,6 @@ public class SallGui extends Application {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
 
-
-        // Dashboard
-        Tab tabDashboard = new Tab("Dashboard");
-        tabPane.getTabs().add(tabDashboard);
-        DashboardPane dashboardPane = new DashboardPane();
-        tabDashboard.setContent(dashboardPane);
-
         // Destillering
         Tab tabDestillering = new Tab("Destillering");
         tabPane.getTabs().add(tabDestillering);
