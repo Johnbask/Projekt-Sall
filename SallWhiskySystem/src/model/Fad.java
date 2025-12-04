@@ -50,7 +50,11 @@ public class Fad implements
     }
 
     public boolean isEmpty() {
-        return getDestilat() == null;
+        if(destillater.isEmpty()||litterIFad <= 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public double getLitterIFad(){
