@@ -23,8 +23,7 @@ public class Fad implements
 
     // links
     // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
-    private List<Destilat> gamleDestillater;
-    private Destilat destilat;
+    private List<Destilat> destillater;
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
@@ -50,7 +49,7 @@ public class Fad implements
     }
 
     public boolean isEmpty() {
-        return destilat == null;
+        return getDestilat() == null;
     }
 
     // Getters
@@ -81,11 +80,7 @@ public class Fad implements
 
     // Links getters
     public List<Destilat> getGamleDestillater() {
-        return gamleDestillater;
-    }
-
-    public Destilat getDestilat() {
-        return destilat;
+        return destillater;
     }
 
     public Hylde getHylde() {
@@ -104,13 +99,12 @@ public class Fad implements
         return flaske;
     }
 
-    public void setDestilat(Destilat destilat) {
-        this.destilat = destilat;
-    }
-
     public void addTidligereIndhold(String s){
         System.out.println(s);
         tidligereIndhold.add(s);
+    }
+    public Destilat getDestilat(){
+        return destillater.getLast();
     }
 
     public void addLagerHist(){
