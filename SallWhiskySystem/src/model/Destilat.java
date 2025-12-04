@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Destilat implements
         java.io.Serializable {
+    public static int antalDestilater =1;
+
     private Double liter;
     private boolean isSingleMalt;
     private boolean isHeart;
@@ -18,11 +20,17 @@ public class Destilat implements
     private Destillering destillering;
     private ModningsTid modningstid;
 
+    public static void setAntalDestilater(int antalDestilater) {
+        Destilat.antalDestilater = antalDestilater;
+    }
+
     public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
         this.liter = liter;
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;
         this.destillering = destillering;
+        this.batchId=antalDestilater;
+        antalDestilater++;
     }
 
     public void setRøgmateriale(String røgmateriale) {

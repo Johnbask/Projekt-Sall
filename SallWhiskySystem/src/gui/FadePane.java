@@ -2,25 +2,24 @@ package gui;
 
 import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
-import javafx.beans.property.SimpleIntegerProperty;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+
 import model.*;
 import storage.Storage;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
-import java.util.MissingFormatArgumentException;
+
 
 public class FadePane extends GridPane {
     private final Label lblFade = new Label("Fade");
@@ -46,6 +45,7 @@ public class FadePane extends GridPane {
     private final IntegerField ifFadSøgning = new IntegerField();
     private final Button btnUpdate = new Button("Update Historik");
     private final Button btnSlet = new Button("Slet");
+    private final Button bPåfyld = new Button("Påfyldning");
     private  final  TableView<Fad> tvFade = new TableView<>();
 
 
@@ -130,10 +130,17 @@ public class FadePane extends GridPane {
         btnUpdate.setOnAction(event -> updateHistorikAction(tvFade.getSelectionModel().getSelectedItem()));
         tfxUpdate.setPromptText("Sherry");
         this.add(tfxUpdate,0,14);
-        /*
-        this.add(btnUpdate, 0, 12);
-        this.add(btnSlet, 1, 12);
-         */
+        this.add(bPåfyld,0,15);
+        bPåfyld.setMinWidth(250);
+        bPåfyld.setOnAction(event -> påFyldninsAction());
+    }
+
+    private void påFyldninsAction() {
+
+        OmhældningsVindue omhældningVindue = new OmhældningsVindue("Omhældning");
+        omhældningVindue.showAndWait();
+
+
 
     }
 
@@ -187,6 +194,7 @@ public class FadePane extends GridPane {
 
         this.add(btnOpret, 2, 10);
         this.add(btnCancel, 3, 10);
+
 
 
         btnOpret.setOnAction(event -> opretFad());

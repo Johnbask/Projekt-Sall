@@ -112,6 +112,7 @@ public class Storage {
             Fad.setAntalFade(fade.size()+1);
 
 
+
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
