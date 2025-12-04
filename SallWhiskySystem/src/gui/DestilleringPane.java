@@ -1,5 +1,6 @@
 package gui;
 
+import com.sun.javafx.scene.control.DoubleField;
 import controller.Controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -29,8 +30,8 @@ public class DestilleringPane extends GridPane {
     private final TextField txfKornSort = new TextField();
     private final DatePicker dpStarDato = new DatePicker();
     private final DatePicker dpSlutDato = new DatePicker();
-    private final TextField txfMaengdeLiter = new TextField();
-    private final TextField txfAlkoholProcent = new TextField();
+    private final DoubleField dFMaengdeLiter = new DoubleField();
+    private final DoubleField dFAlkoholProcent = new DoubleField();
     private final TextField txfRøg = new TextField();
     private final ComboBox<Medarbejder> cbMedarbjder = new ComboBox<>();
     private final TextArea txaKommentar = new TextArea();
@@ -46,6 +47,7 @@ public class DestilleringPane extends GridPane {
     RadioButton rbnFalseSingleMalt = new RadioButton("False");
     RadioButton rbnTrueHeart = new RadioButton("True");
     RadioButton rbnFalseHeart = new RadioButton("False");
+    private final Label lError = new Label();
 
 
 
@@ -67,7 +69,7 @@ public class DestilleringPane extends GridPane {
 
         //this.add(txfFadNr, 1, 2);
 
-        this.add(new Label("Kornsort: "), 0, 1);
+        this.add(new Label("Råvare "), 0, 1);
         this.add(txfKornSort, 1, 1);
 
         this.add(new Label("Start Dato: "), 0, 2);
@@ -77,10 +79,10 @@ public class DestilleringPane extends GridPane {
         this.add(dpSlutDato,1,3);
 
         this.add(new Label("Mængde Liter: "), 0, 4);
-        this.add(txfMaengdeLiter, 1, 4);
+        this.add(dFMaengdeLiter, 1, 4);
 
         this.add(new Label("Alkohol %: "), 0, 5);
-        this.add(txfAlkoholProcent, 1, 5);
+        this.add(dFAlkoholProcent, 1, 5);
 
         this.add(new Label("Røg: "), 0, 6);
         this.add(txfRøg, 1, 6);
@@ -88,12 +90,12 @@ public class DestilleringPane extends GridPane {
         // RadioButtons for isSingleMalt
         this.add(new Label("IsSingleMalt: "), 0, 7);
         HBox hBox1 = new HBox();
-
         hBox1.getChildren().addAll(rbnTrueSingleMalt, rbnFalseSingleMalt);
         this.add(hBox1, 1, 7);
         hBox1.setSpacing(10);
         rbnTrueSingleMalt.setToggleGroup(tg1);
         rbnFalseSingleMalt.setToggleGroup(tg1);
+        rbnTrueSingleMalt.setSelected(true);
 
         // Radiobuttons for isHeart
         this.add(new Label("IsHeart: "), 0, 8);
@@ -103,6 +105,7 @@ public class DestilleringPane extends GridPane {
         hBox2.setSpacing(10);
         rbnTrueHeart.setToggleGroup(tg2);
         rbnFalseHeart.setToggleGroup(tg2);
+        rbnTrueHeart.setSelected(true);
 
         this.add(new Label("Medarbejder: "), 0, 9);
         this.add(cbMedarbjder, 1, 9);
@@ -124,28 +127,59 @@ public class DestilleringPane extends GridPane {
 
         this.add(bSlet,3,12);
 
+        this.add(lError,0,13);
+
         this.add(lWDestilleringer,3,1,1,11);
         lWDestilleringer.getItems().setAll(getDestileringer());
+
+
     }
 
     public void updateDestilleringer(){
         lWDestilleringer.getItems().setAll(getDestileringer());
     }
-    /* // forældet
-    public void updateLedigeFad(){
-        cbFadNr.getItems().setAll(Controller.getEmptyFad());
-    }
-     */
+
 
     private void createDestilat() {
 
+        if(txfKornSort.getText().isBlank()){
+            lError.setText("Pls Input Råvare");
+            lError.setStyle("-fx-text-fill: red;");
+        }else if(dpStarDato == null){
+            lError.setText("Pls Input en start dato");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (dpSlutDato == null) {
+            lError.setText("Pls Input en slut dato");
+            lError.setStyle("-fx-text-fill: red;");  
+        } else if (dFMaengdeLiter == null) {
+            lError.setText("Pls Input mængde destilleret");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (dFAlkoholProcent == null) {
+            lError.setText("Pls Input Alcohol %");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (cbMedarbjder.getSelectionModel().isEmpty()) {
+            lError.setText("Pls vælg en medarbejder");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (cbVand.getSelectionModel().isEmpty()) {
+            lError.setText("Pls vælg en vandKilde");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (dpStarDato.getValue().isBefore(dpSlutDato.getValue())) {
+            lError.setText("ERROR Slut er sat før start");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (dFMaengdeLiter.getValue() <= 0.0) {
+            lError.setText("ERROR pls input en valid mængde i mængde liter");
+            lError.setStyle("-fx-text-fill: red;");
+        } else if (dFAlkoholProcent.getValue() <= 0 || dFAlkoholProcent.getValue() >= 100) {
+            lError.setText("ERROR pls input en valid mængde i mængde liter");
+            lError.setStyle("-fx-text-fill: red;");
+        } else{
+            Destillering destillering = new Destillering(dpStarDato.getValue(),dpSlutDato.getValue(),dFMaengdeLiter.getValue(),dFAlkoholProcent.getValue(),cbMedarbjder.getSelectionModel().getSelectedItem(),txfKornSort.getText(),txfRøg.getText(),txaKommentar.getText(),cbVand.getSelectionModel().getSelectedItem());
+            Controller.opretDestilat(dFMaengdeLiter.getValue(),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),destillering);
+            updateDestilleringer();
+        }
 
 
 
-        Destillering destillering = new Destillering(dpStarDato.getValue(),dpSlutDato.getValue(),Double.parseDouble(txfMaengdeLiter.getText()),Double.parseDouble(txfAlkoholProcent.getText()),cbMedarbjder.getSelectionModel().getSelectedItem(),txfKornSort.getText(),txfRøg.getText(),txaKommentar.getText(),cbVand.getSelectionModel().getSelectedItem());
-        Controller.opretDestilat(Double.parseDouble(txfMaengdeLiter.getText()),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),destillering);
-        //updateLedigeFad();
-        updateDestilleringer();
     }
     private ArrayList<Destillering> getDestileringer(){
         ArrayList<Destillering> Destilleringer = new ArrayList<>();
