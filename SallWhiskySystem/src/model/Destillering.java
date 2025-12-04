@@ -85,4 +85,16 @@ public class Destillering implements java.io.Serializable {
         return råvareList;
     }
 
+    @Override
+    public String toString() {
+        return newMakeId +"  "+ startDato +
+                " - " + slutDato +
+                "  " + mængdeProduceret +
+                "L  " + alkoholProcent +
+                "%  " + råvare +
+                "  " + røg +
+                " vand  " + vand +
+                " medarbejder : " + medarbejder.getNavn() +
+                " note : " + kommentar;
+    }
 }

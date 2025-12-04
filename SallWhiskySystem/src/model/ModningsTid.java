@@ -11,10 +11,10 @@ public class ModningsTid {
     // Links
     private Destilat destilat;
 
-    public ModningsTid(LocalDate startDato, LocalDate slutDato, double spild) {
+    public ModningsTid(LocalDate startDato, LocalDate slutDato) {
         this.startDato = startDato;
         this.slutDato = slutDato;
-        this.spild = spild;
+
     }
 
     public void setSpild(double spild) {

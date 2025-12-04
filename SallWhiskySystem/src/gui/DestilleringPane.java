@@ -2,13 +2,9 @@ package gui;
 
 import com.sun.javafx.scene.control.DoubleField;
 import controller.Controller;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.*;
@@ -115,7 +111,6 @@ public class DestilleringPane extends GridPane {
         this.add(txaKommentar, 1, 10);
         txaKommentar.setPrefSize(50, 100);
 
-
         this.add(new Label("VandKilde"), 0, 11);
         cbVand.setPromptText("Vælg vandkilde");
         cbVand.getItems().setAll(Controller.getVands());
@@ -130,6 +125,7 @@ public class DestilleringPane extends GridPane {
         this.add(lError,0,13);
 
         this.add(lWDestilleringer,3,1,1,11);
+        lWDestilleringer.setMinWidth(600);
         lWDestilleringer.getItems().setAll(getDestileringer());
 
 
@@ -143,25 +139,25 @@ public class DestilleringPane extends GridPane {
     private void createDestilat() {
 
         if(txfKornSort.getText().isBlank()){
-            lError.setText("Pls Input Råvare");
+            lError.setText("ERROR Pls Input Råvare");
             lError.setStyle("-fx-text-fill: red;");
         }else if(dpStarDato == null){
-            lError.setText("Pls Input en start dato");
+            lError.setText("ERROR Pls Input en start dato");
             lError.setStyle("-fx-text-fill: red;");
         } else if (dpSlutDato == null) {
-            lError.setText("Pls Input en slut dato");
+            lError.setText("ERROR Pls Input en slut dato");
             lError.setStyle("-fx-text-fill: red;");  
         } else if (dFMaengdeLiter == null) {
-            lError.setText("Pls Input mængde destilleret");
+            lError.setText("ERROR Pls Input mængde destilleret");
             lError.setStyle("-fx-text-fill: red;");
         } else if (dFAlkoholProcent == null) {
-            lError.setText("Pls Input Alcohol %");
+            lError.setText("ERROR Pls Input Alcohol %");
             lError.setStyle("-fx-text-fill: red;");
         } else if (cbMedarbjder.getSelectionModel().isEmpty()) {
-            lError.setText("Pls vælg en medarbejder");
+            lError.setText("ERROR Pls vælg en medarbejder");
             lError.setStyle("-fx-text-fill: red;");
         } else if (cbVand.getSelectionModel().isEmpty()) {
-            lError.setText("Pls vælg en vandKilde");
+            lError.setText("ERROR Pls vælg en vandKilde");
             lError.setStyle("-fx-text-fill: red;");
         } else if (dpStarDato.getValue().isBefore(dpSlutDato.getValue())) {
             lError.setText("ERROR Slut er sat før start");
