@@ -49,12 +49,9 @@ public class Fad implements
     }
 
     public boolean isTom() {
-        System.out.println("test3");
         if(destillater == null ||litterIFad <= 0){
-            System.out.println("test4");
             return true;
         }else{
-            System.out.println("test5");
             return false;
         }
     }
@@ -115,12 +112,9 @@ public class Fad implements
     }
     public Destilat getDestilat(){
         if(destillater.isEmpty()){
-            System.out.println("test1");
             return null;
         }
-        System.out.println("test2");
         return destillater.getLast();
-
     }
 
     public void addLagerHist(){

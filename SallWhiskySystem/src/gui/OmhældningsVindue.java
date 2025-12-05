@@ -62,7 +62,6 @@ public class OmhældningsVindue extends Stage {
         colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
 
 
-
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
         colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
@@ -77,8 +76,6 @@ public class OmhældningsVindue extends Stage {
 
         tvFade.setMinWidth(450);
 
-
-
         // Test for om det virker TODO Rettelser
         tvFade.getItems().setAll(Controller.getFade());
 
@@ -89,26 +86,26 @@ public class OmhældningsVindue extends Stage {
 
         // tvdestilater add columns
 
-        TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("liter"));
+        TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter");
+        colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
-        TableColumn<Destilat, String> colIsSingleMaLT = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("isSingleMalt"));
-
-
-        TableColumn<Destilat, String> colIsHeart = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("isHeart"));
+        TableColumn<Destilat, String> colIsSingleMaLT = new TableColumn<>("Is single malt");
+        colIsSingleMaLT.setCellValueFactory(new PropertyValueFactory<>("isSingleMalt"));
 
 
-        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("batchId"));
+        TableColumn<Destilat, String> colIsHeart = new TableColumn<>("Is Heart");
+        colIsHeart.setCellValueFactory(new PropertyValueFactory<>("isHeart"));
 
 
+        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Batch Id");
+        colLbatchId.setCellValueFactory(new PropertyValueFactory<>("batchId"));
 
+        tvDestilater.getColumns().add(colLiterIDestilat);
+        tvDestilater.getColumns().add(colIsSingleMaLT);
+        tvDestilater.getColumns().add(colIsHeart);
+        tvDestilater.getColumns().add(colLbatchId);
 
-
-
-
+        tvDestilater.getItems().setAll(Controller.getDestilater());
 
 
 

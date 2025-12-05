@@ -159,7 +159,7 @@ public class DestilleringPane extends GridPane {
         } else if (cbVand.getSelectionModel().isEmpty()) {
             lError.setText("ERROR Pls vælg en vandKilde");
             lError.setStyle("-fx-text-fill: red;");
-        } else if (dpStarDato.getValue().isBefore(dpSlutDato.getValue())) {
+        } else if (dpSlutDato.getValue().isBefore(dpStarDato.getValue())) {
             lError.setText("ERROR Slut er sat før start");
             lError.setStyle("-fx-text-fill: red;");
         } else if (dFMaengdeLiter.getValue() <= 0.0) {
@@ -172,6 +172,7 @@ public class DestilleringPane extends GridPane {
             Destillering destillering = new Destillering(dpStarDato.getValue(),dpSlutDato.getValue(),dFMaengdeLiter.getValue(),dFAlkoholProcent.getValue(),cbMedarbjder.getSelectionModel().getSelectedItem(),txfKornSort.getText(),txfRøg.getText(),txaKommentar.getText(),cbVand.getSelectionModel().getSelectedItem());
             Controller.opretDestilat(dFMaengdeLiter.getValue(),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),destillering);
             updateDestilleringer();
+            Controller.writeStorage();
         }
 
 
