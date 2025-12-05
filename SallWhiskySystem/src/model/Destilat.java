@@ -65,4 +65,12 @@ public class Destilat implements
     public boolean getHeart() {
         return isHeart;
     }
+
+    public String getRøgmateriale(){
+        StringBuilder s = new StringBuilder();
+        for (Destilat destilat : destilater) {
+            s.append(destilat.destillering.getRøg());
+        }
+        return s.toString();
+    }
 }
