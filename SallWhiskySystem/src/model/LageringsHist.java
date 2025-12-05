@@ -5,23 +5,19 @@ import java.time.LocalDate;
 
 public class LageringsHist implements Serializable {
     private LocalDate startDato;
-    private LocalDate slutDato;
 
     // Links
     private Fad fad;
     private Hylde hylde;
 
-    public LageringsHist(LocalDate startDato,Hylde hylde) {
+    public LageringsHist(LocalDate startDato,Hylde hylde,Fad fad) {
         this.startDato = startDato;
         this.hylde = hylde;
+        this.fad = fad;
     }
 
     public LocalDate getStartDato() {
         return startDato;
-    }
-
-    public LocalDate getSlutDato() {
-        return slutDato;
     }
 
     public Fad getFad() {

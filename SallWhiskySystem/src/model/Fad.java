@@ -28,7 +28,6 @@ public class Fad implements
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
-    private List<Flaske> flaske = new ArrayList<>();
 
     public Fad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør) {
         this.liter = liter;
@@ -110,10 +109,6 @@ public class Fad implements
         return omhældning;
     }
 
-    public List<Flaske> getFlaske() {
-        return flaske;
-    }
-
     public void addTidligereIndhold(String s){
         System.out.println(s);
         tidligereIndhold.add(s);
@@ -129,7 +124,7 @@ public class Fad implements
     }
 
     public void addLagerHist(){
-        lageringsHists.add(new LageringsHist(LocalDate.now(),hylde));
+        lageringsHists.add(new LageringsHist(LocalDate.now(),hylde,this));
     }
 }
 
