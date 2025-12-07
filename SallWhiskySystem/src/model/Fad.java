@@ -109,6 +109,9 @@ public class Fad implements
     public List<Omhældning> getOmhældning() {
         return omhældning;
     }
+    public void addOmhældning(Omhældning omhældning){
+        this.omhældning.add(omhældning);
+    }
 
     public List<Flaske> getFlaske() {
         return flaske;
@@ -130,6 +133,15 @@ public class Fad implements
 
     public void addLagerHist(){
         lageringsHists.add(new LageringsHist(LocalDate.now(),hylde));
+    }
+
+    public boolean addLiterOfDestilatToFad(double mængde){
+        if (litterIFad+mængde<=liter){
+            liter+=mængde;
+            return true;
+        }else {
+            return false;
+        }
     }
 }
 

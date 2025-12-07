@@ -20,9 +20,7 @@ public class Destilat implements
     private Destillering destillering;
     private ModningsTid modningstid;
 
-    public static void setAntalDestilater(int antalDestilater) {
-        Destilat.antalDestilater = antalDestilater;
-    }
+
 
     public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
         this.liter = liter;
@@ -32,6 +30,7 @@ public class Destilat implements
         this.batchId=antalDestilater;
         antalDestilater++;
     }
+
 
     public void setRøgmateriale(String røgmateriale) {
         this.røgmateriale = røgmateriale;
@@ -78,5 +77,19 @@ public class Destilat implements
 
     public boolean getHeart() {
         return isHeart;
+    }
+
+    public static void setAntalDestilater(int antalDestilater) {
+        Destilat.antalDestilater = antalDestilater;
+    }
+
+    public boolean tapDestilat(double mængde){
+        if (liter-mængde>=0){
+        liter-=mængde;
+        return true;
+        }
+        else {
+            return false;
+        }
     }
 }

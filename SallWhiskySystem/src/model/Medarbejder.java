@@ -8,9 +8,7 @@ public class Medarbejder implements java.io.Serializable {
     private String navn;
     private String Stilling;
 
-    // link attributter
-    private List<Omhældning> omhældningList = new ArrayList<>();
-    private List<Destillering> destilleringlist = new ArrayList<>();
+
 
     public Medarbejder(String navn, String stilling) {
         this.navn = navn;
@@ -25,11 +23,4 @@ public class Medarbejder implements java.io.Serializable {
         return Stilling;
     }
 
-    public List<Destillering> getDestilleringlist() {
-        return destilleringlist;
-    }
-
-    public List<Omhældning> getOmhældningList() {
-        return omhældningList;
-    }
 }
