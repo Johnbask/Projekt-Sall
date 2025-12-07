@@ -1,6 +1,7 @@
 package model;
 
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Destilat implements
@@ -14,7 +15,7 @@ public class Destilat implements
     private boolean isUsed = false;
 
     // link attributter
-    List<Destilat> destilater;
+    List<Destilat> destilater = new ArrayList<>();
     private Destillering destillering;
 
     public static void setAntalDestilater(int antalDestilater) {
@@ -72,5 +73,15 @@ public class Destilat implements
             s.append(destilat.destillering.getRøg());
         }
         return s.toString();
+    }
+
+    public boolean tapDestilat(double mængde) {
+
+        if(mængde>=liter){
+            return false;
+        }else {
+            liter-=mængde;
+            return true;
+        }
     }
 }

@@ -3,6 +3,7 @@ package gui;
 import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -49,7 +50,7 @@ public class OmhældningsVindue extends Stage {
     private final DatePicker datePicker = new DatePicker();
     private final ComboBox<Medarbejder> cbxMedarbejder = new ComboBox<>();
     private final IntegerField intfLiter = new IntegerField();
-    private final Button bOmhæld = new Button();
+    private final Button bOmhæld = new Button("Påfyld");
 
 
 
@@ -100,8 +101,11 @@ public class OmhældningsVindue extends Stage {
 
         tvDestilater.getItems().setAll(Controller.getDestilater());
 
+
         TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter I fad");
         colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("liter"));
+
+
         tvDestilater.getColumns().add(colLiterIDestilat);
 
         TableColumn<Destilat, Boolean> colIsSingleMaLT = new TableColumn<>("Single Malt");
@@ -125,13 +129,13 @@ public class OmhældningsVindue extends Stage {
         tvDestilater.getColumns().add(colIsHeart);
 
 
-        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Liter I fad");
+        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Batch Id");
         colLbatchId.setCellValueFactory(new PropertyValueFactory<>("batchId"));
         tvDestilater.getColumns().add(colLbatchId);
 
 
         TableColumn<Destilat, String> colSmoke = new TableColumn<>("Røgmateriale");
-        colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("røgmateriale"));
+        colSmoke.setCellValueFactory(new PropertyValueFactory<>("røgmateriale"));
         tvDestilater.getColumns().add(colSmoke);
 
 
@@ -146,7 +150,8 @@ public class OmhældningsVindue extends Stage {
         bOmhæld.setOnAction(event -> omhældAction());
 
         cbxMedarbejder.getItems().setAll(Storage.getMedarbejderne());
-
+        cbxMedarbejder.getSelectionModel().selectFirst();
+        datePicker.setValue(LocalDate.now());
 
 
 
@@ -161,7 +166,20 @@ public class OmhældningsVindue extends Stage {
         Fad fad = tvFade.getSelectionModel().getSelectedItem();
         Destilat destilat = tvDestilater.getSelectionModel().getSelectedItem();
         LocalDate Date = datePicker.getValue();
-        Omhældning omhældning =  Controller.opretOmhældning(fad,destilat,Date,intfLiter.getValue(),cbxMedarbejder.getValue());
+        if (intfLiter.getValue()<=0 || destilat==null||fad==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Mere information er nødvendigt for at foretage en påfyldning");
+            alert.showAndWait();
+
+        }else {
+            Omhældning omhældning =  Controller.opretOmhældning(fad,destilat,Date,intfLiter.getValue(),cbxMedarbejder.getValue());
+            tvFade.getItems().setAll(Controller.getFade());
+            tvDestilater.getItems().setAll(Controller.getDestilater());
+            Controller.writeStorage();
+        }
+
+        System.out.println(fad.getOmhældning());
+
 
     }
 
