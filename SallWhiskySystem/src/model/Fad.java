@@ -28,6 +28,7 @@ public class Fad implements
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
+    private ModningsTid modningsTid;
 
     public Fad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør) {
         this.liter = liter;
@@ -131,6 +132,15 @@ public class Fad implements
         }else {
             return false;
         }
+    }
+
+    public void setModningsTid(ModningsTid modningsTid) {
+        this.modningsTid = modningsTid;
+    }
+
+    private boolean isModen(){
+        return modningsTid.isModen();
+
     }
 }
 

@@ -156,12 +156,10 @@ public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDat
             omhældning=new Omhældning(mængde,dato,fad,medarbejder);
             fad.addOmhældning(omhældning);
             if (!fad.addLiterOfDestilatToFad(mængde)||!destilat.tapDestilat(mængde)){
-                throw new Exception("not enough space");
+                return null;
             }
             destilat.setUsed(true);
-
-
-
+            fad.setModningsTid(new ModningsTid(dato));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -7,11 +7,9 @@ public class ModningsTid {
     private LocalDate startDato;
     private double Forventespild;
     private boolean isModen;
-    private Fad fad;
 
-    public ModningsTid(LocalDate startDato,Fad fad) {
+    public ModningsTid(LocalDate startDato) {
         this.startDato = startDato;
-        this.fad = fad;
 
     }
 

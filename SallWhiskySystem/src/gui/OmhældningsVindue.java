@@ -172,13 +172,19 @@ public class OmhældningsVindue extends Stage {
             alert.showAndWait();
 
         }else {
-            Omhældning omhældning =  Controller.opretOmhældning(fad,destilat,Date,intfLiter.getValue(),cbxMedarbejder.getValue());
+            Omhældning omhældning = null;
+            omhældning =  Controller.opretOmhældning(fad,destilat,Date,intfLiter.getValue(),cbxMedarbejder.getValue());
             tvFade.getItems().setAll(Controller.getFade());
             tvDestilater.getItems().setAll(Controller.getDestilater());
             Controller.writeStorage();
+            if (omhældning==null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Der er ikke nok plads i fadet eller der er ikke nok destilat tilbage");
+                alert.showAndWait();
+
+            }
         }
 
-        System.out.println(fad.getOmhældning());
 
 
     }
