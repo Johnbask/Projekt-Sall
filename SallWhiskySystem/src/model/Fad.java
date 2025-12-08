@@ -155,5 +155,9 @@ public class Fad implements
     public ModningsTid getModningsTid() {
         return modningsTid;
     }
+
+    public void addDestilat(Destilat destilat){
+        destillater.add(destilat);
+    }
 }
 

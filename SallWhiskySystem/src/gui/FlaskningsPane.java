@@ -57,9 +57,11 @@ public class FlaskningsPane extends GridPane {
         Label lVælgFad = new Label("Vælg Fad");
         this.add(lVælgFad,0,4);
         this.add(cbFade,1,4);
-        cbFade.getItems().setAll(Controller.getFildFad());
+        cbFade.getItems().setAll(Controller.getModneFade());
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
         cbFade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
+        cbFade.setOnAction(event -> this.updateFade());
+
         this.add(lLiterIFad,2,4);
 
 
@@ -96,13 +98,19 @@ public class FlaskningsPane extends GridPane {
 
     }
 
-    private void selectedFadChanged() {
+    public void updateFade() {
 
+        cbFade.getItems().setAll(Controller.getModneFade());
+
+
+    }
+
+    private void selectedFadChanged() {
         if(cbFade.getSelectionModel().isEmpty()){
             lLiterIFad.setText(" ");
         }else{
             cbFade.getSelectionModel().getSelectedItem().getLiter();
-            lLiterIFad.setText(cbFade.getSelectionModel().getSelectedItem().getLiter()+"L");
+            lLiterIFad.setText(cbFade.getSelectionModel().getSelectedItem().getLitterIFad()+"L");
         }
 
     }
@@ -135,24 +143,20 @@ public class FlaskningsPane extends GridPane {
             Fad fad = cbFade.getSelectionModel().getSelectedItem();
             Destilat destilat = fad.getDestilat();
 
-            s.append(fad.getMateriale());
+            s.append(tFMakeName.getText());
+            s.append(fad.getMateriale().toString());
             s.append(destilat.getDestillering().getSlutDato());
             if(destilat.isSingleMalt()) s.append("Singel malt");
             if(destilat.isHeart()) s.append("Pure heart");
             s.append(destilat.getRøgmateriale());
             s.append(Period.between(fad.getModningsTid().getStartDato(),LocalDate.now()));
-            tAHistorien.setText(s.toString());
+            s.append(dFProcent.getValue()+"%");
 
+            tAHistorien.setText(s.toString());
         }
 
 
 
-            // get fad alle modene fad
-
-        // get destilat
-
-        // points i historie
-        //
 
 
     }

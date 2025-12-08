@@ -55,6 +55,7 @@ public class SallGui extends Application {
         tabPane.getTabs().add(tabFlaskning);
         FlaskningsPane flaskningsPane = new FlaskningsPane();
         tabFlaskning.setContent(flaskningsPane);
+        tabFlaskning.setOnSelectionChanged(event -> flaskningsPane.updateFade());
         // Søgning
 
         // Sporbarhed Tab
