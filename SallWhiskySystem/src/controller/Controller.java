@@ -172,6 +172,8 @@ public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDat
             destilat.setUsed(true);
             fad.setModningsTid(new ModningsTid(dato));
             fad.addDestilat(destilat);
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -15,7 +15,6 @@ public class Destilat implements
     private boolean isUsed = false;
 
     // link attributter
-    List<Destilat> destilater = new ArrayList<>();
     private Destillering destillering;
 
     public static void setAntalDestilater(int antalDestilater) {
@@ -32,9 +31,6 @@ public class Destilat implements
     }
 
 
-    public void addDestilat(Destilat d){
-        destilater.add(d);
-    }
     public void setUsed(boolean b){
         isUsed = b;
     }
@@ -51,9 +47,6 @@ public class Destilat implements
         return batchId;
     }
 
-    public List<Destilat> getDestilater() {
-        return destilater;
-    }
 
     public Destillering getDestillering() {
         return destillering;
@@ -68,11 +61,7 @@ public class Destilat implements
     }
 
     public String getRøgmateriale(){
-        StringBuilder s = new StringBuilder();
-        for (Destilat destilat : destilater) {
-            s.append(destilat.destillering.getRøg());
-        }
-        return s.toString();
+        return this.destillering.getRøg();
     }
 
     public boolean tapDestilat(double mængde) {
@@ -86,22 +75,10 @@ public class Destilat implements
     }
 
     public boolean isSingleMalt(){
-        if(!isSingleMalt) return false;
-        for (Destilat destilat : destilater) {
-            if(!destilat.isSingleMalt || !destilat.destillering.getRåvareList().equals(destillering.getRåvareList())){
-                return false;
-            }
-        }
-        return true;
+        return isSingleMalt;
     }
 
     public boolean isHeart(){
-        if(!isHeart) return false;
-        for (Destilat destilat : destilater) {
-            if(!destilat.isHeart()){
-                return false;
-            }
-        }
-        return true;
+        return isHeart;
     }
 }
