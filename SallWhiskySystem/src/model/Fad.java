@@ -1,8 +1,5 @@
 package model;
 
-import com.sun.scenario.effect.impl.state.AccessHelper;
-import storage.Storage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,9 +130,13 @@ public class Fad implements
         }
     }
 
-    public boolean removeLiterOfDestilatToFad(double mængde){
+    public boolean removeLiterOfDestilatFromFad(double mængde){
         if (!(0>liter-mængde)){
             litterIFad-=mængde;
+            if (litterIFad==0){
+                omhældning=new ArrayList<>();
+                destillater=null;
+            }
             return true;
         }else {
             return false;

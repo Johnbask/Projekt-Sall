@@ -3,15 +3,12 @@ package gui;
 import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,7 +16,6 @@ import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -169,7 +165,7 @@ public class OmhældningsVindue extends Stage {
     private void spildAction() {
         int num = intfLiter.getValue();
         Fad fad = tvFade.getSelectionModel().getSelectedItem();
-        fad.removeLiterOfDestilatToFad(num);
+        fad.removeLiterOfDestilatFromFad(num);
 
         tvFade.getItems().setAll(Controller.getFade());
         Controller.writeStorage();
@@ -180,15 +176,19 @@ public class OmhældningsVindue extends Stage {
     private void omhældAction() {
         Fad fad = tvFade.getSelectionModel().getSelectedItem();
         Destilat destilat = tvDestilater.getSelectionModel().getSelectedItem();
-        LocalDate Date = datePicker.getValue();
+        LocalDate date = datePicker.getValue();
         if (intfLiter.getValue()<=0 || destilat==null||fad==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Mere information er nødvendigt for at foretage en påfyldning");
             alert.showAndWait();
 
-        }else {
+        }else if (date.isBefore(destilat.getDestillering().getSlutDato())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Dato er umulig fordi destilleringen tog sted efter valgte dato");
+            alert.showAndWait();
+        }else{
             Omhældning omhældning = null;
-            omhældning =  Controller.opretOmhældning(fad,destilat,Date,intfLiter.getValue(),cbxMedarbejder.getValue());
+            omhældning =  Controller.opretOmhældning(fad,destilat, date,intfLiter.getValue(),cbxMedarbejder.getValue());
             tvFade.getItems().setAll(Controller.getFade());
             tvDestilater.getItems().setAll(Controller.getDestilater());
             Controller.writeStorage();

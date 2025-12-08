@@ -60,7 +60,6 @@ public class FlaskningsPane extends GridPane {
         cbFade.getItems().setAll(Controller.getModneFade());
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
         cbFade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
-        cbFade.setOnAction(event -> this.updateFade());
 
         this.add(lLiterIFad,2,4);
 
@@ -143,14 +142,6 @@ public class FlaskningsPane extends GridPane {
             Fad fad = cbFade.getSelectionModel().getSelectedItem();
             Destilat destilat = fad.getDestilat();
 
-            s.append(tFMakeName.getText());
-            s.append(fad.getMateriale().toString());
-            s.append(destilat.getDestillering().getSlutDato());
-            if(destilat.isSingleMalt()) s.append("Singel malt");
-            if(destilat.isHeart()) s.append("Pure heart");
-            s.append(destilat.getRøgmateriale());
-            s.append(Period.between(fad.getModningsTid().getStartDato(),LocalDate.now()));
-            s.append(dFProcent.getValue()+"%");
 
             tAHistorien.setText(s.toString());
         }
