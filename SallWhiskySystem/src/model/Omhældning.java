@@ -34,4 +34,8 @@ public class Omhældning implements Serializable {
     public Medarbejder getMedarbejder() {
         return medarbejder;
     }
+
+    public boolean isModen(){
+        return LocalDate.now().isAfter(dato.plusYears(3));
+    }
 }
