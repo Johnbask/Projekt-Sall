@@ -28,7 +28,6 @@ public class Fad implements
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
     private List<Omhældning> omhældning= new ArrayList<>();
-    private List<Flaske> flaske = new ArrayList<>();
 
     public Fad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør) {
         this.liter = liter;
@@ -50,12 +49,9 @@ public class Fad implements
     }
 
     public boolean isTom() {
-        System.out.println("test3");
         if(destillater == null ||litterIFad <= 0){
-            System.out.println("test4");
             return true;
         }else{
-            System.out.println("test5");
             return false;
         }
     }
@@ -109,9 +105,8 @@ public class Fad implements
     public List<Omhældning> getOmhældning() {
         return omhældning;
     }
-
-    public List<Flaske> getFlaske() {
-        return flaske;
+    public void addOmhældning(Omhældning omhældning){
+        this.omhældning.add(omhældning);
     }
 
     public void addTidligereIndhold(String s){
@@ -120,16 +115,22 @@ public class Fad implements
     }
     public Destilat getDestilat(){
         if(destillater.isEmpty()){
-            System.out.println("test1");
             return null;
         }
-        System.out.println("test2");
         return destillater.getLast();
-
     }
 
     public void addLagerHist(){
-        lageringsHists.add(new LageringsHist(LocalDate.now(),hylde));
+        lageringsHists.add(new LageringsHist(LocalDate.now(),hylde,this));
+    }
+
+    public boolean addLiterOfDestilatToFad(double mængde){
+        if (litterIFad+mængde<=liter){
+            litterIFad+=mængde;
+            return true;
+        }else {
+            return false;
+        }
     }
 }
 

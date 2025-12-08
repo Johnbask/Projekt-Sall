@@ -2,6 +2,8 @@ package gui;
 
 import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -14,7 +16,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.*;
+import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +46,12 @@ public class OmhældningsVindue extends Stage {
 
     private  final  TableView<Fad> tvFade = new TableView<>();
     private final TableView<Destilat> tvDestilater = new TableView<>();
+
+    private final DatePicker datePicker = new DatePicker();
+    private final ComboBox<Medarbejder> cbxMedarbejder = new ComboBox<>();
+    private final IntegerField intfLiter = new IntegerField();
+    private final Button bOmhæld = new Button("Påfyld");
+
 
 
 
@@ -89,23 +99,59 @@ public class OmhældningsVindue extends Stage {
 
         // tvdestilater add columns
 
+        tvDestilater.getItems().setAll(Controller.getDestilater());
+
+
         TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("liter"));
-
-        TableColumn<Destilat, String> colIsSingleMaLT = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("isSingleMalt"));
+        colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
 
-        TableColumn<Destilat, String> colIsHeart = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("isHeart"));
+        tvDestilater.getColumns().add(colLiterIDestilat);
+
+        TableColumn<Destilat, Boolean> colIsSingleMaLT = new TableColumn<>("Single Malt");
+        colIsSingleMaLT.setCellValueFactory(cell ->
+        {
+            Destilat destilat = cell.getValue();
+            return new SimpleBooleanProperty(destilat.getSingleMalt());
+        });
+        tvDestilater.getColumns().add(colIsSingleMaLT);
+
+        TableColumn<Destilat, String> colIsHeart = new TableColumn<>("Hoved/hale");
+        colIsHeart.setCellValueFactory(cell -> {
+            Destilat destilat = cell.getValue();
+            if (destilat.getHeart()){
+                return new SimpleStringProperty("hoved");
+            }else {
+                return new SimpleStringProperty("hale");
+            }
+
+        });
+        tvDestilater.getColumns().add(colIsHeart);
 
 
-        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Liter I fad");
-        colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("batchId"));
+        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Batch Id");
+        colLbatchId.setCellValueFactory(new PropertyValueFactory<>("batchId"));
+        tvDestilater.getColumns().add(colLbatchId);
+
+
+        TableColumn<Destilat, String> colSmoke = new TableColumn<>("Røgmateriale");
+        colSmoke.setCellValueFactory(new PropertyValueFactory<>("røgmateriale"));
+        tvDestilater.getColumns().add(colSmoke);
 
 
 
+        // add buttons
 
+        pane.add(datePicker,0,9);
+        pane.add(cbxMedarbejder,1,9);
+        pane.add(intfLiter,3,9);
+        pane.add(new Label("Liter:"),2,9);
+        pane.add(bOmhæld,4,9);
+        bOmhæld.setOnAction(event -> omhældAction());
+
+        cbxMedarbejder.getItems().setAll(Storage.getMedarbejderne());
+        cbxMedarbejder.getSelectionModel().selectFirst();
+        datePicker.setValue(LocalDate.now());
 
 
 
@@ -116,6 +162,26 @@ public class OmhældningsVindue extends Stage {
 
     }
 
+    private void omhældAction() {
+        Fad fad = tvFade.getSelectionModel().getSelectedItem();
+        Destilat destilat = tvDestilater.getSelectionModel().getSelectedItem();
+        LocalDate Date = datePicker.getValue();
+        if (intfLiter.getValue()<=0 || destilat==null||fad==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Mere information er nødvendigt for at foretage en påfyldning");
+            alert.showAndWait();
+
+        }else {
+            Omhældning omhældning =  Controller.opretOmhældning(fad,destilat,Date,intfLiter.getValue(),cbxMedarbejder.getValue());
+            tvFade.getItems().setAll(Controller.getFade());
+            tvDestilater.getItems().setAll(Controller.getDestilater());
+            Controller.writeStorage();
+        }
+
+        System.out.println(fad.getOmhældning());
+
+
+    }
 
 
 }

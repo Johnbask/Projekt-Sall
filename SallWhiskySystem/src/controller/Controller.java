@@ -4,6 +4,7 @@ import model.*;
 import storage.Storage;
 
 import javax.management.monitor.GaugeMonitor;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +149,27 @@ public class Controller {
         }
         return result;
     }
+
+public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDate dato, double mængde,Medarbejder medarbejder ){
+        Omhældning omhældning =null;
+        try {
+            omhældning=new Omhældning(mængde,dato,fad,medarbejder);
+            fad.addOmhældning(omhældning);
+            if (!fad.addLiterOfDestilatToFad(mængde)||!destilat.tapDestilat(mængde)){
+                throw new Exception("not enough space");
+            }
+            destilat.setUsed(true);
+
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+    return omhældning;
+}
+
 
 
 

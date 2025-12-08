@@ -7,7 +7,6 @@ public class Flaske {
     private  Double ml;
     private  double alkoholProcent;
     private LocalDate påHældningsDato;
-
     // links
     private Fad fad;
     private Vand vand;

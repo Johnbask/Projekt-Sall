@@ -177,8 +177,10 @@ public class Storage {
 
         Controller.opretVand("Toiletkummen");
         Controller.opretMedarbejder("Ruben","Gud");
-        Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst(),"1","2","3",vands.getFirst());
+        Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
         Controller.opretDestilat(100.0,true,true,destillering);
+        Controller.opretDestilat(200,true,true,destillering);
+        Controller.opretDestilat(300,true,true,destillering);
 
     }
 

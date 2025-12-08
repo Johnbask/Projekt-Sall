@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Omhældning {
+public class Omhældning implements Serializable {
 
     private double mængde;
     private LocalDate dato;

@@ -1,6 +1,7 @@
 package model;
 
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Destilat implements
@@ -13,18 +14,15 @@ public class Destilat implements
     private int batchId;
     private boolean isUsed = false;
 
-    private String røgmateriale; //nullable
-
     // link attributter
-    List<Destilat> destilater;
+    List<Destilat> destilater = new ArrayList<>();
     private Destillering destillering;
-    private ModningsTid modningstid;
 
     public static void setAntalDestilater(int antalDestilater) {
         Destilat.antalDestilater = antalDestilater;
     }
 
-    public Destilat(Double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
+    public Destilat(double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
         this.liter = liter;
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;
@@ -33,9 +31,6 @@ public class Destilat implements
         antalDestilater++;
     }
 
-    public void setRøgmateriale(String røgmateriale) {
-        this.røgmateriale = røgmateriale;
-    }
 
     public void addDestilat(Destilat d){
         destilater.add(d);
@@ -60,14 +55,6 @@ public class Destilat implements
         return destilater;
     }
 
-    public ModningsTid getModningstid() {
-        return modningstid;
-    }
-
-    public String getRøgmateriale() {
-        return røgmateriale;
-    }
-
     public Destillering getDestillering() {
         return destillering;
     }
@@ -78,5 +65,23 @@ public class Destilat implements
 
     public boolean getHeart() {
         return isHeart;
+    }
+
+    public String getRøgmateriale(){
+        StringBuilder s = new StringBuilder();
+        for (Destilat destilat : destilater) {
+            s.append(destilat.destillering.getRøg());
+        }
+        return s.toString();
+    }
+
+    public boolean tapDestilat(double mængde) {
+
+        if(mængde>=liter){
+            return false;
+        }else {
+            liter-=mængde;
+            return true;
+        }
     }
 }
