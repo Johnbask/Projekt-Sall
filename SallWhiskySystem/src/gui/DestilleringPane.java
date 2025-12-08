@@ -120,6 +120,16 @@ public class DestilleringPane extends GridPane {
         lWDestilleringer.getItems().setAll(getDestileringer());
 
 
+        dpStarDato.setValue(LocalDate.now());
+        dpSlutDato.setValue(LocalDate.now().plusDays(7));
+        cbMedarbjder.getSelectionModel().selectFirst();
+        cbVand.getSelectionModel().selectFirst();
+
+
+
+
+
+
     }
 
     public void updateDestilleringer(){

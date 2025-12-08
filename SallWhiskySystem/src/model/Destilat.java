@@ -77,7 +77,7 @@ public class Destilat implements
 
     public boolean tapDestilat(double mængde) {
 
-        if(mængde>=liter){
+        if(mængde>liter){
             return false;
         }else {
             liter-=mængde;
