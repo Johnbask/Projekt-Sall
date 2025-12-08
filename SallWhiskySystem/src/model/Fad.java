@@ -121,6 +121,10 @@ public class Fad implements
         lageringsHists.add(new LageringsHist(LocalDate.now(),hylde,this));
     }
 
+    public List<Destilat> getDestillater() {
+        return destillater;
+    }
+
     public boolean addLiterOfDestilatToFad(double mængde){
         if (litterIFad+mængde<=liter){
             litterIFad+=mængde;
