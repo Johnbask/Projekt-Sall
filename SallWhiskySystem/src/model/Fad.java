@@ -107,7 +107,6 @@ public class Fad implements
     }
 
     public void addTidligereIndhold(String s){
-        System.out.println(s);
         tidligereIndhold.add(s);
     }
     public Destilat getDestilat(){
