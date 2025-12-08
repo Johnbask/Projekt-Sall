@@ -15,6 +15,10 @@ public class Destillering implements java.io.Serializable {
     private String røg;
     private String kommentar;
 
+    public static void setIdMaker(int idMaker) {
+        Destillering.idMaker = idMaker;
+    }
+
     // link attributter
     private List<Råvare> råvareList;
     private  Vand vand;

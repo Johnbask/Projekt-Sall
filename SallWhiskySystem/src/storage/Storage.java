@@ -111,6 +111,17 @@ public class Storage {
             Fad.setAntalFade(fade.size()+1);
 
 
+            ArrayList<Destillering> Destilleringer = new ArrayList<>();
+            ArrayList<Integer> ider = new ArrayList<>();
+            for (Destilat destilat : Controller.getDestilater()) {
+                if(!ider.contains(destilat.getDestillering().getNewMakeId())){
+                    Destilleringer.add(destilat.getDestillering());
+                    ider.add(destilat.getDestillering().getNewMakeId());
+                }
+            }
+            Destillering.setIdMaker(Destilleringer.size()+1);
+
+
 
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");

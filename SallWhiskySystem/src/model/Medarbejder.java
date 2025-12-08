@@ -23,4 +23,8 @@ public class Medarbejder implements java.io.Serializable {
         return Stilling;
     }
 
+    @Override
+    public String toString() {
+        return navn+":"+Stilling;
+    }
 }

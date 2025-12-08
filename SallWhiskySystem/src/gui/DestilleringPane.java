@@ -56,15 +56,6 @@ public class DestilleringPane extends GridPane {
         this.add(lblDestillering, 0, 0, 2, 1);
         lblDestillering.setStyle("-fx-font-size: 24px");
 
-        /*
-        this.add(new Label("Fad Nr.:"), 0, 1);
-        cbFadNr.setPromptText("Vælg fad (valgfrit)");
-        cbFadNr.getItems().setAll(Controller.getEmptyFad());
-        this.add(cbFadNr, 1, 1);
-         */
-
-        //this.add(txfFadNr, 1, 2);
-
         this.add(new Label("Råvare "), 0, 1);
         this.add(txfKornSort, 1, 1);
 
@@ -173,8 +164,8 @@ public class DestilleringPane extends GridPane {
             Controller.opretDestilat(dFMaengdeLiter.getValue(),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),destillering);
             updateDestilleringer();
             Controller.writeStorage();
-        }
 
+        }
 
 
     }
