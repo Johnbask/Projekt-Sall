@@ -6,10 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import model.Destilat;
-import model.Fad;
-import model.Lager;
-import model.Vand;
+import model.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -60,7 +57,6 @@ public class FlaskningsPane extends GridPane {
         cbFade.getItems().setAll(Controller.getModneFade());
         ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
         cbFade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
-        cbFade.setOnAction(event -> this.updateFade());
 
         this.add(lLiterIFad,2,4);
 
@@ -92,8 +88,9 @@ public class FlaskningsPane extends GridPane {
         this.add(bFlaskkiefy,1,10);
         bFlaskkiefy.setOnAction(event -> this.Flaskkiefy());
 
-        this.add(lError,0,11);
+        this.add(lError,0,11,3,1);
         lError.setStyle("-fx-text-fill: red;");
+        lError.setMinWidth(200);
 
 
     }
@@ -138,21 +135,16 @@ public class FlaskningsPane extends GridPane {
             lError.setText("ERROR no Fad Selected");
         }else if (dFProcent.getValue() <= 0 || dFProcent.getValue() > 100) {
             lError.setText("ERROR pls pick a valid alkohold procent to use");
-        }else {
+        }else if(tFMakeName.getText().isBlank()){
+            lError.setText("ERROR pls name your creation");
+        }else if(cbVandKilde.getSelectionModel().isEmpty()){
+            lError.setText("ERROR pls pick a water source");
+        }else{
             StringBuilder s = new StringBuilder();
             Fad fad = cbFade.getSelectionModel().getSelectedItem();
-            Destilat destilat = fad.getDestilat();
-
             s.append(tFMakeName.getText());
             s.append(fad.getMateriale().toString());
-            s.append(destilat.getDestillering().getSlutDato());
-            if(destilat.isSingleMalt()) s.append("Singel malt");
-            if(destilat.isHeart()) s.append("Pure heart");
-            s.append(destilat.getRøgmateriale());
-            s.append(Period.between(fad.getModningsTid().getStartDato(),LocalDate.now()));
-            s.append(dFProcent.getValue()+"%");
 
-            tAHistorien.setText(s.toString());
         }
 
 
