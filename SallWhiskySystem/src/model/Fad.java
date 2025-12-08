@@ -151,5 +151,9 @@ public class Fad implements
         return modningsTid.isModen();
 
     }
+
+    public ModningsTid getModningsTid() {
+        return modningsTid;
+    }
 }
 
