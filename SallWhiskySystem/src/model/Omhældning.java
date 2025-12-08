@@ -11,12 +11,14 @@ public class Omhældning implements Serializable {
     // link attributter
     private Fad fad;
     private Medarbejder medarbejder;
+    private Destilat destilat;
 
-    public Omhældning(double mængde, LocalDate dato, Fad fad, Medarbejder medarbejder) {
+    public Omhældning(double mængde, LocalDate dato, Fad fad, Medarbejder medarbejder, Destilat destilat) {
         this.mængde = mængde;
         this.dato = dato;
         this.fad = fad;
         this.medarbejder = medarbejder;
+        this.destilat=destilat;
     }
 
     public double getMængde() {

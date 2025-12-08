@@ -154,7 +154,7 @@ public class Controller {
         List<Fad> temp = getFildFad();
         List<Fad> res = new ArrayList<>();
         for (Fad fad : temp) {
-            if(fad.getModningsTid().isModen()){
+            if(fad.getOmhældning().getLast().isModen()){
                 res.add(fad);
             }
         }
@@ -164,13 +164,12 @@ public class Controller {
 public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDate dato, double mængde,Medarbejder medarbejder ){
         Omhældning omhældning =null;
         try {
-            omhældning=new Omhældning(mængde,dato,fad,medarbejder);
+            omhældning=new Omhældning(mængde,dato,fad,medarbejder,destilat);
             fad.addOmhældning(omhældning);
             if (!fad.addLiterOfDestilatToFad(mængde)||!destilat.tapDestilat(mængde)){
                 return null;
             }
             destilat.setUsed(true);
-            fad.setModningsTid(new ModningsTid(dato));
             fad.addDestilat(destilat);
 
 
