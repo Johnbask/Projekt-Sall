@@ -150,6 +150,17 @@ public class Controller {
         return result;
     }
 
+    public static List<Fad> getModneFade(){
+        List<Fad> temp = getFildFad();
+        List<Fad> res = new ArrayList<>();
+        for (Fad fad : temp) {
+            if(fad.getModningsTid().isModen()){
+                res.add(fad);
+            }
+        }
+        return res;
+    }
+
 public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDate dato, double mængde,Medarbejder medarbejder ){
         Omhældning omhældning =null;
         try {
@@ -160,6 +171,7 @@ public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDat
             }
             destilat.setUsed(true);
             fad.setModningsTid(new ModningsTid(dato));
+            fad.addDestilat(destilat);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
