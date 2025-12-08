@@ -51,6 +51,7 @@ public class OmhældningsVindue extends Stage {
     private final ComboBox<Medarbejder> cbxMedarbejder = new ComboBox<>();
     private final IntegerField intfLiter = new IntegerField();
     private final Button bOmhæld = new Button("Påfyld");
+    private final Button bSpild = new Button("Opdater Spild");
 
 
 
@@ -153,11 +154,25 @@ public class OmhældningsVindue extends Stage {
         cbxMedarbejder.getSelectionModel().selectFirst();
         datePicker.setValue(LocalDate.now());
 
+        pane.add(bSpild,5,9);
+        bSpild.setOnAction(event -> spildAction());
 
 
 
 
 
+
+
+
+    }
+
+    private void spildAction() {
+        int num = intfLiter.getValue();
+        Fad fad = tvFade.getSelectionModel().getSelectedItem();
+        fad.removeLiterOfDestilatToFad(num);
+
+        tvFade.getItems().setAll(Controller.getFade());
+        Controller.writeStorage();
 
 
     }

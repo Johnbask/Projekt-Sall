@@ -134,6 +134,15 @@ public class Fad implements
         }
     }
 
+    public boolean removeLiterOfDestilatToFad(double mængde){
+        if (!(0>liter-mængde)){
+            litterIFad-=mængde;
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public void setModningsTid(ModningsTid modningsTid) {
         this.modningsTid = modningsTid;
     }
