@@ -2,11 +2,19 @@ package gui;
 
 import com.sun.javafx.scene.control.DoubleField;
 import controller.Controller;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import model.Destilat;
 import model.Fad;
+import model.Lager;
 import model.Vand;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
 
 public class FlaskningsPane extends GridPane {
     public FlaskningsPane() {
@@ -23,9 +31,12 @@ public class FlaskningsPane extends GridPane {
     private final DoubleField dFLiterVand = new DoubleField();
     private final ComboBox<Vand> cbVandKilde = new ComboBox<>();
     private final DoubleField dFFlaskeStørelse = new DoubleField();
+    private final DoubleField dFProcent = new DoubleField();
     private final TextArea tAHistorien = new TextArea();
     private final Button bGenrateStory = new Button("Genrate Story");
     private final Button bFlaskkiefy = new Button("Flaskiefy");
+    private final Label lLiterIFad = new Label(" ");
+    private final Label lError = new Label();
 
     private void intContent() {
 
@@ -34,7 +45,7 @@ public class FlaskningsPane extends GridPane {
         Label lHistorie = new Label("Historien");
         this.add(lHistorie,3,0,2,2);
 
-        this.add(tAHistorien,3,3,1,7);
+        this.add(tAHistorien,3,3,1,8);
         tAHistorien.setEditable(false);
         tAHistorien.setMinWidth(300);
         tAHistorien.setMinHeight(300);
@@ -47,6 +58,10 @@ public class FlaskningsPane extends GridPane {
         this.add(lVælgFad,0,4);
         this.add(cbFade,1,4);
         cbFade.getItems().setAll(Controller.getFildFad());
+        ChangeListener<Fad> listenerFade = (ov, o, n) -> this.selectedFadChanged();
+        cbFade.getSelectionModel().selectedItemProperty().addListener(listenerFade);
+        this.add(lLiterIFad,2,4);
+
 
         Label lLiterFraFad = new Label("Liter fra fad");
         this.add(lLiterFraFad,0,5);
@@ -65,19 +80,81 @@ public class FlaskningsPane extends GridPane {
         this.add(lFlaskeStørelse,0,8);
         this.add(dFFlaskeStørelse,1,8);
 
-        this.add(bGenrateStory,0,9);
+        Label lProcent = new Label("Alkohold procent");
+        this.add(lProcent,0,9);
+        this.add(dFProcent,1,9);
+
+        this.add(bGenrateStory,0,10);
         bGenrateStory.setOnAction(event -> this.genrateStory());
 
-        this.add(bFlaskkiefy,1,9);
+        this.add(bFlaskkiefy,1,10);
         bFlaskkiefy.setOnAction(event -> this.Flaskkiefy());
+
+        this.add(lError,0,11);
+        lError.setStyle("-fx-text-fill: red;");
+
+
+    }
+
+    private void selectedFadChanged() {
+
+        if(cbFade.getSelectionModel().isEmpty()){
+            lLiterIFad.setText(" ");
+        }else{
+            cbFade.getSelectionModel().getSelectedItem().getLiter();
+            lLiterIFad.setText(cbFade.getSelectionModel().getSelectedItem().getLiter()+"L");
+        }
 
     }
 
     private void Flaskkiefy() {
+        if(cbFade.getSelectionModel().isEmpty()){
+            lError.setText("ERROR no Fad Selected");
+        }else if (cbVandKilde.getSelectionModel().isEmpty()) {
+            lError.setText("ERROR ingen vandkilde valgt");
+        }else if(tFMakeName.getText().isBlank()){
+            lError.setText("ERROR pick a cool name");
+        }else if (dFLiterFraFad.getValue() <= 0 || dFLiterFraFad.getValue() > cbFade.getSelectionModel().getSelectedItem().getLiter()) {
+            lError.setText("ERROR pls pick a valid destillat amount to use");
+        }else if (dFLiterVand.getValue() <= 0) {
+            lError.setText("ERROR pls pick a valid water amount to use");
+        } else if (dFFlaskeStørelse.getValue() <= 0) {
+            lError.setText("ERROR pls pick a valid size to use");
+        } else if (dFProcent.getValue() <= 0 || dFProcent.getValue() > 100) {
+            lError.setText("ERROR pls pick a valid alkohold procent to use");
+        }
     }
 
     private void genrateStory() {
-        tAHistorien.setText("Der var en gang en gang og for enden af den gang var der en dør");
+        if(cbFade.getSelectionModel().isEmpty()){
+            lError.setText("ERROR no Fad Selected");
+        }else if (dFProcent.getValue() <= 0 || dFProcent.getValue() > 100) {
+            lError.setText("ERROR pls pick a valid alkohold procent to use");
+        }else {
+            StringBuilder s = new StringBuilder();
+            Fad fad = cbFade.getSelectionModel().getSelectedItem();
+            Destilat destilat = fad.getDestilat();
+
+            s.append(fad.getMateriale());
+            s.append(destilat.getDestillering().getSlutDato());
+            if(destilat.isSingleMalt()) s.append("Singel malt");
+            if(destilat.isHeart()) s.append("Pure heart");
+            s.append(destilat.getRøgmateriale());
+            s.append(Period.between(fad.getModningsTid().getStartDato(),LocalDate.now()));
+            tAHistorien.setText(s.toString());
+
+        }
+
+
+
+            // get fad alle modene fad
+
+        // get destilat
+
+        // points i historie
+        //
+
+
     }
 
 }

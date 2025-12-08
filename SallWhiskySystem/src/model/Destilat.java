@@ -84,4 +84,24 @@ public class Destilat implements
             return true;
         }
     }
+
+    public boolean isSingleMalt(){
+        if(!isSingleMalt) return false;
+        for (Destilat destilat : destilater) {
+            if(!destilat.isSingleMalt || !destilat.destillering.getRåvareList().equals(destillering.getRåvareList())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isHeart(){
+        if(!isHeart) return false;
+        for (Destilat destilat : destilater) {
+            if(!destilat.isHeart()){
+                return false;
+            }
+        }
+        return true;
+    }
 }
