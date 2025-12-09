@@ -155,5 +155,13 @@ public class Fad implements
     public void addDestilat(Destilat destilat){
         destillater.add(destilat);
     }
+
+    public boolean isOnlyHeart(){
+        for (Destilat destilat : destillater) {
+            if(!destilat.isHeart()) return false;
+        }
+        return true;
+    }
+
 }
 
