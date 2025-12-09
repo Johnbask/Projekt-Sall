@@ -8,6 +8,7 @@ import storage.Storage;
 
 import javax.naming.ldap.Control;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -137,68 +138,288 @@ class ControllerTest {
                 () -> assertNotNull(fad),
                 () -> assertEquals(100, fad.getLiter()),
                 () -> assertEquals(Trætype.WHITE_OAK, fad.getMateriale()),
-                () -> assertEquals(List.of("Whisky"), fad.getTidligereIndhold())
+                () -> assertEquals(List.of("Whisky"), fad.getTidligereIndhold()),
+                () -> assertEquals("Leverandør 1", fad.getLeverandør()),
+                () -> assertEquals(hylde, fad.getHylde()),
+                () -> assertEquals(fad, hylde.getFad()),
+                () -> assertTrue(Storage.getFade().contains(fad))
         );
     }
 
     @Test
     void test_getFade() {
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde1 = reol.getHylde(1);
+
+        Fad fad1 = Controller.opretFad(100, Trætype.WHITE_OAK, List.of("Whisky"), "Leverandør 1", hylde1);
+
+        Hylde hylde2 = reol.getHylde(2);
+
+        Fad fad2 = Controller.opretFad(150, Trætype.QUERCUSROBUR, List.of("Sherry"), "Leverandør 2", hylde2);
+
+        List<Fad> fade = Controller.getFade();
+
+        assertAll(
+                () -> assertEquals(2, fade.size()),
+                () -> assertTrue(fade.contains(fad1)),
+                () -> assertTrue(fade.contains(fad2))
+        );
 
     }
 
     @Test
     void test_sletFad() {
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde1 = reol.getHylde(1);
 
+        Fad fad1 = Controller.opretFad(90, Trætype.MIZUNARA, List.of("Bourbon"), "Leverandør 1", hylde1);
+
+        assertAll(
+                () -> assertNotNull(fad1.getHylde()),
+                () -> assertNotNull(hylde1.getFad()),
+                () -> assertEquals(fad1, hylde1.getFad()),
+                () -> assertEquals(hylde1, fad1.getHylde()),
+                () -> assertTrue(Storage.getFade().contains(fad1))
+        );
+
+        Controller.sletFad(fad1);
+
+        assertAll(
+                () -> assertNull(hylde1.getFad()),
+                () -> assertNotEquals(fad1, hylde1.getFad()),
+                () -> assertFalse(Storage.getFade().contains(fad1))
+        );
     }
 
     @Test
     void test_getFildFade() {
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde1 = reol.getHylde(1);
 
-    }
+        Fad fad1 = Controller.opretFad(100, Trætype.WHITE_OAK, List.of("Whisky"), "Leverandør 1", hylde1);
+        fad1.setLitterIFad(50);
 
-    @Test
-    void test_getModneFade() {
+        Hylde hylde2 = reol.getHylde(2);
 
-    }
+        Fad fad2 = Controller.opretFad(150, Trætype.QUERCUSROBUR, List.of("Sherry"), "Leverandør 2", hylde2);
+        fad2.setLitterIFad(100);
 
-    @Test
-    void test_opretDestilat() {
+        List<Fad> FilledFade = Controller.getFildFad();
 
-    }
-
-    @Test
-    void test_getDestilater() {
-
-    }
-
-    @Test
-    void test_opretOmhældning() {
-
+        assertAll(
+                () -> assertEquals(2, FilledFade.size()),
+                () -> assertTrue(FilledFade.contains(fad1)),
+                () -> assertTrue(FilledFade.contains(fad2)),
+                () -> assertEquals(50, fad1.getLitterIFad()),
+                () -> assertEquals(100, fad2.getLitterIFad())
+        );
     }
 
     @Test
     void test_opretMedarbejder() {
+        Medarbejder medarbejder = Controller.opretMedarbejder("Ib Hansen", "Medarbejder");
 
+        assertAll(
+                () -> assertNotNull(medarbejder),
+                () -> assertEquals("Ib Hansen", medarbejder.getNavn()),
+                () -> assertEquals("Medarbejder", medarbejder.getStilling()),
+                () -> assertTrue(Storage.getMedarbejderne().contains(medarbejder))
+        );
     }
 
     @Test
     void test_getMedarbejder() {
+        Medarbejder medarbejder1 = Controller.opretMedarbejder("Ib Hansen", "Medarbejder1");
+        Medarbejder medarbejder2 = Controller.opretMedarbejder("Bob Jørgensen", "Medarbejder2");
 
+        List<Medarbejder> medarbejdere = Controller.getMedarbejderne();
+
+        assertAll(
+                () -> assertEquals(2, medarbejdere.size()),
+                () -> assertTrue(medarbejdere.contains(medarbejder1)),
+                () -> assertTrue(medarbejdere.contains(medarbejder2))
+        );
     }
 
     @Test
-    void test_writeStorage() {
+    void test_opretDestilat() {
+        LocalDate startDato = LocalDate.of(2025, 12, 9);
+        LocalDate slutDato = LocalDate.of(2025, 12, 15);
+        Vand vand = Controller.opretVand("Vand Kilde 1");
+        Medarbejder medarbejder = Controller.opretMedarbejder("Ib Jensen", "Destillatør");
 
+        Destillering destillering = new Destillering(
+                startDato, slutDato,
+                100, 64, medarbejder,
+                "Byg", "Røg Materiale",
+                "Kommentar", vand
+        );
+
+        Destilat destilat = Controller.opretDestilat(50, true, false, destillering);
+
+        assertAll(
+                () -> assertNotNull(destilat),
+                () -> assertEquals(1, destilat.getBatchId()),
+                () -> assertEquals(50, destilat.getLiter()),
+                () -> assertTrue(destilat.isSingleMalt()),
+                () -> assertFalse(destilat.isHeart()),
+                () -> assertEquals(destillering, destilat.getDestillering()),
+                () -> assertTrue(Storage.getDestilater().contains(destilat))
+        );
     }
 
     @Test
-    void test_readStorage() {
+    void test_getDestilater_Plus_DestilleringTest() {
+        // Første Destilat
+        LocalDate startDato1 = LocalDate.of(2025, 12, 12);
+        LocalDate slutDato1 = LocalDate.of(2025, 12, 20);
+        Vand vand1 = Controller.opretVand("Vandkilden 1");
+        Medarbejder medarbejder1 = Controller.opretMedarbejder("Ib Jørgens", "Destillatør medhjælper");
 
+        Destillering destillering1 = new Destillering(
+                startDato1, slutDato1,
+                100, 64, medarbejder1,
+                "Byg", "Røg Materiale 1",
+                "test kommentar", vand1
+        );
+
+        Destilat destilat1 = Controller.opretDestilat(50, true, false, destillering1);
+
+        // Anden Destilat
+        LocalDate startDato2 = LocalDate.of(2025, 12, 15);
+        LocalDate slutDato2 = LocalDate.of(2025, 12, 25);
+        Vand vand2 = Controller.opretVand("Vandkilden 2");
+        Medarbejder medarbejder2 = Controller.opretMedarbejder("Bo Hansen", "Leder");
+
+        Destillering destillering2 = new Destillering(
+                startDato2, slutDato2,
+                80, 70, medarbejder2,
+                "Byg", "Røg materiale 2",
+                "Kommentar", vand2
+        );
+
+        Destilat destilat2 = Controller.opretDestilat(50, false, true, destillering2);
+
+        List<Destilat> destilater =  Controller.getDestilater();
+
+        assertAll(
+                // Test for destilat
+                () -> assertEquals(2, destilater.size()),
+                () -> assertTrue(destilater.contains(destilat1)),
+                () -> assertTrue(destilater.contains(destilat2)),
+
+                // test for Destillering
+                () -> assertEquals(1, destillering1.getNewMakeId()),
+                () -> assertEquals(2, destillering2.getNewMakeId()),
+                () -> assertEquals(startDato1, destillering1.getStartDato()),
+                () -> assertEquals(startDato2, destillering2.getStartDato()),
+                () -> assertEquals(slutDato1, destillering1.getSlutDato()),
+                () -> assertEquals(slutDato2, destillering2.getSlutDato()),
+                () -> assertEquals(100, destillering1.getMængdeProduceret()),
+                () -> assertEquals(80, destillering2.getMængdeProduceret()),
+                () -> assertEquals(64, destillering1.getAlkoholProcent()),
+                () -> assertEquals(70, destillering2.getAlkoholProcent()),
+                () -> assertEquals(medarbejder1, destillering1.getMedarbejder()),
+                () -> assertEquals(medarbejder2, destillering2.getMedarbejder()),
+                () -> assertEquals("Byg", destillering1.getRåvare()),
+                () -> assertEquals("Byg", destillering2.getRåvare()),
+                () -> assertEquals("Røg Materiale 1", destillering1.getRøg()),
+                () -> assertEquals("Røg materiale 2", destillering2.getRøg()),
+                () -> assertEquals("test kommentar", destillering1.getKommentar()),
+                () -> assertEquals("Kommentar", destillering2.getKommentar()),
+                () -> assertEquals(vand1, destillering1.getVand()),
+                () -> assertEquals(vand2, destillering2.getVand())
+        );
     }
 
+    @Test
+    void test_opretOmhældning() {
+        // Sætter Lager systemet op
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde1 = reol.getHylde(1);
 
+        // Laver Fad
+        Fad fad1 = Controller.opretFad(100, Trætype.WHITE_OAK, List.of("Whisky"), "Leverandør 1", hylde1);
 
+        // Laver Vand
+        Vand vand1 = Controller.opretVand("Vandkilden 1");
 
+        // Laver Medarbejder
+        Medarbejder medarbejder = Controller.opretMedarbejder("Hans Jensen", "Anden Leder");
 
+        // Laver Destillering
+        LocalDate startDato = LocalDate.of(2025, 12, 11);
+        LocalDate slutDato = LocalDate.of(2025, 12, 24);
+
+        Destillering destillering = new Destillering(startDato, slutDato,
+                100, 69, medarbejder,
+                "Byg", "Røg materiale",
+                "Kommentar", vand1
+        );
+
+        // Laver Destilat
+        Destilat destilat = Controller.opretDestilat(50, true, true, destillering);
+
+        // Dato for omhældning
+        LocalDate dato =  LocalDate.of(2025, 12, 30);
+
+        Omhældning omhældning = Controller.opretOmhældning(fad1, destilat, dato, 30, medarbejder);
+
+        assertAll(
+                () -> assertNotNull(omhældning),
+                () -> assertEquals(fad1, omhældning.getFad()),
+                () -> assertEquals(destilat, omhældning.getDestilat()),
+                () -> assertEquals(dato, omhældning.getDato()),
+                () -> assertEquals(30, omhældning.getMængde()),
+                () -> assertEquals(medarbejder, omhældning.getMedarbejder()),
+                () -> assertEquals(30, fad1.getLitterIFad()),
+                () -> assertEquals(20, destilat.getLiter()), // 50 - 30 = 20
+                () -> assertTrue(fad1.getOmhældning().contains(omhældning))
+        );
+    }
+
+    @Test
+    void test_enDestilleringFlereDestilater() {
+        LocalDate startDato = LocalDate.of(2025, 12, 11);
+        LocalDate slutDato = LocalDate.of(2025, 12, 24);
+
+        Medarbejder medarbejder = Controller.opretMedarbejder("Hans Jensen", "Anden Leder");
+
+        Vand vand1 = Controller.opretVand("Vandkilden 1");
+
+        Destillering destillering = new Destillering(startDato, slutDato,
+                300, 69, medarbejder,
+                "Byg", "Røg materiale",
+                "Kommentar", vand1
+        );
+
+        Destilat destilat1 =  Controller.opretDestilat(100, true, true, destillering);
+
+        Destilat destilat2 =  Controller.opretDestilat(50, true, true, destillering);
+
+        Destilat destilat3 =  Controller.opretDestilat(130, true, true, destillering);
+
+        assertAll(
+                () -> assertEquals(3, Storage.getDestilater().size()),
+                () -> assertTrue(Storage.getDestilater().contains(destilat1)),
+                () -> assertTrue(Storage.getDestilater().contains(destilat2)),
+                () -> assertTrue(Storage.getDestilater().contains(destilat3)),
+                () -> assertEquals(destillering, destilat1.getDestillering()),
+                () -> assertEquals(destillering, destilat2.getDestillering()),
+                () -> assertEquals(destillering, destilat3.getDestillering())
+        );
+    }
 
 }
