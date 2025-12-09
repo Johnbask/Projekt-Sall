@@ -111,6 +111,17 @@ public class Storage {
             Fad.setAntalFade(fade.size()+1);
 
 
+            ArrayList<Destillering> Destilleringer = new ArrayList<>();
+            ArrayList<Integer> ider = new ArrayList<>();
+            for (Destilat destilat : Controller.getDestilater()) {
+                if(!ider.contains(destilat.getDestillering().getNewMakeId())){
+                    Destilleringer.add(destilat.getDestillering());
+                    ider.add(destilat.getDestillering().getNewMakeId());
+                }
+            }
+            Destillering.setIdMaker(Destilleringer.size()+1);
+
+
 
         } catch (IOException e) {
             System.out.println("Catch in writeStorage");
@@ -178,9 +189,13 @@ public class Storage {
         Controller.opretVand("Toiletkummen");
         Controller.opretMedarbejder("Ruben","Gud");
         Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
+        Destillering destillering2 = new Destillering(LocalDate.of(1913,12,12),LocalDate.of(1913,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
         Controller.opretDestilat(100.0,true,true,destillering);
         Controller.opretDestilat(200,true,true,destillering);
         Controller.opretDestilat(300,true,true,destillering);
+     Destilat des1=    Controller.opretDestilat(1000,true,true,destillering2);
+
+        Controller.opretOmhældning(fad20,des1,LocalDate.of(1999,12,12),90,medarbejderne.getFirst());
 
     }
 

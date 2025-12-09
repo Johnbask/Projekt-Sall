@@ -13,6 +13,7 @@ import model.Fad;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Objects;
 
 public class LagerPane extends GridPane {
     private final ListView<Fad> lWfade = new ListView<>();
@@ -140,15 +141,21 @@ public class LagerPane extends GridPane {
         if(tFlager.getValue()==0){
             lWfade.getItems().setAll(Controller.getFade());
         } else if (!(tFlager.getValue() ==0) && !(tFReol.getValue() ==0)&& !(tFHylde.getValue() ==0)){
-            lWfade.getItems().setAll(Controller.getLager(tFlager.getValue()).getReol((tFReol.getValue())).getHylde(tFHylde.getValue()).getFad());
+            lWfade.getItems().setAll(Objects.requireNonNull(Controller.getLager(tFlager.getValue())).getReol((tFReol.getValue())).getHylde(tFHylde.getValue()).getFad());
         } else if (tFHylde.getValue()==0&& !(tFReol.getValue() ==0)) {
-            lWfade.getItems().setAll(Controller.getLager(tFlager.getValue()).getReol(tFReol.getValue()).getFade());
+            lWfade.getItems().setAll(Objects.requireNonNull(Controller.getLager(tFlager.getValue())).getReol(tFReol.getValue()).getFade());
         } else if (!(tFlager.getValue() ==0)) {
-            lWfade.getItems().setAll(Controller.getLager(tFlager.getValue()).getFade());
+            lWfade.getItems().setAll(Objects.requireNonNull(Controller.getLager(tFlager.getValue())).getFade());
         }
         else{
             System.out.println("ERROR");// skal erstats med try catch
         }
+        if (lWfade.getItems().size()==1){
+            if (lWfade.getItems().getFirst()==null){
+                lWfade.getItems().setAll(new ArrayList<>());
+            }
+        }
+
 
     }
 

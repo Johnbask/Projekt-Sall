@@ -1,8 +1,5 @@
 package model;
 
-import com.sun.scenario.effect.impl.state.AccessHelper;
-import storage.Storage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +120,10 @@ public class Fad implements
         lageringsHists.add(new LageringsHist(LocalDate.now(),hylde,this));
     }
 
+    public List<Destilat> getDestillater() {
+        return destillater;
+    }
+
     public boolean addLiterOfDestilatToFad(double mængde){
         if (litterIFad+mængde<=liter){
             litterIFad+=mængde;
@@ -130,6 +131,29 @@ public class Fad implements
         }else {
             return false;
         }
+    }
+
+    public boolean removeLiterOfDestilatFromFad(double mængde){
+        if (!(0>liter-mængde)){
+            litterIFad-=mængde;
+            if (litterIFad==0){
+                omhældning=new ArrayList<>();
+                destillater=null;
+            }
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean isModen(){
+        return omhældning.getLast().isModen();
+
+    }
+
+
+    public void addDestilat(Destilat destilat){
+        destillater.add(destilat);
     }
 }
 

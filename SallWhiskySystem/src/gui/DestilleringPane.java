@@ -56,15 +56,6 @@ public class DestilleringPane extends GridPane {
         this.add(lblDestillering, 0, 0, 2, 1);
         lblDestillering.setStyle("-fx-font-size: 24px");
 
-        /*
-        this.add(new Label("Fad Nr.:"), 0, 1);
-        cbFadNr.setPromptText("Vælg fad (valgfrit)");
-        cbFadNr.getItems().setAll(Controller.getEmptyFad());
-        this.add(cbFadNr, 1, 1);
-         */
-
-        //this.add(txfFadNr, 1, 2);
-
         this.add(new Label("Råvare "), 0, 1);
         this.add(txfKornSort, 1, 1);
 
@@ -122,11 +113,21 @@ public class DestilleringPane extends GridPane {
 
         this.add(bSlet,3,12);
 
-        this.add(lError,0,13);
+        this.add(lError,0,13,2,1);
 
         this.add(lWDestilleringer,3,1,1,11);
         lWDestilleringer.setMinWidth(600);
         lWDestilleringer.getItems().setAll(getDestileringer());
+
+
+        dpStarDato.setValue(LocalDate.now());
+        dpSlutDato.setValue(LocalDate.now().plusDays(7));
+        cbMedarbjder.getSelectionModel().selectFirst();
+        cbVand.getSelectionModel().selectFirst();
+        lError.setMinWidth(250);
+
+
+
 
 
     }
@@ -166,15 +167,17 @@ public class DestilleringPane extends GridPane {
             lError.setText("ERROR pls input en valid mængde i mængde liter");
             lError.setStyle("-fx-text-fill: red;");
         } else if (dFAlkoholProcent.getValue() <= 0 || dFAlkoholProcent.getValue() >= 100) {
-            lError.setText("ERROR pls input en valid mængde i mængde liter");
+            lError.setText("ERROR alkohol procent skal være over 0");
             lError.setStyle("-fx-text-fill: red;");
         } else{
             Destillering destillering = new Destillering(dpStarDato.getValue(),dpSlutDato.getValue(),dFMaengdeLiter.getValue(),dFAlkoholProcent.getValue(),cbMedarbjder.getSelectionModel().getSelectedItem(),txfKornSort.getText(),txfRøg.getText(),txaKommentar.getText(),cbVand.getSelectionModel().getSelectedItem());
             Controller.opretDestilat(dFMaengdeLiter.getValue(),rbnTrueSingleMalt.isSelected(),rbnTrueHeart.isSelected(),destillering);
             updateDestilleringer();
             Controller.writeStorage();
-        }
+            lError.setText("");
 
+
+        }
 
 
     }

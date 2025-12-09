@@ -150,16 +150,27 @@ public class Controller {
         return result;
     }
 
+    public static List<Fad> getModneFade(){
+        List<Fad> temp = getFildFad();
+        List<Fad> res = new ArrayList<>();
+        for (Fad fad : temp) {
+            if(fad.getOmhældning().getLast().isModen()){
+                res.add(fad);
+            }
+        }
+        return res;
+    }
+
 public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDate dato, double mængde,Medarbejder medarbejder ){
         Omhældning omhældning =null;
         try {
-            omhældning=new Omhældning(mængde,dato,fad,medarbejder);
+            omhældning=new Omhældning(mængde,dato,fad,medarbejder,destilat);
             fad.addOmhældning(omhældning);
             if (!fad.addLiterOfDestilatToFad(mængde)||!destilat.tapDestilat(mængde)){
-                throw new Exception("not enough space");
+                return null;
             }
             destilat.setUsed(true);
-
+            fad.addDestilat(destilat);
 
 
         } catch (Exception e) {
