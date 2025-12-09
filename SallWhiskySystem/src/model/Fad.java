@@ -18,7 +18,7 @@ public class Fad implements
 
     private Trætype materiale;
     private int fadId;
-    private List<String> tidligereIndhold;
+    private List<String> tidligereIndhold = new ArrayList<>();
     private String leverandør;
     private double litterIFad;
 
@@ -34,7 +34,7 @@ public class Fad implements
         this.materiale = materiale;
         this.fadId = antalFade;
         antalFade++;
-        this.tidligereIndhold = tidligereIndhold;
+        this.tidligereIndhold.addAll(tidligereIndhold);
         this.leverandør = leverandør;
     }
 
@@ -110,7 +110,6 @@ public class Fad implements
     }
 
     public void addTidligereIndhold(String s){
-        System.out.println(s);
         tidligereIndhold.add(s);
     }
     public Destilat getDestilat(){
