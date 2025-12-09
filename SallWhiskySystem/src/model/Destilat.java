@@ -7,7 +7,6 @@ import java.util.List;
 public class Destilat implements
         java.io.Serializable {
     public static int antalDestilater =1;
-
     private Double liter;
     private boolean isSingleMalt;
     private boolean isHeart;
