@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +36,24 @@ class DestilatTest {
         Destilat destilat1 = new Destilat(100,true,true,destillering);
         assertEquals(2,destilat1.getBatchId());
     }
+
+    @Test
+    void testTapDestilat(){
+        assertTrue(destilat.tapDestilat(60));
+        assertFalse(destilat.tapDestilat(60));
+        assertFalse(destilat.tapDestilat(-30));
+        assertFalse(destilat.tapDestilat(0));
+    }
+
+    @Test
+    void testAddOmhældning(){
+        int test = destilat.getOmhældninger().size();
+        Fad fad1 = new Fad(5000,Trætype.MIZUNARA,new ArrayList<>(List.of("Sherry")),"Ruben a/s");
+        destilat.addOmhælning(new Omhældning(30,LocalDate.now(),fad1,new Medarbejder("John", "johnson"),destilat));
+        Assertions.assertEquals(test + 1, destilat.getOmhældninger().size());
+
+    }
+
 
 
 
