@@ -11,11 +11,11 @@ import java.util.List;
 
 public class Storage {
 
-    static List<Lager> lagere;
-    static List<Fad> fade;
-    static List<Destilat> destilater;
-    static List<Medarbejder> medarbejderne;
-    static List<Vand> vands;
+    static List<Lager> lagere = new ArrayList<>();
+    static List<Fad> fade = new ArrayList<>();
+    static List<Destilat> destilater = new ArrayList<>();
+    static List<Medarbejder> medarbejderne = new ArrayList<>();
+    static List<Vand> vands = new ArrayList<>();
 
     public static void addVandkilde(Vand vand){
         vands.add(vand);
