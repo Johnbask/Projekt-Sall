@@ -1,7 +1,6 @@
 package model;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,17 +48,10 @@ class DestilatTest {
     void testAddOmhældning(){
         int test = destilat.getOmhældninger().size();
         Fad fad1 = new Fad(5000,Trætype.MIZUNARA,new ArrayList<>(List.of("Sherry")),"Ruben a/s");
+        Fad fad2 = new Fad(5000,Trætype.MIZUNARA,new ArrayList<>(List.of("Sherry")),"Ruben a/s");
         destilat.addOmhælning(new Omhældning(30,LocalDate.now(),fad1,new Medarbejder("John", "johnson"),destilat));
         Assertions.assertEquals(test + 1, destilat.getOmhældninger().size());
-
+        destilat.addOmhælning(new Omhældning(120,LocalDate.now(),fad2,new Medarbejder("John", "johnson"),destilat));
+        Assertions.assertEquals(test + 2, destilat.getOmhældninger().size());
     }
-
-
-
-
-
-
-
-
-
 }
