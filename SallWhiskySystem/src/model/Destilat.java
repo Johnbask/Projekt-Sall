@@ -7,7 +7,6 @@ import java.util.List;
 public class Destilat implements
         java.io.Serializable {
     public static int antalDestilater =1;
-
     private Double liter;
     private boolean isSingleMalt;
     private boolean isHeart;
@@ -66,7 +65,9 @@ public class Destilat implements
     }
 
     public boolean tapDestilat(double mængde) {
-
+        if(mængde <= 0){
+            return false;
+        }
         if(mængde>liter){
             return false;
         }else {

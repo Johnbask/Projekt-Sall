@@ -125,6 +125,9 @@ public class Fad implements
     }
 
     public boolean addLiterOfDestilatToFad(double mængde){
+        if(mængde <= 0){
+            return false;
+        }
         if (litterIFad+mængde<=liter){
             litterIFad+=mængde;
             return true;
