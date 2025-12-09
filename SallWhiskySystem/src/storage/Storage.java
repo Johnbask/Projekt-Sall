@@ -202,13 +202,15 @@ public class Storage {
         Controller.opretMedarbejder("Ruben","Gud");
         Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
         Destillering destillering2 = new Destillering(LocalDate.of(1913,12,12),LocalDate.of(1913,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
-        Controller.opretDestilat(100.0,true,true,destillering);
-        Controller.opretDestilat(200,true,true,destillering);
-        Controller.opretDestilat(300,true,true,destillering);
-     Destilat des1=    Controller.opretDestilat(1000,true,true,destillering2);
+        //Controller.opretDestilat(100.0,true,true,destillering);
+        //Controller.opretDestilat(200,true,true,destillering);
+        //Controller.opretDestilat(300,true,true,destillering);
 
-        Controller.opretOmhældning(fad20,des1,LocalDate.of(1999,12,12),90,medarbejderne.getFirst());
+        Destilat des1 = Controller.opretDestilat(1500, true, false, destillering);
+        Destilat des2 = Controller.opretDestilat(1000, true, true, destillering2);
 
+        Controller.opretOmhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, medarbejderne.getFirst());
+        Controller.opretOmhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, medarbejderne.getFirst());
     }
 
     // hælpemetode finder ledig hylde
