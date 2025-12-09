@@ -36,6 +36,7 @@ public class FlaskningsPane extends GridPane {
     private final Button bFlaskkiefy = new Button("Flaskiefy");
     private final Label lLiterIFad = new Label(" ");
     private final Label lError = new Label();
+    private final DatePicker dPFlaske = new DatePicker();
 
     private void intContent() {
 
@@ -84,13 +85,17 @@ public class FlaskningsPane extends GridPane {
         this.add(lProcent,0,9);
         this.add(dFProcent,1,9);
 
-        this.add(bGenrateStory,0,10);
+        Label lDatepicker = new Label("Dato : ");
+        this.add(lDatepicker,0,10);
+        this.add(dPFlaske,1,10);
+
+        this.add(bGenrateStory,0,11);
         bGenrateStory.setOnAction(event -> this.genrateStory());
 
-        this.add(bFlaskkiefy,1,10);
+        this.add(bFlaskkiefy,1,11);
         bFlaskkiefy.setOnAction(event -> this.Flaskkiefy());
 
-        this.add(lError,0,11,3,1);
+        this.add(lError,0,12,3,1);
         lError.setStyle("-fx-text-fill: red;");
         lError.setMinWidth(200);
 
@@ -129,10 +134,29 @@ public class FlaskningsPane extends GridPane {
             lError.setText("ERROR pls pick a valid size to use");
         } else if (dFProcent.getValue() <= 0 || dFProcent.getValue() > 100) {
             lError.setText("ERROR pls pick a valid alkohold procent to use");
+        }else if(dPFlaske.getValue().isBefore(cbFade.getSelectionModel().getSelectedItem().getOmhældning().getLast().getDato())) {
+            lError.setText("ERROR pls pick a valid date (date before origin date)");
+        }else {
+            String historie = genrateStory();
+        double totalLiter = dFLiterFraFad.getValue() + dFLiterVand.getValue();
+            while (totalLiter >= 0){
+                if(totalLiter >= dFFlaskeStørelse.getValue()){
+                    Controller.opretFlaske(dFFlaskeStørelse.getValue(),dFProcent.getValue(),dPFlaske.getValue(),historie);
+                    totalLiter -= dFFlaskeStørelse.getValue();
+                }else{
+                    Controller.opretFlaske(totalLiter,dFProcent.getValue(),dPFlaske.getValue(),historie);
+                    totalLiter -= dFFlaskeStørelse.getValue();
+                }
+
+            }
+            cbFade.getSelectionModel().getSelectedItem().removeLiterOfDestilatFromFad(dFLiterFraFad.getValue());
+            Controller.writeStorage();
+            updateFade();
         }
     }
 
-    private void genrateStory() {
+    private String genrateStory() {
+        StringBuilder s = new StringBuilder();
         if(cbFade.getSelectionModel().isEmpty()){
             lError.setText("ERROR no Fad Selected");
         }else if (dFProcent.getValue() <= 0 || dFProcent.getValue() > 100) {
@@ -142,7 +166,6 @@ public class FlaskningsPane extends GridPane {
         }else if(cbVandKilde.getSelectionModel().isEmpty()){
             lError.setText("ERROR pls pick a water source");
         }else{
-            StringBuilder s = new StringBuilder();
             Fad fad = cbFade.getSelectionModel().getSelectedItem();
 
             s.append(tFMakeName.getText());
@@ -171,8 +194,6 @@ public class FlaskningsPane extends GridPane {
                     }
                 }
             }
-
-            s.append(":");
             if(råvarene.size()==1){
                 s.append(råvarene.getFirst()+" 100% ");
             }else{
@@ -260,11 +281,7 @@ public class FlaskningsPane extends GridPane {
 
             tAHistorien.setText(s.toString());
         }
-
-
-
-
-
+        return s.toString();
     }
 
 }

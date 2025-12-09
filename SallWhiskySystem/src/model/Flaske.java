@@ -7,14 +7,16 @@ public class Flaske {
     private  Double ml;
     private  double alkoholProcent;
     private LocalDate påHældningsDato;
+    private String historie;
     // links
     private Fad fad;
     private Vand vand;
 
-    public Flaske(Double ml, double alkoholProcent, LocalDate påHældningsDato) {
+    public Flaske(Double ml, double alkoholProcent, LocalDate påHældningsDato,String historie) {
         this.ml = ml;
         this.alkoholProcent = alkoholProcent;
         this.påHældningsDato = påHældningsDato;
+        this.historie = historie;
     }
 
     // Getters Lokalt

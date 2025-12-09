@@ -16,6 +16,15 @@ public class Storage {
     static List<Destilat> destilater = new ArrayList<>();
     static List<Medarbejder> medarbejderne = new ArrayList<>();
     static List<Vand> vands = new ArrayList<>();
+    static List<Flaske> flasker = new ArrayList<>();
+
+    public static void addFlaske(Flaske flaske){
+        flasker.add(flaske);
+    }
+
+    public static List<Flaske> getFlasker() {
+        return flasker;
+    }
 
     public static void addVandkilde(Vand vand){
         vands.add(vand);
@@ -79,6 +88,7 @@ public class Storage {
                 destilater = (ArrayList) objIn.readObject();
                 medarbejderne = (ArrayList) objIn.readObject();
                 vands = (ArrayList) objIn.readObject();
+                flasker = (ArrayList) objIn.readObject();
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -87,6 +97,7 @@ public class Storage {
             destilater = new ArrayList<>();
             medarbejderne = new ArrayList<>();
             vands = new ArrayList<>();
+            flasker = new ArrayList<>();
             initialStorageCreation();
 
         } catch (Exception e){
@@ -107,6 +118,7 @@ public class Storage {
             objOut.writeObject(destilater);
             objOut.writeObject(medarbejderne);
             objOut.writeObject(vands);
+            objOut.writeObject(flasker);
             Lager.setAntalLagere(lagere.size()+1);
             Fad.setAntalFade(fade.size()+1);
 
