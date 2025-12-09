@@ -278,7 +278,7 @@ public class SporbarhedPane extends GridPane {
             historie.append("=== Aktuelt Indhold ===\n");
             historie.append("Mængde Liter: ").append(String.format("%.1f L", destilat.getLiter())).append("\n");
             historie.append("Single Malt: ").append(destilat.getSingleMalt() ? "Ja" : "Nej").append("\n");
-            historie.append("Heart Cut:").append(destilat.getHeart() ? "Ja" : "Nej").append("\n");
+            historie.append("Heart Cut: ").append(destilat.getHeart() ? "Ja" : "Nej").append("\n");
 
             if (destilat.getRøgmateriale() != null) {
                 historie.append("Røgmateriale: ").append(destilat.getRøgmateriale()).append("\n");
@@ -288,7 +288,7 @@ public class SporbarhedPane extends GridPane {
             if (destillering != null) {
                 historie.append("\n=== Destillerings Info ===\n");
                 historie.append("New Make ID: ").append(destillering.getNewMakeId()).append("\n");
-                historie.append("Start Dato:").append(destillering.getStartDato()).append("\n");
+                historie.append("Start Dato: ").append(destillering.getStartDato()).append("\n");
                 historie.append("Slut Dato: ").append(destillering.getSlutDato()).append("\n");
                 historie.append("Alkohol %: ").append(String.format("%.2f%%", destillering.getAlkoholProcent())).append("\n");
                 historie.append("Mængde produceret: ").append(String.format("%.1f L", destillering.getMængdeProduceret())).append("\n");
