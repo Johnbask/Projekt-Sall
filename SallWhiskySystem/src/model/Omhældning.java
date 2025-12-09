@@ -40,4 +40,8 @@ public class Omhældning implements Serializable {
     public boolean isModen(){
         return LocalDate.now().isAfter(dato.plusYears(3));
     }
+
+    public Destilat getDestilat() {
+        return destilat;
+    }
 }
