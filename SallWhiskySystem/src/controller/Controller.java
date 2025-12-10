@@ -228,6 +228,14 @@ public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDat
 
 
     }
+
+    public static void sletVand(Vand vand) {
+        Storage.fjernVand(vand);
+    }
+
+    public static void SletMedarbejder(Medarbejder medarbejder) {
+        Storage.sletMedarbejder(medarbejder);
+    }
 }
 
 

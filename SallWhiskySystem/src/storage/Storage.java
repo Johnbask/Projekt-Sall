@@ -36,6 +36,10 @@ public class Storage {
         return vands;
     }
 
+    public static void fjernVand(Vand vand){
+        vands.remove(vand);
+    }
+
     public static void addDestilat(Destilat destilat){
         destilater.add(destilat);
     }
@@ -58,6 +62,10 @@ public class Storage {
 
     public static List<Medarbejder> getMedarbejderne(){
         return medarbejderne;
+    }
+
+    public static void sletMedarbejder(Medarbejder medarbejder) {
+        medarbejderne.remove(medarbejder);
     }
 
     public static List<Lager> getLagere() {
@@ -243,4 +251,6 @@ public class Storage {
 
         return null;
     }
+
+
 }

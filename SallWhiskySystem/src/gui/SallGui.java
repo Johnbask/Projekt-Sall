@@ -64,6 +64,13 @@ public class SallGui extends Application {
         SporbarhedPane sporbarhedPane = new SporbarhedPane();
         tabSporbarhed.setContent(sporbarhedPane);
 
+        // Misc tab
+        Tab tabMiscellaneous = new Tab("Misc");
+        tabPane.getTabs().add(tabMiscellaneous);
+        MiscPane miscPane = new MiscPane();
+        tabMiscellaneous.setContent(miscPane);
+
+
 
 
     }
