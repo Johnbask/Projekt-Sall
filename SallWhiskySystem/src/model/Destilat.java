@@ -3,6 +3,7 @@ package model;
 import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Destilat implements
         java.io.Serializable {
@@ -83,6 +84,7 @@ public class Destilat implements
     public boolean isHeart(){
         return isHeart;
     }
+
 
 
 }

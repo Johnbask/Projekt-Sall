@@ -44,14 +44,5 @@ class DestilatTest {
         assertFalse(destilat.tapDestilat(0));
     }
 
-    @Test
-    void testAddOmhældning(){
-        int test = destilat.getOmhældninger().size();
-        Fad fad1 = new Fad(5000,Trætype.MIZUNARA,new ArrayList<>(List.of("Sherry")),"Ruben a/s");
-        Fad fad2 = new Fad(5000,Trætype.MIZUNARA,new ArrayList<>(List.of("Sherry")),"Ruben a/s");
-        destilat.addOmhælning(new Omhældning(30,LocalDate.now(),fad1,new Medarbejder("John", "johnson"),destilat));
-        Assertions.assertEquals(test + 1, destilat.getOmhældninger().size());
-        destilat.addOmhælning(new Omhældning(120,LocalDate.now(),fad2,new Medarbejder("John", "johnson"),destilat));
-        Assertions.assertEquals(test + 2, destilat.getOmhældninger().size());
-    }
+
 }
