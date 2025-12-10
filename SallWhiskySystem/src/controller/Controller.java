@@ -236,6 +236,10 @@ public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDat
     public static void SletMedarbejder(Medarbejder medarbejder) {
         Storage.sletMedarbejder(medarbejder);
     }
+
+    public static void sletLager(Lager lager) {
+        Storage.removeLager(lager);
+    }
 }
 
 

@@ -4,6 +4,7 @@ import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -42,6 +43,7 @@ public class LagerCreationPane extends Stage {
     private final  Button bLager = new Button("Opret Lager");
     private final  Button bReol = new Button("Opret Reol");
     private final Button bHylde = new Button("Opret Hylde");
+    private final Button bslet = new Button("slet");
     private final TextField txfLagerNavn = new TextField();
     private final TextField txfLagerAdresse = new TextField();
     private final HBox createButtons = new HBox();
@@ -93,6 +95,34 @@ public class LagerCreationPane extends Stage {
 
         pane.add(txfLagerNavn,0,3);
         pane.add(txfLagerAdresse,1,3);
+
+        pane.add(bslet,4,3);
+        bslet.setMinWidth(285);
+        bslet.setPadding(new Insets(15));
+        bslet.setOnAction(actionEvent -> sletAction());
+
+    }
+
+    private void sletAction() {
+
+
+        if (lWHylde.getSelectionModel().isEmpty()&&lWReol.getSelectionModel().isEmpty()&&!lWLager.getSelectionModel().isEmpty()){
+            Controller.sletLager(lWLager.getSelectionModel().getSelectedItem());
+            lWLager.getItems().setAll(Controller.getLager());
+        } else if (lWHylde.getSelectionModel().isEmpty()&&!lWReol.getSelectionModel().isEmpty()) {
+            Lager lager = lWLager.getSelectionModel().getSelectedItem();
+            lager.removeReol(lWReol.getSelectionModel().getSelectedItem().getNummer());
+            selectedLagerChanged();
+        } else if (!lWHylde.getSelectionModel().isEmpty()) {
+            Lager lager = lWLager.getSelectionModel().getSelectedItem();
+            Reol reol = lager.getReol(lWReol.getSelectionModel().getSelectedItem().getNummer());
+            reol.sletHylde(lWHylde.getSelectionModel().getSelectedItem());
+            opdaterLWHylde();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Vælg en hylde, en reol eller et lager");
+            alert.showAndWait();
+        }
 
     }
 
