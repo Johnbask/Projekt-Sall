@@ -11,6 +11,14 @@ public class Hylde implements
     private Reol reol;
 
     public Hylde(int nummer,Reol reol) {
+        if (nummer <= 0) {
+            throw new IllegalArgumentException("Hylde nummer må ikke være null eller tom");
+        }
+
+        if (reol == null) {
+            throw new IllegalArgumentException("Reol må ikke være null eller tom");
+        }
+
         this.nummer = nummer;
         this.reol = reol;
     }

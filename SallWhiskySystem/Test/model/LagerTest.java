@@ -19,12 +19,32 @@ class LagerTest {
     }
 
     @Test
-    void testConstructor() {
+    void TC1_Constructor_Korrekt() {
         assertAll(
-                () -> assertEquals("Test navn", lager.getNavn()),
                 () -> assertEquals("Test adresse", lager.getAdresse()),
+                () -> assertEquals("Test navn", lager.getNavn()),
                 () -> assertEquals(1, lager.getLagerId())
         );
+    }
+
+    @Test
+    void TC2_Constructor_Adresse_IllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Lager(null, "Test navn")
+        );
+
+        assertEquals("Adresse må ikke være null eller tom", exception.getMessage());
+    }
+
+    @Test
+    void TC3_Constructor_Navn_IllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Lager("Test adresse", null)
+        );
+
+        assertEquals("Navn må ikke være null eller tom", exception.getMessage());
     }
 
     @Test

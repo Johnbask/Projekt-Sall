@@ -14,9 +14,16 @@ public class Reol implements
     private Lager lager;
 
     public Reol(int nummer, Lager lager) {
+        if (nummer <= 0) {
+            throw new IllegalArgumentException("Reol nummer må ikke være null eller tom");
+        }
+
+        if (lager == null) {
+            throw new IllegalArgumentException("Lager må ikke være null eller tom");
+        }
+
         this.nummer = nummer;
         this.lager = lager;
-
     }
 
     public void addHylde(int x){

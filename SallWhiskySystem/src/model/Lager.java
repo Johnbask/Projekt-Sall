@@ -21,6 +21,14 @@ public class Lager implements
     private Map<Integer,Reol> reoler = new HashMap<>();
 
     public Lager(String adresse, String navn) {
+        if (adresse == null) {
+            throw new  IllegalArgumentException("Adresse må ikke være null eller tom");
+        }
+
+        if (navn == null) {
+            throw new IllegalArgumentException("Navn må ikke være null eller tom");
+        }
+
         this.adresse = adresse;
         LagerId = AntalLagere;
         AntalLagere++;

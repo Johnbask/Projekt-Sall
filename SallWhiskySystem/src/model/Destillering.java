@@ -27,7 +27,44 @@ public class Destillering implements java.io.Serializable {
     //tror den her forbindelse ikke skal være her men better safe than sorry
     private  List<Destilat> destilatList;
 
-    public Destillering(LocalDate startDato, LocalDate slutDato, double mængdeProduceret, double alkoholProcent, Medarbejder medarbejder,String råvare, String røg,String kommentar,Vand vand) {
+    public Destillering(
+            LocalDate startDato, LocalDate slutDato,
+            double mængdeProduceret, double alkoholProcent,
+            Medarbejder medarbejder,String råvare, String røg,
+            String kommentar,Vand vand
+    ) {
+        if (startDato == null || slutDato == null) {
+            throw new NullPointerException("startDato/slutDato må ikke være null");
+        }
+
+        if (startDato.isAfter(slutDato)) {
+            throw new IllegalArgumentException("StartDato må ikke være efter slutDato");
+        }
+
+        if (mængdeProduceret <= 0) {
+            throw new IllegalArgumentException("Mængde Produceret skal være større end 0");
+        }
+
+        if (alkoholProcent <= 0 || alkoholProcent > 100) {
+            throw new IllegalArgumentException("Alkohol Procenten skal være > 0 og må ikke være 100");
+        }
+
+        if (medarbejder == null) {
+            throw new NullPointerException("Medarbejder må ikke være null eller tom");
+        }
+
+        if (råvare == null) {
+            throw new NullPointerException("Råvare må ikke være null eller tom");
+        }
+
+        if (røg == null || kommentar == null) {
+            throw new NullPointerException("røg/kommentar må ikke være null");
+        }
+
+        if (vand == null) {
+            throw new NullPointerException("Vand må ikke være null");
+        }
+
         newMakeId = idMaker;
         idMaker++;
         this.startDato = startDato;

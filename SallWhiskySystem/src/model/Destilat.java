@@ -22,6 +22,15 @@ public class Destilat implements
     }
 
     public Destilat(double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
+        if (liter <= 0) {
+            throw new IllegalArgumentException("Liter skal være > 0");
+        }
+
+        if (destillering == null) {
+            throw new NullPointerException("Destillering må ikke være null");
+        }
+
+
         this.liter = liter;
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;

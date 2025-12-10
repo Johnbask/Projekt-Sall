@@ -21,11 +21,31 @@ class HyldeTest {
     }
 
     @Test
-    void testConstructor() {
+    void TC1_Constructor_Korrekt() {
         assertAll(
                 () -> assertEquals(1, hylde.getNummer()),
                 () -> assertEquals(reol, hylde.getReol())
         );
+    }
+
+    @Test
+    void TC2_Constructor_nummerIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Hylde(0, reol)
+        );
+
+        assertEquals("Hylde nummer må ikke være null eller tom", exception.getMessage());
+    }
+
+    @Test
+    void TC3_Constructor_reolIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Hylde(1, null)
+        );
+
+        assertEquals("Reol må ikke være null eller tom", exception.getMessage());
     }
 
     @Test

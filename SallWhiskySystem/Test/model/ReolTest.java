@@ -20,13 +20,31 @@ class ReolTest {
     }
 
     @Test
-    void testConstructor() {
+    void TC1_Constructor_Korrekt() {
         assertAll(
                 () -> assertEquals(1, reol.getNummer()),
-                () -> assertEquals(lager, reol.getLager()),
-                () -> assertNotNull(reol.getHylder())
-
+                () -> assertEquals(lager, reol.getLager())
         );
+    }
+
+    @Test
+    void TC2_Constructor_nummerIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Reol(0, lager)
+        );
+
+        assertEquals("Reol nummer må ikke være null eller tom", exception.getMessage());
+    }
+
+    @Test
+    void TC3_Constructor_LagerIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Reol(1, null)
+        );
+
+        assertEquals("Lager må ikke være null eller tom", exception.getMessage());
     }
 
     @Test

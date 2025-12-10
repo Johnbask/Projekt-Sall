@@ -22,12 +22,32 @@ class DestilatTest {
     }
 
     @Test
-    void testConstructor(){
+    void TC1_Constructor_Korrekt(){
 
         Assertions.assertEquals(100, destilat.getLiter());
         Assertions.assertTrue(destilat.isSingleMalt());
         Assertions.assertFalse(destilat.isHeart());
 
+    }
+
+    @Test
+    void TC2_Constructor_NullPointerException() {
+        NullPointerException exception = assertThrows(
+                NullPointerException.class,
+                () -> new Destilat(100, true, true, null)
+        );
+
+        assertEquals("Destillering må ikke være null", exception.getMessage());
+    }
+
+    @Test
+    void TC3_Constructor_IllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Destilat(0, true, true, destillering)
+        );
+
+        assertEquals("Liter skal være > 0", exception.getMessage());
     }
 
     @Test
