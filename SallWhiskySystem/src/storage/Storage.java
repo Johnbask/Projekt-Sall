@@ -200,8 +200,11 @@ public class Storage {
         Controller.addHylderTilReol(SHlager.getReol(5),7);
         Controller.addHylderTilReol(SanderLager.getReol(5),2);
 
-        Controller.opretVand("Toiletkummen");
+        Controller.opretVand("Ungdommens Kilde");
+        Controller.opretVand("Mountain Spring");
         Controller.opretMedarbejder("Ruben","Gud");
+        Controller.opretMedarbejder("John","Apostel");
+        Controller.opretMedarbejder("Sander Frozen","Is prinsesse");
         Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
         Destillering destillering2 = new Destillering(LocalDate.of(1913,12,12),LocalDate.of(1913,12,14),200,50,medarbejderne.getFirst(),"Malt","Grøn røg","jeg er cool",vands.getFirst());
         //Controller.opretDestilat(100.0,true,true,destillering);
@@ -214,7 +217,6 @@ public class Storage {
         Controller.opretOmhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, medarbejderne.getFirst());
         Controller.opretOmhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, medarbejderne.getFirst());
 
-        //Controller.opretFlaske(10,10,LocalDate.now(),"testFlaske");
 
 
     }
