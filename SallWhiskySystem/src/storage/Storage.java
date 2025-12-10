@@ -215,8 +215,8 @@ public class Storage {
         Destilat des1 = Controller.opretDestilat(1500, true, false, destillering);
         Destilat des2 = Controller.opretDestilat(1000, true, true, destillering2);
 
-        Controller.opretOmhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, medarbejderne.getFirst());
-        Controller.opretOmhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, medarbejderne.getFirst());
+        Controller.opretPåhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, medarbejderne.getFirst());
+        Controller.opretPåhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, medarbejderne.getFirst());
 
 
         Flaske flaske1 = Controller.opretFlaske(0.5,42,LocalDate.now().plusMonths(1),"Gyldne Dråber",fad20,vands.getFirst());

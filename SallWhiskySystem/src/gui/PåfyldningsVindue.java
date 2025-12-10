@@ -22,9 +22,9 @@ import java.util.List;
 
 
 
-public class OmhældningsVindue extends Stage {
+public class PåfyldningsVindue extends Stage {
 
-    public OmhældningsVindue(String titel) {
+    public PåfyldningsVindue(String titel) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
@@ -194,7 +194,7 @@ public class OmhældningsVindue extends Stage {
             alert.showAndWait();
         }else{
             Omhældning omhældning = null;
-            omhældning =  Controller.opretOmhældning(fad,destilat, date,intfLiter.getValue(),cbxMedarbejder.getValue());
+            omhældning =  Controller.opretPåhældning(fad,destilat, date,intfLiter.getValue(),cbxMedarbejder.getValue());
             tvFade.getItems().setAll(Controller.getFade());
             tvDestilater.getItems().setAll(Controller.getDestilater());
             Controller.writeStorage();

@@ -402,7 +402,7 @@ class ControllerTest {
         // Dato for omhældning
         LocalDate dato =  LocalDate.of(2025, 12, 30);
 
-        Omhældning omhældning = Controller.opretOmhældning(fad1, destilat, dato, 30, medarbejder);
+        Omhældning omhældning = Controller.opretPåhældning(fad1, destilat, dato, 30, medarbejder);
 
         assertAll(
                 () -> assertNotNull(omhældning),
@@ -453,7 +453,7 @@ class ControllerTest {
 
         NullPointerException exception = assertThrows(
                 NullPointerException.class,
-                () -> Controller.opretOmhældning(null, destilat, dato, 30, medarbejder)
+                () -> Controller.opretPåhældning(null, destilat, dato, 30, medarbejder)
         );
 
         assertEquals("Fad må ikke være null",  exception.getMessage());
@@ -495,7 +495,7 @@ class ControllerTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> Controller.opretOmhældning(fad1, destilat, dato, 0, medarbejder)
+                () -> Controller.opretPåhældning(fad1, destilat, dato, 0, medarbejder)
         );
 
         assertEquals("Mængde skal være større end 0", exception.getMessage());

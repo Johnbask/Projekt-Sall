@@ -3,7 +3,6 @@ package controller;
 import model.*;
 import storage.Storage;
 
-import javax.management.monitor.GaugeMonitor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,7 +182,7 @@ public class Controller {
         return res;
     }
 
-public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDate dato, double mængde,Medarbejder medarbejder ){
+public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDate dato, double mængde, Medarbejder medarbejder ){
         Omhældning omhældning =null;
         try {
             omhældning=new Omhældning(mængde,dato,fad,medarbejder,destilat);
@@ -204,8 +203,31 @@ public static Omhældning opretOmhældning (Fad fad, Destilat destilat, LocalDat
 }
 
 
+    public static Omhældning opretOmhældning(Fad fadTil, Fad fadFra, LocalDate dato, double mængde, Medarbejder medarbejder) {
+
+        Omhældning omhældning =null;
+        try {
+            omhældning=new Omhældning(mængde,dato,fadTil,medarbejder,fadFra.getDestilat());
+            fadTil.addOmhældning(omhældning);
+            if (!fadTil.addLiterOfDestilatToFad(mængde)||!fadFra.removeLiterOfDestilatFromFad(mængde)){
+                return null;
+            }
+
+            fadTil.getDestillater().addAll(fadFra.getDestillater());
+
+            fadTil.addOmhældning(omhældning);
 
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return omhældning;
+
+
+
+    }
 }
 
 

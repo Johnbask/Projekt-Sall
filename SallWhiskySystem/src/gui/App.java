@@ -13,7 +13,9 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
         //oprette lager
+
         initStorage();
+        System.out.println(Storage.getFade().get(1).getDestillater());
         //her starter vi så gui'en
         Application.launch(SallGui.class);
 

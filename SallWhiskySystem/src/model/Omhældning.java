@@ -44,4 +44,11 @@ public class Omhældning implements Serializable {
     public Destilat getDestilat() {
         return destilat;
     }
+
+    @Override
+    public String toString() {
+        return
+                 dato.toString();
+
+    }
 }

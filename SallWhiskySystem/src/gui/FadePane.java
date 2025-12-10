@@ -47,6 +47,7 @@ public class FadePane extends GridPane {
     private final Button btnSlet = new Button("Slet");
     private final Button bPåfyld = new Button("Påfyldning");
     private  final  TableView<Fad> tvFade = new TableView<>();
+    private final Button bOmhældning = new Button("Omhældning");
 
 
     private void FirstSection() {
@@ -131,14 +132,24 @@ public class FadePane extends GridPane {
         tfxUpdate.setPromptText("Sherry");
         this.add(tfxUpdate,0,14);
         this.add(bPåfyld,0,15);
+        this.add(bOmhældning,0,16);
         bPåfyld.setMinWidth(250);
         bPåfyld.setOnAction(event -> påFyldninsAction());
+
+        bOmhældning.setMinWidth(250);
+        bOmhældning.setOnAction(event -> omhældningsAction());
+    }
+
+    private void omhældningsAction() {
+        omhældningsVindue omhældningVindue = new omhældningsVindue("Omhældning");
+        omhældningVindue.showAndWait();
+
     }
 
     private void påFyldninsAction() {
 
-        OmhældningsVindue omhældningVindue = new OmhældningsVindue("Omhældning");
-        omhældningVindue.showAndWait();
+        PåfyldningsVindue påfyldningsVindue = new PåfyldningsVindue("Påfylding");
+        påfyldningsVindue.showAndWait();
 
 
 
@@ -266,6 +277,7 @@ tvFade.getItems().setAll(Controller.getFade());
 
 
     public void updateHistorikAction(Fad fad){
+        if (!tfxUpdate.getText().isEmpty()&&!tfxUpdate.getText().isBlank())
 fad.addTidligereIndhold(tfxUpdate.getText());
 tvFade.getItems().setAll(Storage.getFade());
 Controller.writeStorage();
