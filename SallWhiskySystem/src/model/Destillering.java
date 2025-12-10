@@ -24,8 +24,7 @@ public class Destillering implements java.io.Serializable {
     private  Vand vand;
     private Medarbejder medarbejder;
 
-    //tror den her forbindelse ikke skal være her men better safe than sorry
-    private  List<Destilat> destilatList;
+
 
     public Destillering(
             LocalDate startDato, LocalDate slutDato,
@@ -118,9 +117,6 @@ public class Destillering implements java.io.Serializable {
         return idMaker;
     }
 
-    public List<Destilat> getDestilatList() {
-        return destilatList;
-    }
 
     public List<Råvare> getRåvareList() {
         return råvareList;

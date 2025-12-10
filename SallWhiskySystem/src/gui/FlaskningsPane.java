@@ -37,6 +37,7 @@ public class FlaskningsPane extends GridPane {
     private final Label lLiterIFad = new Label(" ");
     private final Label lError = new Label();
     private final DatePicker dPFlaske = new DatePicker();
+    private final Button bSeFlasker = new Button("Se Flasker");
 
     private void intContent() {
 
@@ -95,11 +96,19 @@ public class FlaskningsPane extends GridPane {
         this.add(bFlaskkiefy,1,11);
         bFlaskkiefy.setOnAction(event -> this.Flaskkiefy());
 
+        this.add(bSeFlasker,2,11);
+        bSeFlasker.setOnAction(event -> this.SeFlasker());
+
         this.add(lError,0,12,3,1);
         lError.setStyle("-fx-text-fill: red;");
         lError.setMinWidth(200);
 
 
+    }
+
+    private void SeFlasker() {
+        FlaskerWindow flaskerWindow = new FlaskerWindow("Flasker");
+        flaskerWindow.showAndWait();
     }
 
     public void updateFade() {
@@ -141,10 +150,10 @@ public class FlaskningsPane extends GridPane {
         double totalLiter = dFLiterFraFad.getValue() + dFLiterVand.getValue();
             while (totalLiter >= 0){
                 if(totalLiter >= dFFlaskeStørelse.getValue()){
-                    Controller.opretFlaske(dFFlaskeStørelse.getValue(),dFProcent.getValue(),dPFlaske.getValue(),historie);
+                    Controller.opretFlaske(dFFlaskeStørelse.getValue(),dFProcent.getValue(),dPFlaske.getValue(),historie,tFMakeName.getText());
                     totalLiter -= dFFlaskeStørelse.getValue();
                 }else{
-                    Controller.opretFlaske(totalLiter,dFProcent.getValue(),dPFlaske.getValue(),historie);
+                    Controller.opretFlaske(totalLiter,dFProcent.getValue(),dPFlaske.getValue(),historie,tFMakeName.getText());
                     totalLiter -= dFFlaskeStørelse.getValue();
                 }
 

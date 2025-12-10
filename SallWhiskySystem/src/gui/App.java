@@ -22,7 +22,6 @@ public class App {
     public static void initStorage(){
 
 
-// SKAL forbindes til controller istedet så metoden kalder controller der kalder storage
         Controller.readStorage();
 
 
