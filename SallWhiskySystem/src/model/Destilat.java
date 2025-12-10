@@ -12,7 +12,7 @@ public class Destilat implements
     private boolean isHeart;
     private int batchId;
     private boolean isUsed = false;
-    private List<Omhældning> omhældninger = new ArrayList<>();
+
 
     // link attributter
     private Destillering destillering;
@@ -84,11 +84,5 @@ public class Destilat implements
         return isHeart;
     }
 
-    public void addOmhælning(Omhældning omhældning){
-        omhældninger.add(omhældning);
-    }
 
-    public List<Omhældning> getOmhældninger() {
-        return omhældninger;
-    }
 }

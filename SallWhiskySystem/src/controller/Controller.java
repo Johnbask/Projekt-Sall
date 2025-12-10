@@ -13,10 +13,17 @@ public class Controller {
         return Storage.getFade();
     }
 
-    public static Vand opretVand(String kilde){
-        Vand vand = new Vand(kilde);
-        Storage.addVandkilde(vand);
-        return vand;
+    public static Vand opretVand(String kilde) {
+        if (kilde == null || kilde.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kilde må ikke være null eller tom");
+        }
+        try {
+            Vand vand = new Vand(kilde);
+            Storage.addVandkilde(vand);
+            return vand;
+        } catch (Exception e) {
+            throw new NullPointerException("Kunne ikke oprette Vand" + e.getMessage());
+        }
     }
 
     public static Flaske opretFlaske(double l,double alkoholdProcent,LocalDate påHældnigsdato,String historie,String name){

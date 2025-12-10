@@ -62,9 +62,6 @@ public class Fad implements
 
     // Getters
     // Lokalt getters
-    public static int getAntalFade() {
-        return antalFade;
-    }
 
     public double getLiter() {
         return liter;
@@ -87,9 +84,6 @@ public class Fad implements
     }
 
     // Links getters
-    public List<Destilat> getGamleDestillater() {
-        return destillater;
-    }
 
     public Hylde getHylde() {
         return hylde;
