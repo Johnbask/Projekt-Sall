@@ -22,6 +22,8 @@ public class Storage {
         flasker.add(flaske);
     }
 
+    public static void sletFlaske(Flaske flaske){flasker.remove(flaske);}
+
     public static List<Flaske> getFlasker() {
         return flasker;
     }
@@ -211,6 +213,10 @@ public class Storage {
 
         Controller.opretOmhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, medarbejderne.getFirst());
         Controller.opretOmhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, medarbejderne.getFirst());
+
+        //Controller.opretFlaske(10,10,LocalDate.now(),"testFlaske");
+
+
     }
 
     // hælpemetode finder ledig hylde

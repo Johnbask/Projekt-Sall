@@ -19,10 +19,14 @@ public class Controller {
         return vand;
     }
 
-    public static Flaske opretFlaske(double l,double alkoholdProcent,LocalDate påHældnigsdato,String historie){
-        Flaske flaske = new Flaske(l,alkoholdProcent,påHældnigsdato,historie);
+    public static Flaske opretFlaske(double l,double alkoholdProcent,LocalDate påHældnigsdato,String historie,String name){
+        Flaske flaske = new Flaske(l,alkoholdProcent,påHældnigsdato,historie,name);
         Storage.addFlaske(flaske);
         return flaske;
+    }
+
+    public static void sletFlaske(Flaske flaske){
+        Storage.sletFlaske(flaske);
     }
 
     public static List<Flaske> getFlasker(){ return Storage.getFlasker(); }
