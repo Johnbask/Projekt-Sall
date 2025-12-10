@@ -26,8 +26,11 @@ public class Controller {
         }
     }
 
-    public static Flaske opretFlaske(double l,double alkoholdProcent,LocalDate påHældnigsdato,String historie,String name){
-        Flaske flaske = new Flaske(l,alkoholdProcent,påHældnigsdato,historie,name);
+    public static Flaske opretFlaske(double l,double alkoholdProcent,LocalDate påHældnigsdato,String name,Fad fad, Vand vand){
+        if (vand==null){
+            vand=fad.getDestilat().getDestillering().getVand();
+        }
+        Flaske flaske = new Flaske(l,alkoholdProcent,påHældnigsdato,name, fad, vand);
         Storage.addFlaske(flaske);
         return flaske;
     }

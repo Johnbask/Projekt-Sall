@@ -134,6 +134,7 @@ public class Storage {
                 }
             }
             Destillering.setIdMaker(Destilleringer.size()+1);
+            Destilat.setAntalDestilater(destilater.size()+1);
 
 
 
@@ -217,6 +218,8 @@ public class Storage {
         Controller.opretOmhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, medarbejderne.getFirst());
         Controller.opretOmhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, medarbejderne.getFirst());
 
+
+        Flaske flaske1 = Controller.opretFlaske(0.5,42,LocalDate.now().plusMonths(1),"Gyldne Dråber",fad20,vands.getFirst());
 
 
     }

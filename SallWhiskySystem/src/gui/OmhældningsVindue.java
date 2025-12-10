@@ -82,15 +82,15 @@ public class OmhældningsVindue extends Stage {
         tvFade.getColumns().add(colFadStørrelse);
         tvFade.getColumns().add(colLiterIfad);
 
-        tvFade.setMinWidth(450);
+        tvFade.setMinWidth(350);
 
 
 
         tvFade.getItems().setAll(Controller.getFade());
 
         // Add it to the pane
-        pane.add(tvFade, 0, 1, 4, 8);
-        pane.add(tvDestilater,5,1,2,8);
+        pane.add(tvFade, 0, 1, 2, 1);
+        pane.add(tvDestilater,3,1,3,1);
         tvDestilater.setMinWidth(450);
 
         // tvdestilater add columns
@@ -98,7 +98,7 @@ public class OmhældningsVindue extends Stage {
         tvDestilater.getItems().setAll(Controller.getDestilater());
 
 
-        TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter I fad");
+        TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter tilbage af destilat");
         colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
 
@@ -125,15 +125,22 @@ public class OmhældningsVindue extends Stage {
         tvDestilater.getColumns().add(colIsHeart);
 
 
-        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Batch Id");
-        colLbatchId.setCellValueFactory(new PropertyValueFactory<>("batchId"));
-        tvDestilater.getColumns().add(colLbatchId);
 
 
         TableColumn<Destilat, String> colSmoke = new TableColumn<>("Røgmateriale");
         colSmoke.setCellValueFactory(new PropertyValueFactory<>("røgmateriale"));
         tvDestilater.getColumns().add(colSmoke);
 
+        TableColumn<Destilat, String> colDato = new TableColumn<>("Destillerings dato");
+        colDato.setCellValueFactory(Cell-> {
+            Destilat destilat= Cell.getValue();
+            return new SimpleStringProperty(destilat.getDestillering().getSlutDato().toString());
+        });
+        tvDestilater.getColumns().add(colDato);
+
+        TableColumn<Destilat, String> colLbatchId = new TableColumn<>("Batch Id");
+        colLbatchId.setCellValueFactory(new PropertyValueFactory<>("batchId"));
+        tvDestilater.getColumns().add(colLbatchId);
 
 
         // add buttons

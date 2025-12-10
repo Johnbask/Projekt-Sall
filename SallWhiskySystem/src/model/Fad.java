@@ -46,7 +46,7 @@ public class Fad implements
     }
 
     public boolean isTom() {
-        if(destillater == null ||litterIFad <= 0){
+        if(destillater.isEmpty() ||litterIFad <= 0){
             return true;
         }else{
             return false;
@@ -103,6 +103,7 @@ public class Fad implements
     public void addTidligereIndhold(String s){
         tidligereIndhold.add(s);
     }
+
     public Destilat getDestilat(){
         if(destillater.isEmpty()){
             return null;
@@ -135,7 +136,7 @@ public class Fad implements
             litterIFad-=mængde;
             if (litterIFad==0){
                 omhældning=new ArrayList<>();
-                destillater=null;
+                destillater=new ArrayList<>();
             }
             return true;
         }else {

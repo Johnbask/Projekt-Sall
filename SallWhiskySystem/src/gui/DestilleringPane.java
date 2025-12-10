@@ -111,7 +111,6 @@ public class DestilleringPane extends GridPane {
         this.add(btnCreate, 0, 12);
         btnCreate.setOnAction(event -> createDestilat());
 
-        this.add(bSlet,3,12);
 
         this.add(lError,0,13,2,1);
 
@@ -120,8 +119,8 @@ public class DestilleringPane extends GridPane {
         lWDestilleringer.getItems().setAll(getDestileringer());
 
 
-        dpStarDato.setValue(LocalDate.now());
-        dpSlutDato.setValue(LocalDate.now().plusDays(7));
+        dpStarDato.setValue(LocalDate.now().minusDays(8));
+        dpSlutDato.setValue(LocalDate.now().minusDays(1));
         cbMedarbjder.getSelectionModel().selectFirst();
         cbVand.getSelectionModel().selectFirst();
         lError.setMinWidth(250);
