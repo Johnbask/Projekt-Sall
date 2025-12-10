@@ -86,7 +86,6 @@ public class OmhældningsVindue extends Stage {
 
 
 
-        // Test for om det virker TODO Rettelser
         tvFade.getItems().setAll(Controller.getFade());
 
         // Add it to the pane
