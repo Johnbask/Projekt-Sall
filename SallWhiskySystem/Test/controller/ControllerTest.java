@@ -2,11 +2,8 @@ package controller;
 
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import storage.Storage;
-
-import javax.naming.ldap.Control;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -52,7 +49,7 @@ class ControllerTest {
     }
 
     @Test
-    void test_opretLager() {
+    void TC1_opretLager_KorrektOprettet() {
         Lager lager = Controller.opretLager("Test Adresse 1", "Test navn 1");
 
         assertAll(
@@ -63,6 +60,27 @@ class ControllerTest {
                 () -> assertTrue(Storage.getLagere().contains(lager))
         );
     }
+
+    @Test
+    void TC2_opretLager_AdresseIllegalArgument() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> Controller.opretLager(null, "Test navn 1")
+        );
+
+        assertEquals("Adresse må ikke være null eller tom", exception.getMessage());
+    }
+
+    @Test
+    void TC3_opretLager_NavnIllegalArgument() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> Controller.opretLager("Test Adresse 1", null)
+        );
+
+        assertEquals("Navn må ikke være null eller tom", exception.getMessage());
+    }
+
 
     @Test
     void test_getLager() {
@@ -125,7 +143,7 @@ class ControllerTest {
     }
 
     @Test
-    void test_opretFad() {
+    void TC1_opretFad_KorrektOprettet() {
         Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
         Controller.addReolerTilLager(lager1, 1);
         Reol reol = lager1.getReol(1);
@@ -144,6 +162,38 @@ class ControllerTest {
                 () -> assertEquals(fad, hylde.getFad()),
                 () -> assertTrue(Storage.getFade().contains(fad))
         );
+    }
+
+    @Test
+    void TC2_opretFad_ThrowsIllegalArgumentException() {
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde = reol.getHylde(1);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> Controller.opretFad(0, Trætype.WHITE_OAK, List.of("Whisky"), "Leverandør 1", hylde)
+        );
+
+        assertEquals("Negative space doesnt exist, please use a positive integer for the liters ", exception.getMessage());
+    }
+
+    @Test
+    void TC3_opretFad_ThrowsNullPointerException() {
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde = reol.getHylde(1);
+
+        NullPointerException exception = assertThrows(
+                NullPointerException.class,
+                () -> Controller.opretFad(100, null, List.of("Whisky"), "Leverandør 1", hylde)
+        );
+
+        assertEquals("One or more arguments were null", exception.getMessage());
     }
 
     @Test
@@ -278,7 +328,7 @@ class ControllerTest {
     }
 
     @Test
-    void test_getDestilater_Plus_DestilleringTest() {
+    void test_getDestilater() {
         // Første Destilat
         LocalDate startDato1 = LocalDate.of(2025, 12, 12);
         LocalDate slutDato1 = LocalDate.of(2025, 12, 20);
@@ -312,37 +362,14 @@ class ControllerTest {
         List<Destilat> destilater =  Controller.getDestilater();
 
         assertAll(
-                // Test for destilat
                 () -> assertEquals(2, destilater.size()),
                 () -> assertTrue(destilater.contains(destilat1)),
-                () -> assertTrue(destilater.contains(destilat2)),
-
-                // test for Destillering
-                () -> assertEquals(1, destillering1.getNewMakeId()),
-                () -> assertEquals(2, destillering2.getNewMakeId()),
-                () -> assertEquals(startDato1, destillering1.getStartDato()),
-                () -> assertEquals(startDato2, destillering2.getStartDato()),
-                () -> assertEquals(slutDato1, destillering1.getSlutDato()),
-                () -> assertEquals(slutDato2, destillering2.getSlutDato()),
-                () -> assertEquals(100, destillering1.getMængdeProduceret()),
-                () -> assertEquals(80, destillering2.getMængdeProduceret()),
-                () -> assertEquals(64, destillering1.getAlkoholProcent()),
-                () -> assertEquals(70, destillering2.getAlkoholProcent()),
-                () -> assertEquals(medarbejder1, destillering1.getMedarbejder()),
-                () -> assertEquals(medarbejder2, destillering2.getMedarbejder()),
-                () -> assertEquals("Byg", destillering1.getRåvare()),
-                () -> assertEquals("Byg", destillering2.getRåvare()),
-                () -> assertEquals("Røg Materiale 1", destillering1.getRøg()),
-                () -> assertEquals("Røg materiale 2", destillering2.getRøg()),
-                () -> assertEquals("test kommentar", destillering1.getKommentar()),
-                () -> assertEquals("Kommentar", destillering2.getKommentar()),
-                () -> assertEquals(vand1, destillering1.getVand()),
-                () -> assertEquals(vand2, destillering2.getVand())
+                () -> assertTrue(destilater.contains(destilat2))
         );
     }
 
     @Test
-    void test_opretOmhældning() {
+    void TC1_opretOmhældning_KorrektOprettet() {
         // Sætter Lager systemet op
         Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
         Controller.addReolerTilLager(lager1, 1);
@@ -388,6 +415,90 @@ class ControllerTest {
                 () -> assertEquals(20, destilat.getLiter()), // 50 - 30 = 20
                 () -> assertTrue(fad1.getOmhældning().contains(omhældning))
         );
+    }
+
+    @Test
+    void TC2_opretOmhældning_NullPointerException() {
+        // Sætter Lager systemet op
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde1 = reol.getHylde(1);
+
+        // Laver Fad
+        Fad fad1 = Controller.opretFad(100, Trætype.WHITE_OAK, List.of("Whisky"), "Leverandør 1", hylde1);
+
+        // Laver Vand
+        Vand vand1 = Controller.opretVand("Vandkilden 1");
+
+        // Laver Medarbejder
+        Medarbejder medarbejder = Controller.opretMedarbejder("Hans Jensen", "Anden Leder");
+
+        // Laver Destillering
+        LocalDate startDato = LocalDate.of(2025, 12, 11);
+        LocalDate slutDato = LocalDate.of(2025, 12, 24);
+
+        Destillering destillering = new Destillering(startDato, slutDato,
+                100, 69, medarbejder,
+                "Byg", "Røg materiale",
+                "Kommentar", vand1
+        );
+
+        // Laver Destilat
+        Destilat destilat = Controller.opretDestilat(50, true, true, destillering);
+
+        // Dato for omhældning
+        LocalDate dato =  LocalDate.of(2025, 12, 30);
+
+        NullPointerException exception = assertThrows(
+                NullPointerException.class,
+                () -> Controller.opretOmhældning(null, destilat, dato, 30, medarbejder)
+        );
+
+        assertEquals("Fad må ikke være null",  exception.getMessage());
+    }
+
+    @Test
+    void TC3_opretOmhældning_IllegalArgumentException() {
+        // Sætter Lager systemet op
+        Lager lager1 = Controller.opretLager("Test adresse 1", "Test navn 1");
+        Controller.addReolerTilLager(lager1, 1);
+        Reol reol = lager1.getReol(1);
+        Controller.addHylderTilReol(reol, 3);
+        Hylde hylde1 = reol.getHylde(1);
+
+        // Laver Fad
+        Fad fad1 = Controller.opretFad(100, Trætype.WHITE_OAK, List.of("Whisky"), "Leverandør 1", hylde1);
+
+        // Laver Vand
+        Vand vand1 = Controller.opretVand("Vandkilden 1");
+
+        // Laver Medarbejder
+        Medarbejder medarbejder = Controller.opretMedarbejder("Hans Jensen", "Anden Leder");
+
+        // Laver Destillering
+        LocalDate startDato = LocalDate.of(2025, 12, 11);
+        LocalDate slutDato = LocalDate.of(2025, 12, 24);
+
+        Destillering destillering = new Destillering(startDato, slutDato,
+                100, 69, medarbejder,
+                "Byg", "Røg materiale",
+                "Kommentar", vand1
+        );
+
+        // Laver Destilat
+        Destilat destilat = Controller.opretDestilat(50, true, true, destillering);
+
+        // Dato for omhældning
+        LocalDate dato =  LocalDate.of(2025, 12, 30);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> Controller.opretOmhældning(fad1, destilat, dato, 0, medarbejder)
+        );
+
+        assertEquals("Mængde skal være større end 0", exception.getMessage());
     }
 
     @Test
