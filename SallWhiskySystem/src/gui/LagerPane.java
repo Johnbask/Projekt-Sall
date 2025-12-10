@@ -23,6 +23,7 @@ public class LagerPane extends GridPane {
     private final IntegerField  tFad = new IntegerField();
     private final Button bFlytFad = new Button("Flyt Fad");
     private final Button bSletFad = new Button("Slet Fad");
+    private final Button bCreate = new Button("Create");
 
     public LagerPane(){
         this.setPadding(new Insets(20));
@@ -62,19 +63,22 @@ public class LagerPane extends GridPane {
         HBox hBox = new HBox();
         hBox.getChildren().add(bFlytFad);
         hBox.getChildren().add(bSletFad);
+        hBox.getChildren().add(bCreate);
        this.add(hBox,0,7);
        hBox.setTranslateX(-10);
        hBox.setSpacing(15);
        hBox.setAlignment(Pos.CENTER);
 
-      //  this.add(bFlytFad,1,7);
+
         bFlytFad.setDisable(true);
         bFlytFad.setOnAction(event -> flytFadPane(lWfade.getSelectionModel().getSelectedItem()));
 
 
-    //    this.add(bSletFad,2,7);
+
         bSletFad.setDisable(true);
         bSletFad.setOnAction(event -> sletFad(lWfade.getSelectionModel().getSelectedItem()));
+
+        bCreate.setOnAction(actionEvent -> lagerCreationPane());
 
 
 
@@ -83,6 +87,13 @@ public class LagerPane extends GridPane {
 
 
         updateLWFade();
+    }
+
+    private void lagerCreationPane() {
+        LagerCreationPane lagerCreationPane = new LagerCreationPane("Lager Creation");
+        lagerCreationPane.showAndWait();
+        Controller.writeStorage();
+
     }
 
     private void findFadMedId() {
