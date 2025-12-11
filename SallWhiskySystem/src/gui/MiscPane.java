@@ -7,30 +7,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import model.Medarbejder;
 import model.Vand;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class MiscPane extends GridPane {
 
     private final TextField txfVand = new TextField();
     private final TextField txfMedarbejderNavn = new TextField();
     private final TextField txfMedarbejderStilling = new TextField();
-
     private final Button bVand = new Button("Opret vand");
     private final Button bSletVand = new Button("Slet Vand");
     private final Button bMedarbejder =new Button("Opret Medarbejder");
     private final Button bSletMedarbejder = new Button("Slet Medarbejder");
-
     private final ListView<Medarbejder> lwMedarbejder = new ListView<>();
     private final ComboBox<Vand> cbxVand = new ComboBox<>();
-
     private final HBox hBoxmedarbejder = new HBox();
-
-
 
     public MiscPane(){
         this.setPadding(new Insets(20));
@@ -39,14 +31,10 @@ public class MiscPane extends GridPane {
         this.setGridLinesVisible(false);
 
         txfVand.setPromptText("Fiji");
-
         txfMedarbejderNavn.setPromptText("Lars Larsen");
         txfMedarbejderStilling.setPromptText("revisor");
-
         lwMedarbejder.getItems().setAll(Controller.getMedarbejderne());
-
         cbxVand.getItems().setAll(Controller.getVands());
-
 
         this.add(lwMedarbejder,0,0,2,3);
         this.add(cbxVand,2,0);
@@ -66,16 +54,6 @@ public class MiscPane extends GridPane {
 
         bMedarbejder.setOnAction(actionEvent -> opretMedarbejderAction());
         bSletMedarbejder.setOnAction(actionEvent -> sletMedarbejderAction());
-
-
-
-
-
-
-
-
-
-
     }
 
     private void sletMedarbejderAction() {
@@ -88,7 +66,6 @@ public class MiscPane extends GridPane {
             Controller.writeStorage();
             lwMedarbejder.getItems().setAll(Controller.getMedarbejderne());
         }
-
     }
 
     private void opretMedarbejderAction() {
@@ -101,7 +78,6 @@ public class MiscPane extends GridPane {
             lwMedarbejder.getItems().add(medarbejder);
             Controller.writeStorage();
         }
-
     }
 
     private void sletVand() {
@@ -114,7 +90,6 @@ public class MiscPane extends GridPane {
             Controller.writeStorage();
             cbxVand.getItems().setAll(Controller.getVands());
         }
-
     }
 
     public void opretVand(){

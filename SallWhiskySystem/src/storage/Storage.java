@@ -2,12 +2,9 @@ package storage;
 
 import controller.Controller;
 import model.*;
-
 import java.io.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Storage {
 
@@ -74,7 +71,6 @@ public class Storage {
         return lagere;
     }
 
-
     public static List<Fad> getFade() {
         return fade;
     }
@@ -111,8 +107,6 @@ public class Storage {
         Storage.flasker = flasker;
     }
 
-
-
     public static void writeStorage() {
         try (FileOutputStream fileOut =
                      new FileOutputStream("SallWhiskySystem/src/storage/storage.txt");
@@ -127,7 +121,6 @@ public class Storage {
             objOut.writeObject(flasker);
             Lager.setAntalLagere(lagere.size() + 1);
             Fad.setAntalFade(fade.size() + 1);
-
 
             ArrayList<Destillering> Destilleringer = new ArrayList<>();
             ArrayList<Integer> ider = new ArrayList<>();
@@ -145,8 +138,6 @@ public class Storage {
             System.out.println("Catch in writeStorage");
             throw new RuntimeException(e.getMessage());
         }
-
-
     }
 }
 

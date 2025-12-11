@@ -4,7 +4,6 @@ package model;
 public class Hylde implements
         java.io.Serializable {
 
-
     private int nummer;
     // Links
     private Fad fad = null;
@@ -14,11 +13,9 @@ public class Hylde implements
         if (nummer <= 0) {
             throw new IllegalArgumentException("Hylde nummer må ikke være null eller tom");
         }
-
         if (reol == null) {
             throw new IllegalArgumentException("Reol må ikke være null eller tom");
         }
-
         this.nummer = nummer;
         this.reol = reol;
     }

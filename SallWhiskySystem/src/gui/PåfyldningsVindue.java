@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.*;
 import storage.Storage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,36 +24,27 @@ public class PåfyldningsVindue extends Stage {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-
         this.setTitle(titel);
         GridPane pane = new GridPane();
         this.initContent(pane);
-
         Scene scene = new Scene(pane);
         this.setScene(scene);
     }
 
-
     private final Label lbOmhældning = new Label("Påfyldning");
-
     private  final  TableView<Fad> tvFade = new TableView<>();
     private final TableView<Destilat> tvDestilater = new TableView<>();
-
     private final DatePicker datePicker = new DatePicker();
     private final ComboBox<Medarbejder> cbxMedarbejder = new ComboBox<>();
     private final IntegerField intfLiter = new IntegerField();
     private final Button bOmhæld = new Button("Påfyld");
     private final Button bSpild = new Button("Opdater Spild");
 
-
-
-
     public void initContent(GridPane pane) {
         pane.setPadding(new Insets(20));
         pane.setHgap(10);
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
-
         pane.add(lbOmhældning, 0, 0, 2, 1);
         lbOmhældning.setStyle("-fx-font-size: 24px");
 
@@ -65,38 +55,28 @@ public class PåfyldningsVindue extends Stage {
         TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Historik");
         colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
 
-
-
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
         colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
         TableColumn<Fad, String> colLiterIfad = new TableColumn<>("Liter I fad");
         colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("litterIFad"));
 
-
         tvFade.getColumns().add(colFadID);
         tvFade.getColumns().add(colTidligereIndhold);
         tvFade.getColumns().add(colFadStørrelse);
         tvFade.getColumns().add(colLiterIfad);
-
         tvFade.setMinWidth(350);
-
-
-
         tvFade.getItems().setAll(Controller.getFade());
 
         // Add it to the pane
         pane.add(tvFade, 0, 1, 2, 1);
         pane.add(tvDestilater,3,1,3,1);
         tvDestilater.setMinWidth(450);
-
-        // tvdestilater add columns
-
         updateDisplayedDestilater();
 
+        // tvdestilater add columns
         TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter tilbage af destilat");
         colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("liter"));
-
 
         tvDestilater.getColumns().add(colLiterIDestilat);
 
@@ -120,9 +100,6 @@ public class PåfyldningsVindue extends Stage {
         });
         tvDestilater.getColumns().add(colIsHeart);
 
-
-
-
         TableColumn<Destilat, String> colSmoke = new TableColumn<>("Røgmateriale");
         colSmoke.setCellValueFactory(new PropertyValueFactory<>("røgmateriale"));
         tvDestilater.getColumns().add(colSmoke);
@@ -138,9 +115,7 @@ public class PåfyldningsVindue extends Stage {
         colLbatchId.setCellValueFactory(new PropertyValueFactory<>("batchId"));
         tvDestilater.getColumns().add(colLbatchId);
 
-
         // add buttons
-
         pane.add(datePicker,0,9);
         pane.add(cbxMedarbejder,1,9);
         pane.add(intfLiter,3,9);
@@ -154,7 +129,6 @@ public class PåfyldningsVindue extends Stage {
 
         pane.add(bSpild,5,9);
         bSpild.setOnAction(event -> spildAction());
-
     }
 
     private void updateDisplayedDestilater(){
@@ -169,7 +143,6 @@ public class PåfyldningsVindue extends Stage {
         int num = intfLiter.getValue();
         Fad fad = tvFade.getSelectionModel().getSelectedItem();
         fad.removeLiterOfDestilatFromFad(num);
-
         tvFade.getItems().setAll(Controller.getFade());
         Controller.writeStorage();
     }
@@ -182,7 +155,6 @@ public class PåfyldningsVindue extends Stage {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Mere information er nødvendigt for at foretage en påfyldning");
             alert.showAndWait();
-
         }else if (date.isBefore(destilat.getDestillering().getSlutDato())){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Dato er umulig fordi destilleringen tog sted efter valgte dato");
@@ -197,11 +169,8 @@ public class PåfyldningsVindue extends Stage {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Der er ikke nok plads i fadet eller der er ikke nok destilat tilbage");
                 alert.showAndWait();
-
             }
         }
         tvDestilater.getItems().setAll(Controller.getDestilater());
     }
-
-
 }

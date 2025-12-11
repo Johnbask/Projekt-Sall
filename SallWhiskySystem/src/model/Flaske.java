@@ -3,32 +3,40 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Flaske implements Serializable {
 
-    private  Double ml;
-    private  double alkoholProcent;
+    private Double liter;
+    private double alkoholProcent;
     private LocalDate påHældningsDato;
     private String historie;
     private String name;
+    private HashSet<Destilat> destilats = new HashSet<>();
     // links
     private Fad fad;
     private Vand vand;
 
-    public Flaske(Double ml, double alkoholProcent, LocalDate påHældningsDato ,String name,Fad fad, Vand vand) {
-        this.ml = ml;
+    public Flaske(Double liter, double alkoholProcent, LocalDate påHældningsDato ,String name,Fad fad, Vand vand) {
+        this.liter = liter;
         this.alkoholProcent = alkoholProcent;
         this.påHældningsDato = påHældningsDato;
         this.name = name;
         this.fad=fad;
         this.vand=vand;
         this.historie=generateHistory();
+        this.destilats.addAll(fad.getDestillater());
+
+    }
+
+    public HashSet<Destilat> getDestilats() {
+        return destilats;
     }
 
     // Getters Lokalt
     public Double getMl() {
-        return ml;
+        return liter;
     }
 
     public double getAlkoholProcent() {
@@ -175,7 +183,7 @@ public class Flaske implements Serializable {
 
     @Override
     public String toString() {
-        return name +" "+ ml +"L  " + alkoholProcent +"%" ;
+        return name +" "+ liter +"L  " + alkoholProcent +"%" ;
     }
 
     }

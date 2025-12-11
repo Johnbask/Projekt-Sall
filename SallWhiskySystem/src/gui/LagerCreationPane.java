@@ -4,7 +4,6 @@ import com.sun.javafx.scene.control.IntegerField;
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -16,7 +15,6 @@ import model.Fad;
 import model.Hylde;
 import model.Lager;
 import model.Reol;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +63,6 @@ public class LagerCreationPane extends Stage {
         ChangeListener<Lager> listenerLager = (ov, o, n) -> this.selectedLagerChanged();
         lWLager.getSelectionModel().selectedItemProperty().addListener(listenerLager);
 
-
         Label lReol = new Label("Tomme reoler");
         pane.add(lReol,2,1);
         pane.add(lWReol,2,2,2,1);
@@ -75,9 +72,6 @@ public class LagerCreationPane extends Stage {
         Label lHylde = new Label("Tomme Hylder");
         pane.add(lHylde,4,1);
         pane.add(lWHylde,4,2,2,1);
-
-
-
 
         createButtons.getChildren().add(bLager);
         createButtons.getChildren().add(bReol);
@@ -100,12 +94,9 @@ public class LagerCreationPane extends Stage {
         bslet.setMinWidth(285);
         bslet.setPadding(new Insets(15));
         bslet.setOnAction(actionEvent -> sletAction());
-
     }
 
     private void sletAction() {
-
-
         if (lWHylde.getSelectionModel().isEmpty()&&lWReol.getSelectionModel().isEmpty()&&!lWLager.getSelectionModel().isEmpty()){
             Controller.sletLager(lWLager.getSelectionModel().getSelectedItem());
             lWLager.getItems().setAll(Controller.getLager());
@@ -123,7 +114,6 @@ public class LagerCreationPane extends Stage {
             alert.setContentText("Vælg en hylde, en reol eller et lager");
             alert.showAndWait();
         }
-
     }
 
     private void opretHylde() {
@@ -146,7 +136,6 @@ public class LagerCreationPane extends Stage {
         Controller.addReolerTilLager(lWLager.getSelectionModel().getSelectedItem(),integerField.getValue());
         opdaterLWReol();
         }
-
     }
 
     private void OpretLager() {
@@ -154,16 +143,11 @@ public class LagerCreationPane extends Stage {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Ingen blanke felter");
             alert.showAndWait();
-
         }else {
             Lager lager = Controller.opretLager(txfLagerAdresse.getText(),txfLagerNavn.getText());
             lWLager.getItems().add(lager);
-
         }
-
     }
-
-
 
     private void selectedReolChanged() {
         opdaterLWHylde();
@@ -191,7 +175,6 @@ public class LagerCreationPane extends Stage {
             lWLager.getSelectionModel().getSelectedItem().getReoler().forEach((key ,reol) -> {if(chekOmHarTomme(reol))tommeReoler.add(reol);});
             lWReol.getItems().setAll(tommeReoler);
         }
-
     }
 
     // funktion der chekker om en reol har en eller flere tomme hylder
@@ -205,5 +188,4 @@ public class LagerCreationPane extends Stage {
         }
         return true;
     }
-
 }

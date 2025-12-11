@@ -69,7 +69,7 @@ public class FlaskerWindow extends Stage {
         if(lWFlasker.getSelectionModel().isEmpty()){
             bFindBatch.setDisable(true);
         }else{
-            lWDestilat.getItems().setAll(lWFlasker.getSelectionModel().getSelectedItem().getFad().getDestillater());
+            lWDestilat.getItems().setAll(lWFlasker.getSelectionModel().getSelectedItem().getDestilats());
         }
     }
 

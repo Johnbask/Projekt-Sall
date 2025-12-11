@@ -12,7 +12,6 @@ import javafx.stage.StageStyle;
 import model.Hylde;
 import model.Lager;
 import model.Reol;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +35,7 @@ public class VælgFadVindue extends Stage {
     private final Button bVælg = new Button("Vælg");
     public List<Reol> tommeReoler = new ArrayList<>();
     public List<Hylde> tommeHylder = new ArrayList<>();
-
-
-
-
     public Hylde hylde;
-
-    public Hylde getHylde() {
-        return hylde;
-    }
 
     public void initContent(GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -62,7 +53,6 @@ public class VælgFadVindue extends Stage {
         ChangeListener<Lager> listenerLager = (ov, o, n) -> this.selectedLagerChanged();
         lWLager.getSelectionModel().selectedItemProperty().addListener(listenerLager);
 
-
         Label lReol = new Label("Tomme reoler");
         pane.add(lReol,1,1);
         pane.add(lWReol,1,2);
@@ -78,7 +68,10 @@ public class VælgFadVindue extends Stage {
         pane.add(bVælg,0,3,1,3);
         bVælg.setDisable(true);
         bVælg.setOnAction(event -> bVælg());
+    }
 
+    public Hylde getHylde() {
+        return hylde;
     }
 
     private void selectedHyldeChanged() {
@@ -116,7 +109,6 @@ public class VælgFadVindue extends Stage {
             lWLager.getSelectionModel().getSelectedItem().getReoler().forEach((key ,reol) -> {if(chekOmHarTomme(reol))tommeReoler.add(reol);});
             lWReol.getItems().setAll(tommeReoler);
         }
-
     }
 
     // funktion der chekker om en reol har en eller flere tomme hylder

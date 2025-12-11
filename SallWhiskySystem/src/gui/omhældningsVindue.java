@@ -19,7 +19,6 @@ import model.Omhældning;
 import storage.Storage;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -29,28 +28,20 @@ public class omhældningsVindue extends Stage {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-
         this.setTitle(titel);
         GridPane pane = new GridPane();
         this.initContent(pane);
-
         Scene scene = new Scene(pane);
         this.setScene(scene);
     }
 
-
     private final Label lbOmhældning = new Label("Påfyldning");
-
     private  final TableView<Fad> tvTilFade = new TableView<>();
     private final TableView<Fad> tvFraFade = new TableView<>();
-
     private final DatePicker datePicker = new DatePicker();
     private final ComboBox<Medarbejder> cbxMedarbejder = new ComboBox<>();
     private final IntegerField intfLiter = new IntegerField();
     private final Button bOmhæld = new Button("Påfyld");;
-
-
-
 
     public void initContent(GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -68,14 +59,11 @@ public class omhældningsVindue extends Stage {
         TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Historik");
         colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
 
-
-
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
         colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("liter"));
 
         TableColumn<Fad, String> colLiterIfad = new TableColumn<>("Liter I fad");
         colLiterIfad.setCellValueFactory(new PropertyValueFactory<>("litterIFad"));
-
 
         tvTilFade.getColumns().add(colFadID);
         tvTilFade.getColumns().add(colTidligereIndhold);
@@ -83,8 +71,6 @@ public class omhældningsVindue extends Stage {
         tvTilFade.getColumns().add(colLiterIfad);
 
         tvTilFade.setMinWidth(350);
-
-
 
         tvTilFade.getItems().setAll(Controller.getFade());
 
@@ -94,21 +80,14 @@ public class omhældningsVindue extends Stage {
         tvFraFade.setMinWidth(450);
 
         // tvdestilater add columns
-
         for (Fad fad : Controller.getFade()) {
         if (!fad.isTom()){
             tvFraFade.getItems().add(fad);
         }
-
         }
-
-
-
-
         TableColumn<Fad, String> colLiterIDestilat = new TableColumn<>("Liter tilbage af destilat");
         colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("litterIFad"));
         tvFraFade.getColumns().add(colLiterIDestilat);
-
 
         TableColumn<Fad, Boolean> colIsSingleMaLT = new TableColumn<>("Single Malt");
         colIsSingleMaLT.setCellValueFactory(cell ->
@@ -117,7 +96,6 @@ public class omhældningsVindue extends Stage {
             return new SimpleBooleanProperty(fad.getDestillater().isEmpty() &&fad.getDestilat().getSingleMalt());
         });
         tvFraFade.getColumns().add(colIsSingleMaLT);
-
 
         TableColumn<Fad, Boolean> colSmoke = new TableColumn<>("Smoked");
         colSmoke.setCellValueFactory(cell->
@@ -151,9 +129,7 @@ public class omhældningsVindue extends Stage {
         });
         tvFraFade.getColumns().add(colLbatchId);
 
-
         // add buttons
-
         pane.add(datePicker,0,9);
         pane.add(cbxMedarbejder,1,9);
         pane.add(intfLiter,3,9);
@@ -164,15 +140,6 @@ public class omhældningsVindue extends Stage {
         cbxMedarbejder.getItems().setAll(Storage.getMedarbejderne());
         cbxMedarbejder.getSelectionModel().selectFirst();
         datePicker.setValue(LocalDate.now());
-
-
-
-
-
-
-
-
-
     }
 
     private void spildAction() {
@@ -182,8 +149,6 @@ public class omhældningsVindue extends Stage {
 
         tvTilFade.getItems().setAll(Controller.getFade());
         Controller.writeStorage();
-
-
     }
 
     private void omhældAction() {
@@ -200,8 +165,6 @@ public class omhældningsVindue extends Stage {
             alert.setContentText("Nye omhældninger skal være efter tidligere omhældninger og efter destilleringen har fundet sted");
             alert.showAndWait();
         } else {
-
-
             Omhældning omhældning = null;
             omhældning = Controller.opretOmhældning(fadTil, fadFra, date, intfLiter.getValue(), cbxMedarbejder.getValue());
             tvTilFade.getItems().setAll(Controller.getFade());
@@ -210,19 +173,13 @@ public class omhældningsVindue extends Stage {
                 if (!fad.isTom()) {
                     tvFraFade.getItems().add(fad);
                 }
-
                 Controller.writeStorage();
                 if (omhældning == null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Der er ikke nok plads i fadet eller der er ikke nok destilat tilbage");
                     alert.showAndWait();
-
                 }
             }
-
-
         }
-
-
     }
 }

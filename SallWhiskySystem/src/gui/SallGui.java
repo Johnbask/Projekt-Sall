@@ -28,13 +28,11 @@ public class SallGui extends Application {
     private void initTabPane(TabPane tabPane) {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-
         // Destillering
         Tab tabDestillering = new Tab("Destillering");
         tabPane.getTabs().add(tabDestillering);
         DestilleringPane destilleringPane = new DestilleringPane();
         tabDestillering.setContent(destilleringPane);
-        // Påfyldning på Fad
 
         // Fade
         Tab tabFade = new Tab("Fade");
@@ -48,15 +46,12 @@ public class SallGui extends Application {
         LagerPane lagerPane = new LagerPane();
         tabLager.setContent(lagerPane);
 
-        // Færdige Produkter
-
         // Flaskning
         Tab tabFlaskning = new Tab("Flaskning");
         tabPane.getTabs().add(tabFlaskning);
         FlaskningsPane flaskningsPane = new FlaskningsPane();
         tabFlaskning.setContent(flaskningsPane);
         tabFlaskning.setOnSelectionChanged(event -> flaskningsPane.updateFade());
-        // Søgning
 
         // Sporbarhed Tab
         Tab tabSporbarhed = new Tab("Sporbarhed");
@@ -69,9 +64,5 @@ public class SallGui extends Application {
         tabPane.getTabs().add(tabMiscellaneous);
         MiscPane miscPane = new MiscPane();
         tabMiscellaneous.setContent(miscPane);
-
-
-
-
     }
 }

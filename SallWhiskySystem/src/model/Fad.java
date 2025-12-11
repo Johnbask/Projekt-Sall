@@ -8,11 +8,6 @@ public class Fad implements
         java.io.Serializable {
     public static int antalFade =1;
     private double liter;
-
-    public static void setAntalFade(int antalFade) {
-        Fad.antalFade = antalFade;
-    }
-
     private Trætype materiale;
     private int fadId;
     private List<String> tidligereIndhold = new ArrayList<>();
@@ -20,7 +15,6 @@ public class Fad implements
     private double litterIFad;
 
     // links
-    // TODO rettelser til List<Class>, instedet for Class class (Fad 1 -- 0..* (1..*) instedet for 1)
     private List<Destilat> destillater = new ArrayList<>();
     private Hylde hylde;
     private List<LageringsHist> lageringsHists= new ArrayList<>();
@@ -33,6 +27,10 @@ public class Fad implements
         antalFade++;
         this.tidligereIndhold.addAll(tidligereIndhold);
         this.leverandør = leverandør;
+    }
+
+    public static void setAntalFade(int antalFade) {
+        Fad.antalFade = antalFade;
     }
 
     @Override

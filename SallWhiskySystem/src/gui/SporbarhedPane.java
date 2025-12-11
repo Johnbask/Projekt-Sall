@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import model.Destilat;
 import model.Destillering;
 import model.Fad;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +22,6 @@ public class SporbarhedPane extends GridPane {
     private TableView<Fad> tvFade; // Oversigt af Fade
     private ObservableList<Fad> allFadeData; // For Searching
     private final TextArea txaHistorie = new TextArea(); // For Fad History
-
     // private fields to create searches
     private final TextField txfFadNr = new TextField();
     private final TextField txfNewMakeID = new TextField();
@@ -58,7 +56,6 @@ public class SporbarhedPane extends GridPane {
         tvFade.setPrefWidth(391);
 
         // Create columns
-
         // Fad Id.
         TableColumn<Fad, Integer> colFadNr = new TableColumn<>("Fad Nr.");
         colFadNr.setCellValueFactory(new PropertyValueFactory<>("fadId"));
@@ -75,31 +72,25 @@ public class SporbarhedPane extends GridPane {
                 int newMakeId = fad.getDestilat().getDestillering().getNewMakeId();
                 return new SimpleIntegerProperty(newMakeId).asObject();
             }
-
             return new SimpleIntegerProperty(0).asObject();
         });
-
 
         // Tidligere Indhold
         TableColumn<Fad, String> colTidligereIndhold = new TableColumn<>("Tidligere Indhold");
         colTidligereIndhold.setCellValueFactory(cell -> {
            Fad fad = cell.getValue();
            List<String> indhold = fad.getTidligereIndhold();
-
            if (indhold != null && !indhold.isEmpty()) {
                return new SimpleStringProperty(String.join(", ", indhold));
            }
-
            return new SimpleStringProperty("Ingen");
         });
-
 
         // Destillerings Dato
         TableColumn<Fad, String> colDestilleringsDato = new TableColumn<>("Destillerings Dato");
         colDestilleringsDato.setCellValueFactory(cell -> {
             Fad fad = cell.getValue();
             Destilat destilat = fad.getDestilat();
-
             if (destilat != null && destilat.getDestillering() != null) {
                 LocalDate startDato = destilat.getDestillering().getStartDato();
                 return new SimpleStringProperty(startDato.toString());
@@ -121,7 +112,6 @@ public class SporbarhedPane extends GridPane {
                     }
                 }
         );
-
         this.add(tvFade, 0, 1, 2, 7);
     }
 
@@ -129,9 +119,7 @@ public class SporbarhedPane extends GridPane {
     private void loadFadeDate() {
         try {
             List<Fad> fade = Controller.getFade(); // Henter alle Fade
-
             allFadeData = FXCollections.observableArrayList(fade); // Gør dem observable til søgning
-
             tvFade.setItems(allFadeData); // viser alle fade inde i TableView
 
             // Hvis der ingen fad at vise
@@ -183,7 +171,6 @@ public class SporbarhedPane extends GridPane {
     // Gør Felterne søgebare i TableView
     private void search() {
         List<Fad> result = new ArrayList<>();
-
         for (Fad fad : allFadeData) {
             boolean matches = true;
 
@@ -193,7 +180,6 @@ public class SporbarhedPane extends GridPane {
                     matches = false;
                 }
             }
-
             // New Make ID
             if (!txfNewMakeID.getText().isEmpty()) {
                 Destilat destilat = fad.getDestilat();
@@ -204,7 +190,6 @@ public class SporbarhedPane extends GridPane {
                     matches = false;
                 }
             }
-
             // Tidligere Indhold
             if (!txfTidligereIndhold.getText().isEmpty()) {
                 boolean found = false;
@@ -220,7 +205,6 @@ public class SporbarhedPane extends GridPane {
                     matches = false;
                 }
             }
-
             // Dato
             if (dpDestilleringDato.getValue() != null) {
                 Destilat destilat = fad.getDestilat();
@@ -230,9 +214,7 @@ public class SporbarhedPane extends GridPane {
                     matches = false;
                 }
             }
-
             if (matches) result.add(fad);
-
         }
 
         // Opdatere TableView med søgning
@@ -251,7 +233,6 @@ public class SporbarhedPane extends GridPane {
     }
 
     // Vis Fad Historie
-    // TODO Check om alt er der som skal være der
     private void displayFadHistorie(Fad fad) {
         StringBuilder historie = new StringBuilder();
 
@@ -288,39 +269,24 @@ public class SporbarhedPane extends GridPane {
                 if (destilat.getRøgmateriale() != null) {
                     historie.append("Røgmateriale: ").append(destilat.getRøgmateriale()).append("\n");
             }
-
-
-
-
-
-
             }
             historie.append("\n=== Destillerings Info ===\n");
-
             for (Destillering destillering : destillerings) {
                 if (destillering!=null){
-
                     historie.append("New Make ID: ").append(destillering.getNewMakeId()).append("\n");
                     historie.append("Start Dato: ").append(destillering.getStartDato()).append("\n");
                     historie.append("Slut Dato: ").append(destillering.getSlutDato()).append("\n");
                     historie.append("Alkohol %: ").append(String.format("%.2f%%", destillering.getAlkoholProcent())).append("\n");
                     historie.append("Mængde produceret: ").append(String.format("%.1f L", destillering.getMængdeProduceret())).append("\n");
-
                     if (destillering.getKommentar() != null && !destillering.getKommentar().isEmpty()) {
                         historie.append("Kommentar: ").append(destillering.getKommentar()).append("\n");
                     }
-
                     historie.append("Destilleret af: ").append(destillering.getMedarbejder().getNavn()).append("\n");
-
                 }
             }
-
-
-
             }
         txaHistorie.setText(historie.toString());
         }
-        
 
     // Alerts
     private void ShowAlert(String title, String message) {

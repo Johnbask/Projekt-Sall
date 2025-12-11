@@ -9,7 +9,6 @@ public class Reol implements
         java.io.Serializable {
 
     private int nummer;
-    // Links
     private Map<Integer,Hylde> hylder = new HashMap<>();
     private Lager lager;
 
@@ -17,11 +16,9 @@ public class Reol implements
         if (nummer <= 0) {
             throw new IllegalArgumentException("Reol nummer må ikke være null eller tom");
         }
-
         if (lager == null) {
             throw new IllegalArgumentException("Lager må ikke være null eller tom");
         }
-
         this.nummer = nummer;
         this.lager = lager;
     }
@@ -50,8 +47,6 @@ public class Reol implements
         return lager;
     }
 
-    // TODO: Skal muligvis fjernes, eller ændres fra List<Fad> til List<Hylde>.
-    //  Har direkte connect til Fad, som ikke burde være der (Ud fra Klassediagrammet)
     public List<Fad> getFade(){
         List<Fad> reolensfade = new ArrayList<>();
         hylder.forEach((key,hylde)->{

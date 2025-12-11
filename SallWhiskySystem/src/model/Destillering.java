@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Destillering implements java.io.Serializable {
 
@@ -14,17 +13,9 @@ public class Destillering implements java.io.Serializable {
     private String råvare;
     private String røg;
     private String kommentar;
-
-    public static void setIdMaker(int idMaker) {
-        Destillering.idMaker = idMaker;
-    }
-
     // link attributter
-    private List<Råvare> råvareList;
     private  Vand vand;
     private Medarbejder medarbejder;
-
-
 
     public Destillering(
             LocalDate startDato, LocalDate slutDato,
@@ -77,6 +68,11 @@ public class Destillering implements java.io.Serializable {
         this.vand = vand;
     }
 
+    public static void setIdMaker(int idMaker) {
+        Destillering.idMaker = idMaker;
+    }
+
+
     public int getNewMakeId() {
         return newMakeId;
     }
@@ -111,15 +107,6 @@ public class Destillering implements java.io.Serializable {
 
     public Vand getVand() {
         return vand;
-    }
-
-    public static int getIdMaker() {
-        return idMaker;
-    }
-
-
-    public List<Råvare> getRåvareList() {
-        return råvareList;
     }
 
     public String getRøg(){
