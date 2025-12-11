@@ -7,7 +7,6 @@ public class Destilat implements
     private boolean isSingleMalt;
     private boolean isHeart;
     private int batchId;
-    private boolean isUsed = false;
     // link attributter
     private Destillering destillering;
 
@@ -28,14 +27,6 @@ public class Destilat implements
 
     public static void setAntalDestilater(int antalDestilater) {
         Destilat.antalDestilater = antalDestilater;
-    }
-
-    public void setUsed(boolean b){
-        isUsed = b;
-    }
-
-    public boolean getUsed(){
-        return isUsed;
     }
 
     public Double getLiter() {
