@@ -142,9 +142,6 @@ public class Controller {
         Storage.writeStorage();
     }
 
-    public static void readStorage(){
-        Storage.readStorage();
-    }
 
 
     public static void sletFad(Fad fad){
@@ -239,6 +236,31 @@ public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDat
 
     public static void sletLager(Lager lager) {
         Storage.removeLager(lager);
+    }
+
+    public static void setLager(List<Lager> lager) {
+        Storage.setLagere(lager);
+    }
+
+    public static void setFade(List<Fad> fade) {
+        Storage.setFade(fade);
+    }
+
+    public static void setDestilater(List<Destilat> destilat) {
+        Storage.setDestilater(destilat);
+    }
+
+
+    public static void setMedarbejder(List<Medarbejder> medarbejdere) {
+        Storage.setMedarbejderne(medarbejdere);
+    }
+
+    public static void setVand(List<Vand> vand) {
+        Storage.setVands(vand);
+    }
+
+    public static void setFlasker(List<Flaske> flasker) {
+        Storage.setFlasker(flasker);
     }
 }
 
