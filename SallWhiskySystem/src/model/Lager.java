@@ -1,5 +1,4 @@
 package model;
-import storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,11 +10,6 @@ public class Lager implements
 
     public static int AntalLagere = 1;
     private String adresse;
-
-    public static void setAntalLagere(int antalLagere) {
-        AntalLagere = antalLagere;
-    }
-
     private int LagerId;
     private  String navn;
     private Map<Integer,Reol> reoler = new HashMap<>();
@@ -24,15 +18,17 @@ public class Lager implements
         if (adresse == null) {
             throw new  IllegalArgumentException("Adresse må ikke være null eller tom");
         }
-
         if (navn == null) {
             throw new IllegalArgumentException("Navn må ikke være null eller tom");
         }
-
         this.adresse = adresse;
         LagerId = AntalLagere;
         AntalLagere++;
         this.navn = navn;
+    }
+
+    public static void setAntalLagere(int antalLagere) {
+        AntalLagere = antalLagere;
     }
 
     public void addReol(int x){

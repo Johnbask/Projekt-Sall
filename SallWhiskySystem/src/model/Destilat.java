@@ -1,10 +1,5 @@
 package model;
 
-import java.security.PrivateKey;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class Destilat implements
         java.io.Serializable {
     public static int antalDestilater =1;
@@ -13,25 +8,16 @@ public class Destilat implements
     private boolean isHeart;
     private int batchId;
     private boolean isUsed = false;
-
-
     // link attributter
     private Destillering destillering;
-
-    public static void setAntalDestilater(int antalDestilater) {
-        Destilat.antalDestilater = antalDestilater;
-    }
 
     public Destilat(double liter, boolean isSingleMalt, boolean isHeart, Destillering destillering) {
         if (liter <= 0) {
             throw new IllegalArgumentException("Liter skal være > 0");
         }
-
         if (destillering == null) {
             throw new NullPointerException("Destillering må ikke være null");
         }
-
-
         this.liter = liter;
         this.isSingleMalt = isSingleMalt;
         this.isHeart = isHeart;
@@ -40,15 +26,18 @@ public class Destilat implements
         antalDestilater++;
     }
 
+    public static void setAntalDestilater(int antalDestilater) {
+        Destilat.antalDestilater = antalDestilater;
+    }
 
     public void setUsed(boolean b){
         isUsed = b;
     }
+
     public boolean getUsed(){
         return isUsed;
     }
 
-    // Getters
     public Double getLiter() {
         return liter;
     }
@@ -56,7 +45,6 @@ public class Destilat implements
     public int getBatchId() {
         return batchId;
     }
-
 
     public Destillering getDestillering() {
         return destillering;

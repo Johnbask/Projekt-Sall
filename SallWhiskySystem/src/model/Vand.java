@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Vand implements Serializable {
 
     private String kilde;
-    // Links
+
     public Vand(String kilde) {
         this.kilde = kilde;
     }

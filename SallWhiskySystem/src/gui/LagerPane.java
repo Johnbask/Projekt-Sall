@@ -9,9 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.Fad;
-
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,10 +34,12 @@ public class LagerPane extends GridPane {
 
         this.add(tFlager,2,1);
         Label lLager = new Label("Lager id");
+
         this.add(lLager,1,1);
         tFlager.valueProperty().addListener(observable-> updateLWFade());
 
         this.add(tFReol,2,2);
+
         Label lReol = new Label("Reol id");
         this.add(lReol,1,2);
         tFReol.editableProperty().setValue(false);
@@ -49,7 +49,6 @@ public class LagerPane extends GridPane {
         this.add(lHylde,1,3);
         tFHylde.valueProperty().addListener(observable -> updateLWFade());
         tFReol.editableProperty().setValue(false);
-
 
         Label lFad = new Label("Fad id");
         this.add(lFad,1,4);
@@ -64,27 +63,18 @@ public class LagerPane extends GridPane {
         hBox.getChildren().add(bFlytFad);
         hBox.getChildren().add(bSletFad);
         hBox.getChildren().add(bCreate);
-       this.add(hBox,0,7);
-       hBox.setTranslateX(-10);
-       hBox.setSpacing(15);
-       hBox.setAlignment(Pos.CENTER);
-
+        this.add(hBox,0,7);
+        hBox.setTranslateX(-10);
+        hBox.setSpacing(15);
+        hBox.setAlignment(Pos.CENTER);
 
         bFlytFad.setDisable(true);
         bFlytFad.setOnAction(event -> flytFadPane(lWfade.getSelectionModel().getSelectedItem()));
-
-
 
         bSletFad.setDisable(true);
         bSletFad.setOnAction(event -> sletFad(lWfade.getSelectionModel().getSelectedItem()));
 
         bCreate.setOnAction(actionEvent -> lagerCreationPane());
-
-
-
-
-
-
 
         updateLWFade();
     }
@@ -93,7 +83,6 @@ public class LagerPane extends GridPane {
         LagerCreationPane lagerCreationPane = new LagerCreationPane("Lager Creation");
         lagerCreationPane.showAndWait();
         Controller.writeStorage();
-
     }
 
     private void findFadMedId() {
@@ -105,14 +94,10 @@ public class LagerPane extends GridPane {
         lWfade.getItems().setAll(Controller.getFade());
     }
     }
-
-
-
     private void sletFad(Fad fad) {
         Controller.sletFad(fad);
-       updateLWFade();
-       Controller.writeStorage();
-
+        updateLWFade();
+        Controller.writeStorage();
     }
 
     private void selectedFadChanged() {
@@ -122,12 +107,10 @@ public class LagerPane extends GridPane {
         }else{
             bFlytFad.setDisable(true);
             bFlytFad.setDisable(true);
-
         }
     }
 
     public void updateEditabel(){
-
         if(!(tFlager.getValue() ==0)){
             tFReol.setEditable(true);
         }
@@ -144,7 +127,6 @@ public class LagerPane extends GridPane {
             tFHylde.setEditable(false);
             if(!(tFHylde.getValue() ==0)) tFHylde.setValue(0);
         }
-
     }
 
     private void updateLWFade() {
@@ -166,8 +148,6 @@ public class LagerPane extends GridPane {
                 lWfade.getItems().setAll(new ArrayList<>());
             }
         }
-
-
     }
 
     public void flytFadPane(Fad fad){
@@ -175,6 +155,4 @@ public class LagerPane extends GridPane {
         flytFadPane.showAndWait();
         Controller.writeStorage();
     }
-
-
 }

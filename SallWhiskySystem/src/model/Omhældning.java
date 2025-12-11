@@ -7,8 +7,6 @@ public class Omhældning implements Serializable {
 
     private double mængde;
     private LocalDate dato;
-
-    // link attributter
     private Fad fad;
     private Medarbejder medarbejder;
     private Destilat destilat;
@@ -47,8 +45,6 @@ public class Omhældning implements Serializable {
 
     @Override
     public String toString() {
-        return
-                 dato.toString();
-
+        return dato.toString();
     }
 }
