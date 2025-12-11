@@ -135,6 +135,12 @@ public class App {
         Controller.opretPåhældning(fad3, des3, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
         Controller.opretPåhældning(fad4, des4, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
 
+        // modne fade
+        Controller.opretPåhældning(fad6, des2, LocalDate.of(2021, 5, 5), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad7, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad8, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad9, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+
 
         Flaske flaske1 = Controller.opretFlaske(0.5,42,LocalDate.now().plusMonths(1),"Gyldne Dråber",fad20,Controller.getVands().getFirst());
         Flaske flaske2 = Controller.opretFlaske(0.75,42,LocalDate.now().plusMonths(1),"Dragens elixir",fad1,Controller.getVands().getFirst());
