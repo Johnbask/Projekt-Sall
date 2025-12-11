@@ -15,6 +15,7 @@ import model.Fad;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class SporbarhedPane extends GridPane {
@@ -273,37 +274,53 @@ public class SporbarhedPane extends GridPane {
         }
 
         // Nuværende destillation info
-        Destilat destilat = fad.getDestilat();
-        if (destilat != null) {
+        HashSet<Destilat> destilater = new HashSet<>(fad.getDestillater());
+        HashSet<Destillering> destillerings = new HashSet<>();
+        if ( !destilater.isEmpty()) {
             historie.append("=== Aktuelt Indhold ===\n");
-            historie.append("Mængde Liter: ").append(String.format("%.1f L", fad.getLitterIFad())).append("\n");
-            historie.append("Single Malt: ").append(destilat.getSingleMalt() ? "Ja" : "Nej").append("\n");
-            historie.append("Heart Cut: ").append(destilat.getHeart() ? "Ja" : "Nej").append("\n");
-
-            if (destilat.getRøgmateriale() != null) {
-                historie.append("Røgmateriale: ").append(destilat.getRøgmateriale()).append("\n");
+            for (Destilat destilat : destilater) {
+                destillerings.add(destilat.getDestillering());
+                historie.append("Batchid: ");
+                historie.append(destilat.getBatchId()).append("\n");
+                historie.append("Mængde Liter: ").append(String.format("%.1f L", fad.getLitterIFad())).append("\n");
+                historie.append("Single Malt: ").append(destilat.getSingleMalt() ? "Ja" : "Nej").append("\n");
+                historie.append("Heart Cut: ").append(destilat.getHeart() ? "Ja" : "Nej").append("\n");
+                if (destilat.getRøgmateriale() != null) {
+                    historie.append("Røgmateriale: ").append(destilat.getRøgmateriale()).append("\n");
             }
 
-            Destillering destillering = destilat.getDestillering();
-            if (destillering != null) {
-                historie.append("\n=== Destillerings Info ===\n");
-                historie.append("New Make ID: ").append(destillering.getNewMakeId()).append("\n");
-                historie.append("Start Dato: ").append(destillering.getStartDato()).append("\n");
-                historie.append("Slut Dato: ").append(destillering.getSlutDato()).append("\n");
-                historie.append("Alkohol %: ").append(String.format("%.2f%%", destillering.getAlkoholProcent())).append("\n");
-                historie.append("Mængde produceret: ").append(String.format("%.1f L", destillering.getMængdeProduceret())).append("\n");
-                historie.append("Nuværende mængde: ").append(String.format("%.1f L", destilat.getLiter())).append("\n");
 
-                if (destillering.getKommentar() != null && !destillering.getKommentar().isEmpty()) {
-                    historie.append("Kommentar: ").append(destillering.getKommentar()).append("\n");
+
+
+
+
+            }
+            historie.append("\n=== Destillerings Info ===\n");
+
+            for (Destillering destillering : destillerings) {
+                if (destillering!=null){
+
+                    historie.append("New Make ID: ").append(destillering.getNewMakeId()).append("\n");
+                    historie.append("Start Dato: ").append(destillering.getStartDato()).append("\n");
+                    historie.append("Slut Dato: ").append(destillering.getSlutDato()).append("\n");
+                    historie.append("Alkohol %: ").append(String.format("%.2f%%", destillering.getAlkoholProcent())).append("\n");
+                    historie.append("Mængde produceret: ").append(String.format("%.1f L", destillering.getMængdeProduceret())).append("\n");
+
+                    if (destillering.getKommentar() != null && !destillering.getKommentar().isEmpty()) {
+                        historie.append("Kommentar: ").append(destillering.getKommentar()).append("\n");
+                    }
+
+                    historie.append("Destilleret af: ").append(destillering.getMedarbejder().getNavn()).append("\n");
+
                 }
-
-                historie.append("Destilleret af: ").append(destillering.getMedarbejder().getNavn()).append("\n");
             }
-        }
 
+
+
+            }
         txaHistorie.setText(historie.toString());
-    }
+        }
+        
 
     // Alerts
     private void ShowAlert(String title, String message) {
