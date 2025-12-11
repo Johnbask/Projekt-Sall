@@ -70,10 +70,6 @@ public class Lager implements
         return navn;
     }
 
-    public static int getAntalLagere() {
-        return AntalLagere;
-    }
-
     @Override
     public String toString() {
         return  navn + "id : " + LagerId + "\n" + adresse ;

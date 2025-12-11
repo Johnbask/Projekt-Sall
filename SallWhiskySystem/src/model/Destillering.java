@@ -97,10 +97,6 @@ public class Destillering implements java.io.Serializable {
         return kommentar;
     }
 
-    public void setKommentar(String kommentar) {
-        this.kommentar = kommentar;
-    }
-
     public Medarbejder getMedarbejder() {
         return medarbejder;
     }

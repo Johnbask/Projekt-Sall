@@ -2,7 +2,6 @@ package controller;
 
 import model.*;
 import storage.Storage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,14 +109,11 @@ public class Controller {
         return lager.getReol(num);
     }
 
-
     // should throw exception if the reol or hylde doesnt exist
     public static Hylde FindHyldePåReolFraLager (Lager lager, int reolNummer, int hyldeNummer){
 
         return lager.getReol(reolNummer).getHylde(hyldeNummer);
     }
-
-    // opret fad
 
     // pre: Material is picked from a list of acceptable types
     public static Fad opretFad(double liter, Trætype materiale, List<String> tidligereIndhold, String leverandør,Hylde hylde){
@@ -137,12 +133,9 @@ public class Controller {
         return fad;
     }
 
-
     public static void writeStorage(){
         Storage.writeStorage();
     }
-
-
 
     public static void sletFad(Fad fad){
         fad.getHylde().sletFad();
@@ -187,19 +180,14 @@ public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDat
             if (!fad.addLiterOfDestilatToFad(mængde)||!destilat.tapDestilat(mængde)){
                 return null;
             }
-            destilat.setUsed(true);
             fad.addDestilat(destilat);
 
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     return omhældning;
 }
-
-
     public static Omhældning opretOmhældning(Fad fadTil, Fad fadFra, LocalDate dato, double mængde, Medarbejder medarbejder) {
 
         Omhældning omhældning =null;
@@ -209,21 +197,13 @@ public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDat
             if (!fadTil.addLiterOfDestilatToFad(mængde)||!fadFra.removeLiterOfDestilatFromFad(mængde)){
                 return null;
             }
-
             fadTil.getDestillater().addAll(fadFra.getDestillater());
-
             fadTil.addOmhældning(omhældning);
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
         return omhældning;
-
-
-
     }
 
     public static void sletVand(Vand vand) {
@@ -249,7 +229,6 @@ public static Omhældning opretPåhældning(Fad fad, Destilat destilat, LocalDat
     public static void setDestilater(List<Destilat> destilat) {
         Storage.setDestilater(destilat);
     }
-
 
     public static void setMedarbejder(List<Medarbejder> medarbejdere) {
         Storage.setMedarbejderne(medarbejdere);
