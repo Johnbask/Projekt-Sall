@@ -3,7 +3,6 @@ package gui;
 import controller.Controller;
 import javafx.application.Application;
 import model.*;
-import storage.Storage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,8 +13,6 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
         //oprette lager
-
-
         try (FileInputStream fileIn =
                      new FileInputStream("SallWhiskySystem/src/storage/storage.txt");
              ObjectInputStream objIn =
@@ -27,10 +24,6 @@ public class App {
                 Controller.setMedarbejder((ArrayList) objIn.readObject());
                 Controller.setVand((ArrayList) objIn.readObject());
                 Controller.setFlasker((ArrayList) objIn.readObject());
-
-
-
-
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -40,8 +33,6 @@ public class App {
             System.out.println("Catch readStorage");
             throw new RuntimeException(e);
         }
-
-
 
         //her starter vi så gui'en
         Application.launch(SallGui.class);
@@ -57,12 +48,9 @@ public class App {
         Controller.setVand((new ArrayList<>()));
         Controller.setFlasker((new ArrayList<>()));
 
-
-
         // opret lagere
         Lager SHlager = Controller.opretLager("Sønderhøj 30","Det første lager");
         Lager SanderLager = Controller.opretLager("Serup Tinghøjvej 1", "Det bedste Lager");
-
 
         // tilføj reoler og hylder til lagerne
         Controller.addReolerTilLager(SHlager,10);
@@ -89,12 +77,9 @@ public class App {
         Fad fad7=  Controller.opretFad(50, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
         Fad fad8=  Controller.opretFad(75, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
         Fad fad9=  Controller.opretFad(750, Trætype.WHITE_OAK,new ArrayList<>(List.of("Sherry")),"Stor Amerikans Sherry",findledigHylde());
-
-
         Fad fad10=  Controller.opretFad(70, Trætype.WHITE_OAK,new ArrayList<>(List.of("Burbon")),"Lille Amerikans Burbon",findledigHylde());
         Fad fad11=  Controller.opretFad(750, Trætype.WHITE_OAK,new ArrayList<>(List.of("Burbon")),"Enorm Amerikans Burbon",findledigHylde());
         Fad fad12=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Burbon")),"Stor Amerikans Burbon",findledigHylde());
-
         Fad fad13=  Controller.opretFad(50, Trætype.WHITE_OAK ,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
         Fad fad14=  Controller.opretFad(50, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
         Fad fad15=  Controller.opretFad(50, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
@@ -104,7 +89,6 @@ public class App {
         Fad fad19=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
         Fad fad20=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
         Fad fad21=  Controller.opretFad(100, Trætype.WHITE_OAK,new ArrayList<>(List.of("Wine","Sherry")),"Small Town distillery",findledigHylde());
-
 
         Controller.addReolerTilLager(SHlager,1);
         Controller.addReolerTilLager(SanderLager,1);
@@ -116,10 +100,12 @@ public class App {
         Controller.opretMedarbejder("Ruben","Gud");
         Controller.opretMedarbejder("John","Apostel");
         Controller.opretMedarbejder("Sander Frozen","Is prinsesse");
+
         Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),1000,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","jeg er cool",Controller.getVands().getFirst());
         Destillering destillering2 = new Destillering(LocalDate.of(1913,12,12),LocalDate.of(1913,12,14),1000,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","jeg er cool",Controller.getVands().getFirst());
         Destillering destillering3 = new Destillering(LocalDate.of(2020,10,10),LocalDate.of(2021,10,10),500,50,Controller.getMedarbejderne().getFirst(),"Korn","Ivory","",Controller.getVands().get(1));
         Destillering destillering4 = new Destillering(LocalDate.of(2000,5,5),LocalDate.of(2000,6,6),500,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","God urt",Controller.getVands().getFirst());
+
         Destilat des1 = Controller.opretDestilat(750, true, false, destillering);
         Destilat des2 = Controller.opretDestilat(800, true, true, destillering2);
         Destilat des3 = Controller.opretDestilat(400, true, true, destillering3);
@@ -141,16 +127,10 @@ public class App {
         Controller.opretPåhældning(fad8, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
         Controller.opretPåhældning(fad9, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
 
-
         Flaske flaske1 = Controller.opretFlaske(0.5,42,LocalDate.now().plusMonths(1),"Gyldne Dråber",fad20,Controller.getVands().getFirst());
         Flaske flaske2 = Controller.opretFlaske(0.75,42,LocalDate.now().plusMonths(1),"Dragens elixir",fad1,Controller.getVands().getFirst());
         Flaske flaske3 = Controller.opretFlaske(5,48,LocalDate.now().plusMonths(1),"Mobbe drengen",fad1,Controller.getVands().getFirst());
         Flaske flaske4 = Controller.opretFlaske(0.44,44,LocalDate.now().plusMonths(1),"Jhins favorite",fad1,Controller.getVands().getFirst());
-
-
-
-
-
 
 // write storage
          Controller.writeStorage();
@@ -170,18 +150,11 @@ public class App {
             reols.addAll(lager.getReoler().values());
         }
         reols.forEach(( reol)-> hylders.addAll(reol.getHylder().values()));
-
         for(Hylde hylde : hylders){
             if(hylde.getFad() == null){
                 return hylde;
             }
         }
-
         return null;
     }
-
-
-
-
-
 }

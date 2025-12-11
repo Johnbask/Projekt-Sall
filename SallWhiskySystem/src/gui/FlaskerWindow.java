@@ -4,16 +4,14 @@ import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Destilat;
-import model.Fad;
 import model.Flaske;
-import model.Lager;
+
 
 import java.util.ArrayList;
 import java.util.List;

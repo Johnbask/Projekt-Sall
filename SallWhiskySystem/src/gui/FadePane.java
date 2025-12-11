@@ -8,34 +8,24 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-
 import model.*;
 import storage.Storage;
-
-
 import java.util.ArrayList;
-
 import java.util.List;
 
-
 public class FadePane extends GridPane {
-    private final Label lblFade = new Label("Fade");
 
     public FadePane() {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
         this.setGridLinesVisible(false);
-
-
+        Label lblFade = new Label("Fade");
         this.add(lblFade, 0, 0, 2, 1);
         lblFade.setStyle("-fx-font-size: 24px");
-
         FirstSection();
-
         SecondSection();
 
     }
@@ -46,12 +36,11 @@ public class FadePane extends GridPane {
     private final Button btnUpdate = new Button("Update Historik");
     private final Button btnSlet = new Button("Slet");
     private final Button bPåfyld = new Button("Påfyldning");
-    private  final  TableView<Fad> tvFade = new TableView<>();
+    private final TableView<Fad> tvFade = new TableView<>();
     private final Button bOmhældning = new Button("Omhældning");
 
 
     private void FirstSection() {
-
 
         // Create Columns
         TableColumn<Fad, Integer> colFadID = new TableColumn<>("Fad ID");
@@ -59,8 +48,6 @@ public class FadePane extends GridPane {
 
         TableColumn<Fad, List<String>> colTidligereIndhold = new TableColumn<>("Historik");
         colTidligereIndhold.setCellValueFactory(new PropertyValueFactory<>("tidligereIndhold"));
-
-
 
         TableColumn<Fad, Double> colFadStørrelse = new TableColumn<>("Fadstørrelse");
         colFadStørrelse.setCellValueFactory(new PropertyValueFactory<>("liter"));
@@ -70,10 +57,6 @@ public class FadePane extends GridPane {
 
         TableColumn<Fad, String> colLeverandør = new TableColumn<>("Leverandør");
         colLeverandør.setCellValueFactory(new PropertyValueFactory<>("leverandør"));
-
-
-    /*    TableColumn<Fad, LocalDate> colKøbtDato = new TableColumn<>("Købt Dato");
-        colKøbtDato.setCellValueFactory(new PropertyValueFactory<>("købtdato"));*/
 
         TableColumn<Fad, String> colLokation = new TableColumn<>("Lokation");
         colLokation.setCellValueFactory(cell -> {
@@ -96,21 +79,17 @@ public class FadePane extends GridPane {
             return new SimpleStringProperty(result);
         });
 
-      //tvFade.getColumns().addAll(colFadID, colTidligereIndhold, colFadStørrelse, colMateriale, colLeverandør, colLokation);
+        //tvFade.getColumns().addAll(colFadID, colTidligereIndhold, colFadStørrelse, colMateriale, colLeverandør, colLokation);
 
         tvFade.getColumns().add(colFadID);
         tvFade.getColumns().add(colTidligereIndhold);
         tvFade.getColumns().add(colFadStørrelse);
         tvFade.getColumns().add(colMateriale);
         tvFade.getColumns().add(colLeverandør);
-       // tvFade.getColumns().add(colKøbtDato);
-        tvFade.getColumns().addAll(colLokation);
+        tvFade.getColumns().add(colLokation);
 
         tvFade.setMinWidth(700);
 
-
-
-        // Test for om det virker TODO Rettelser
         tvFade.getItems().setAll(Controller.getFade());
 
         // Add it to the pane
@@ -126,13 +105,13 @@ public class FadePane extends GridPane {
         this.add(hBox, 0, 13);
         hBox.setSpacing(10);
         btnSlet.setOnAction(event -> sletFad(tvFade.getSelectionModel().getSelectedItem()));
-        this.add(new Label("Søg med FadId"),1,12);
+        this.add(new Label("Søg med FadId"), 1, 12);
 
         btnUpdate.setOnAction(event -> updateHistorikAction(tvFade.getSelectionModel().getSelectedItem()));
         tfxUpdate.setPromptText("Sherry");
-        this.add(tfxUpdate,0,14);
-        this.add(bPåfyld,0,15);
-        this.add(bOmhældning,0,16);
+        this.add(tfxUpdate, 0, 14);
+        this.add(bPåfyld, 0, 15);
+        this.add(bOmhældning, 0, 16);
         bPåfyld.setMinWidth(250);
         bPåfyld.setOnAction(event -> påFyldninsAction());
 
@@ -151,24 +130,26 @@ public class FadePane extends GridPane {
         PåfyldningsVindue påfyldningsVindue = new PåfyldningsVindue("Påfylding");
         påfyldningsVindue.showAndWait();
 
-
-
     }
 
     private void sletFad(Fad fad) {
         Controller.sletFad(fad);
 
         Controller.writeStorage();
-        System.out.println("deleted"+fad);
+        System.out.println("deleted" + fad);
         tvFade.getItems().setAll(Controller.getFade());
     }
 
     private void findFadMedId() {
         List<Fad> fade = new ArrayList<>();
         Controller.getFade().forEach(fad ->
-        {if (fad.getFadId()==(ifFadSøgning.getValue())){fade.add(fad);}});
+        {
+            if (fad.getFadId() == (ifFadSøgning.getValue())) {
+                fade.add(fad);
+            }
+        });
         tvFade.getItems().setAll(fade);
-        if (ifFadSøgning.getValue()==0){
+        if (ifFadSøgning.getValue() == 0) {
             tvFade.getItems().setAll(Controller.getFade());
         }
     }
@@ -176,9 +157,8 @@ public class FadePane extends GridPane {
     // Private Fields for second section
     private final TextField txfHistorik = new TextField();
     private final IntegerField intFadstørrelse = new IntegerField();
-    private final ComboBox cbxMateriale = new ComboBox();
+    private final ComboBox<Trætype> cbxMateriale = new ComboBox<>();
     private final TextField txfLeverandør = new TextField();
-
     private final Button btnOpret = new Button("Opret");
     private final Button btnCancel = new Button("Cancel");
 
@@ -191,22 +171,12 @@ public class FadePane extends GridPane {
 
         this.add(new Label("Materiale: "), 2, 4);
         this.add(cbxMateriale, 3, 4);
-        cbxMateriale.getItems().setAll(Trætype.values());
+        cbxMateriale.getItems().setAll (Trætype.values());
 
         this.add(new Label("Leverandør:"), 2, 5);
         this.add(txfLeverandør, 3, 5);
-
-        /*
-        HBox hBox = new HBox();
-        hBox.getChildren().addAll(btnOpret, btnCancel);
-        this.add(hBox, 1, 11);
-        hBox.setSpacing(50);
-         */
-
         this.add(btnOpret, 2, 10);
         this.add(btnCancel, 3, 10);
-
-
 
         btnOpret.setOnAction(event -> opretFad());
         btnCancel.setOnAction(event -> cancelFad());
@@ -217,70 +187,58 @@ public class FadePane extends GridPane {
         txfHistorik.clear();
         cbxMateriale.getSelectionModel().clearSelection();
         txfLeverandør.clear();
-
     }
 
     private void opretFad() {
-        System.out.println(intFadstørrelse.getValue()<0);
+        System.out.println(intFadstørrelse.getValue() < 0);
         System.out.println(txfLeverandør.getText().isEmpty());
         System.out.println(cbxMateriale.getSelectionModel().isEmpty());
 
-
-
-
-
-        if (txfLeverandør.getText().isEmpty()){
+        if (txfLeverandør.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Leverandør skal være udfyldt");
             alert.showAndWait();
-            if (alert.getResult().equals(ButtonType.OK)){
+            if (alert.getResult().equals(ButtonType.OK)) {
                 alert.hide();
             }
 
-        }else if (cbxMateriale.getSelectionModel().isEmpty()){
+        } else if (cbxMateriale.getSelectionModel().isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("Materiale skal være valgt");
             alert.showAndWait();
-            if (alert.getResult().equals(ButtonType.OK)){
+            if (alert.getResult().equals(ButtonType.OK)) {
                 alert.hide();
             }
 
-        }else if (intFadstørrelse.getValue()<=0){
+        } else if (intFadstørrelse.getValue() <= 0) {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("Fadstørelsen skal være valgt");
             alert.showAndWait();
-            if (alert.getResult().equals(ButtonType.OK)){
+            if (alert.getResult().equals(ButtonType.OK)) {
                 alert.hide();
             }
-
-        }else {
-
-
+        } else {
             VælgFadVindue vælgFadVindue = new VælgFadVindue("Vælg fad");
             vælgFadVindue.showAndWait();
-            Hylde hylde= vælgFadVindue.getHylde();
+            Hylde hylde = vælgFadVindue.getHylde();
             vælgFadVindue.close();
 
-            Fad fad = Controller.opretFad((double) intFadstørrelse.getValue(), (Trætype) cbxMateriale.getSelectionModel().getSelectedItem(),new ArrayList<>(List.of(txfHistorik.getText()))
-                    ,txfLeverandør.getText(),hylde);
+            Fad fad = Controller.opretFad((double) intFadstørrelse.getValue(), (Trætype) cbxMateriale.getSelectionModel().getSelectedItem(), new ArrayList<>(List.of(txfHistorik.getText()))
+                    , txfLeverandør.getText(), hylde);
             fad.addLagerHist();
         }
-
-
-Controller.writeStorage();
-tvFade.getItems().setAll(Controller.getFade());
-
-
+        Controller.writeStorage();
+        tvFade.getItems().setAll(Controller.getFade());
     }
 
 
-    public void updateHistorikAction(Fad fad){
-        if (!tfxUpdate.getText().isEmpty()&&!tfxUpdate.getText().isBlank())
-fad.addTidligereIndhold(tfxUpdate.getText());
-tvFade.getItems().setAll(Storage.getFade());
-Controller.writeStorage();
+    public void updateHistorikAction(Fad fad) {
+        if (!tfxUpdate.getText().isEmpty() && !tfxUpdate.getText().isBlank())
+            fad.addTidligereIndhold(tfxUpdate.getText());
+        tvFade.getItems().setAll(Storage.getFade());
+        Controller.writeStorage();
     }
 
 }

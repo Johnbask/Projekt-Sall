@@ -13,7 +13,6 @@ import model.Fad;
 import model.Hylde;
 import model.Lager;
 import model.Reol;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +55,6 @@ public class FlytFadPane extends Stage {
         ChangeListener<Lager> listenerLager = (ov, o, n) -> this.selectedLagerChanged();
         lWLager.getSelectionModel().selectedItemProperty().addListener(listenerLager);
 
-
         Label lReol = new Label("Tomme reoler");
         pane.add(lReol,1,1);
         pane.add(lWReol,1,2);
@@ -72,15 +70,10 @@ public class FlytFadPane extends Stage {
         pane.add(bFlyt,0,3,1,3);
         bFlyt.setDisable(true);
         bFlyt.setOnAction(event -> flyt());
-
     }
 
     private void selectedHyldeChanged() {
-        if(lWHylde.getSelectionModel().getSelectedItem() !=null){
-            bFlyt.setDisable(false);
-        }else{
-            bFlyt.setDisable(true);
-        }
+        bFlyt.setDisable(lWHylde.getSelectionModel().getSelectedItem() == null);
     }
 
     private void selectedReolChanged() {
@@ -115,8 +108,7 @@ public class FlytFadPane extends Stage {
 
     // funktion der chekker om en reol har en eller flere tomme hylder
     private boolean chekOmHarTomme(Reol reol){
-        ArrayList<Hylde> hylder = new ArrayList<>();
-        hylder.addAll(reol.getHylder().values());
+        ArrayList<Hylde> hylder = new ArrayList<>(reol.getHylder().values());
         for (Hylde hylde : hylder) {
             if(hylde.getFad()== null){
                 return true;
@@ -127,7 +119,7 @@ public class FlytFadPane extends Stage {
 
     public void flyt(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("you usuer u wannna move that");
+        alert.setContentText("are you sure u wanna move that");
         alert.showAndWait();
         if(alert.getResult().equals(ButtonType.OK)){
             fadet.setHylde(lWHylde.getSelectionModel().getSelectedItem());

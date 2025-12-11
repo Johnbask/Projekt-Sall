@@ -7,14 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import model.*;
-import storage.Storage;
-
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FlaskningsPane extends GridPane {
     public FlaskningsPane() {
@@ -65,7 +58,6 @@ public class FlaskningsPane extends GridPane {
 
         this.add(lLiterIFad, 2, 4);
 
-
         Label lLiterFraFad = new Label("Liter fra fad");
         this.add(lLiterFraFad, 0, 5);
         this.add(dFLiterFraFad, 1, 5);
@@ -104,11 +96,7 @@ public class FlaskningsPane extends GridPane {
         lError.setStyle("-fx-text-fill: red;");
         lError.setMinWidth(200);
 
-
         dPFlaske.setValue(LocalDate.now());
-
-
-
     }
 
     private void SeFlasker() {
@@ -117,10 +105,7 @@ public class FlaskningsPane extends GridPane {
     }
 
     public void updateFade() {
-
         cbFade.getItems().setAll(Controller.getModneFade());
-
-
     }
 
     private void selectedFadChanged() {
@@ -131,7 +116,6 @@ public class FlaskningsPane extends GridPane {
             lLiterIFad.setText(cbFade.getSelectionModel().getSelectedItem().getLitterIFad() + "L ");
             lLiterIFad.setText(lLiterIFad.getText() + cbFade.getSelectionModel().getSelectedItem().getDestilat().getDestillering().getAlkoholProcent() + "P");
         }
-
     }
 
     private void Flaskkiefy() {
@@ -188,6 +172,7 @@ public class FlaskningsPane extends GridPane {
             flaske = new Flaske((dFFlaskeStørelse.getValue()), dFProcent.getValue(), dPFlaske.getValue(), tFMakeName.getText(), cbFade.getSelectionModel().getSelectedItem(), cbVandKilde.getSelectionModel().getSelectedItem());
 
         }
-        tAHistorien.setText(flaske.getHistorie());
+        if (flaske!=null){
+        tAHistorien.setText(flaske.getHistorie());}
     }
 }

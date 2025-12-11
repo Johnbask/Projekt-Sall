@@ -3,16 +3,12 @@ package gui;
 import com.sun.javafx.scene.control.DoubleField;
 import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.*;
-import storage.Storage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DestilleringPane extends GridPane {
 
@@ -44,8 +40,6 @@ public class DestilleringPane extends GridPane {
     RadioButton rbnTrueHeart = new RadioButton("True");
     RadioButton rbnFalseHeart = new RadioButton("False");
     private final Label lError = new Label();
-
-
 
     private void FirstSection() {
         this.setPadding(new Insets(20));
@@ -107,10 +101,8 @@ public class DestilleringPane extends GridPane {
         cbVand.getItems().setAll(Controller.getVands());
         this.add(cbVand, 1, 11);
 
-
         this.add(btnCreate, 0, 12);
         btnCreate.setOnAction(event -> createDestilat());
-
 
         this.add(lError,0,13,2,1);
 
@@ -118,23 +110,16 @@ public class DestilleringPane extends GridPane {
         lWDestilleringer.setMinWidth(600);
         lWDestilleringer.getItems().setAll(getDestileringer());
 
-
         dpStarDato.setValue(LocalDate.now().minusDays(8));
         dpSlutDato.setValue(LocalDate.now().minusDays(1));
         cbMedarbjder.getSelectionModel().selectFirst();
         cbVand.getSelectionModel().selectFirst();
         lError.setMinWidth(250);
-
-
-
-
-
     }
 
     public void updateDestilleringer(){
         lWDestilleringer.getItems().setAll(getDestileringer());
     }
-
 
     private void createDestilat() {
 
@@ -174,11 +159,7 @@ public class DestilleringPane extends GridPane {
             updateDestilleringer();
             Controller.writeStorage();
             lError.setText("");
-
-
         }
-
-
     }
     private ArrayList<Destillering> getDestileringer(){
         ArrayList<Destillering> Destilleringer = new ArrayList<>();
