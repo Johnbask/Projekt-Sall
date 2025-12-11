@@ -16,6 +16,7 @@ import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -95,8 +96,7 @@ public class PåfyldningsVindue extends Stage {
 
         // tvdestilater add columns
 
-        tvDestilater.getItems().setAll(Controller.getDestilater());
-
+        updateDisplayedDestilater();
 
         TableColumn<Destilat, String> colLiterIDestilat = new TableColumn<>("Liter tilbage af destilat");
         colLiterIDestilat.setCellValueFactory(new PropertyValueFactory<>("liter"));
@@ -159,13 +159,14 @@ public class PåfyldningsVindue extends Stage {
         pane.add(bSpild,5,9);
         bSpild.setOnAction(event -> spildAction());
 
+    }
 
-
-
-
-
-
-
+    private void updateDisplayedDestilater(){
+        List<Destilat> ikkeTommeDesitlater = new ArrayList<>();
+        for (Destilat destilat : Controller.getDestilater()) {
+            if(destilat.getLiter() <= 0) ikkeTommeDesitlater.add(destilat);
+        }
+        tvDestilater.getItems().setAll(ikkeTommeDesitlater);
     }
 
     private void spildAction() {
@@ -205,9 +206,7 @@ public class PåfyldningsVindue extends Stage {
 
             }
         }
-
-
-
+        tvDestilater.getItems().setAll(Controller.getDestilater());
     }
 
 
