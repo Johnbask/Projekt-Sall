@@ -19,10 +19,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class PåfyldningsVindue extends Stage {
 
     public PåfyldningsVindue(String titel) {
@@ -164,7 +160,7 @@ public class PåfyldningsVindue extends Stage {
     private void updateDisplayedDestilater(){
         List<Destilat> ikkeTommeDesitlater = new ArrayList<>();
         for (Destilat destilat : Controller.getDestilater()) {
-            if(destilat.getLiter() <= 0) ikkeTommeDesitlater.add(destilat);
+            if(destilat.getLiter() > 0) ikkeTommeDesitlater.add(destilat);
         }
         tvDestilater.getItems().setAll(ikkeTommeDesitlater);
     }
@@ -176,8 +172,6 @@ public class PåfyldningsVindue extends Stage {
 
         tvFade.getItems().setAll(Controller.getFade());
         Controller.writeStorage();
-
-
     }
 
     private void omhældAction() {
