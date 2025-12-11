@@ -187,8 +187,6 @@ public class FlaskningsPane extends GridPane {
 
             flaske = new Flaske((dFFlaskeStørelse.getValue()), dFProcent.getValue(), dPFlaske.getValue(), tFMakeName.getText(), cbFade.getSelectionModel().getSelectedItem(), cbVandKilde.getSelectionModel().getSelectedItem());
 
-
-
         }
         tAHistorien.setText(flaske.getHistorie());
     }

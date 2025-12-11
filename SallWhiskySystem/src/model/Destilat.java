@@ -94,6 +94,10 @@ public class Destilat implements
         return isHeart;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Destilat{" +
+                "batchId=" + batchId +
+                '}';
+    }
 }
