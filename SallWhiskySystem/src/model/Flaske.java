@@ -34,18 +34,6 @@ public class Flaske implements Serializable {
         return destilats;
     }
 
-    // Getters Lokalt
-    public Double getMl() {
-        return liter;
-    }
-
-    public double getAlkoholProcent() {
-        return alkoholProcent;
-    }
-
-    public LocalDate getPåHældningsDato() {
-        return påHældningsDato;
-    }
 
     public String getHistorie() {
         return historie;

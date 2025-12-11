@@ -101,23 +101,6 @@ public class Controller {
         }
     }
 
-    // should throw exception if the lager doesnt exist
-    public static Reol FindReolPåLager(Lager lager, int num) {
-        if (lager == null) {
-            throw new NullPointerException("Lager not found");
-        }
-        if (0 > num) {
-            throw new IllegalArgumentException("Number for this function must be positive");
-        }
-        return lager.getReol(num);
-    }
-
-
-    // should throw exception if the reol or hylde doesnt exist
-    public static Hylde FindHyldePåReolFraLager(Lager lager, int reolNummer, int hyldeNummer) {
-
-        return lager.getReol(reolNummer).getHylde(hyldeNummer);
-    }
 
     // opret fad
 
@@ -150,15 +133,6 @@ public class Controller {
         Storage.getFade().remove(fad);
     }
 
-    public static List<Fad> getEmptyFad() {
-        List<Fad> result = new ArrayList<>();
-        for (Fad f : Storage.getFade()) {
-            if (f.isTom()) {
-                result.add(f);
-            }
-        }
-        return result;
-    }
 
     public static List<Fad> getFildFad() {
         List<Fad> result = new ArrayList<>();
@@ -215,13 +189,9 @@ public class Controller {
             fadTil.getDestillater().addAll(fadFra.getDestillater());
 
             fadTil.addOmhældning(omhældning);
-
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
         return omhældning;
 
 

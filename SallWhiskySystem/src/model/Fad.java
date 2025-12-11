@@ -142,12 +142,6 @@ public class Fad implements
         }
     }
 
-    private boolean isModen(){
-        return omhældning.getLast().isModen();
-
-    }
-
-
     public void addDestilat(Destilat destilat){
         destillater.add(destilat);
     }
