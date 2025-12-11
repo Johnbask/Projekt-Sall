@@ -163,7 +163,6 @@ public class Controller {
             if (!fad.addLiterOfDestilatToFad(mængde) || !destilat.tapDestilat(mængde)) {
                 return null;
             }
-            destilat.setUsed(true);
             fad.addDestilat(destilat);
 
 
