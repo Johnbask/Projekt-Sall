@@ -116,20 +116,36 @@ public class App {
         Controller.opretMedarbejder("Ruben","Gud");
         Controller.opretMedarbejder("John","Apostel");
         Controller.opretMedarbejder("Sander Frozen","Is prinsesse");
-        Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),200,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","jeg er cool",Controller.getVands().getFirst());
-        Destillering destillering2 = new Destillering(LocalDate.of(1913,12,12),LocalDate.of(1913,12,14),200,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","jeg er cool",Controller.getVands().getFirst());
-        //Controller.opretDestilat(100.0,true,true,destillering);
-        //Controller.opretDestilat(200,true,true,destillering);
-        //Controller.opretDestilat(300,true,true,destillering);
+        Destillering destillering = new Destillering(LocalDate.of(2025,12,12),LocalDate.of(2025,12,14),1000,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","jeg er cool",Controller.getVands().getFirst());
+        Destillering destillering2 = new Destillering(LocalDate.of(1913,12,12),LocalDate.of(1913,12,14),1000,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","jeg er cool",Controller.getVands().getFirst());
+        Destillering destillering3 = new Destillering(LocalDate.of(2020,10,10),LocalDate.of(2021,10,10),500,50,Controller.getMedarbejderne().getFirst(),"Korn","Ivory","",Controller.getVands().get(1));
+        Destillering destillering4 = new Destillering(LocalDate.of(2000,5,5),LocalDate.of(2000,6,6),500,50,Controller.getMedarbejderne().getFirst(),"Malt","Grøn røg","God urt",Controller.getVands().getFirst());
+        Destilat des1 = Controller.opretDestilat(750, true, false, destillering);
+        Destilat des2 = Controller.opretDestilat(800, true, true, destillering2);
+        Destilat des3 = Controller.opretDestilat(400, true, true, destillering3);
+        Destilat des4 = Controller.opretDestilat(500, true, true, destillering4);
 
-        Destilat des1 = Controller.opretDestilat(1500, true, false, destillering);
-        Destilat des2 = Controller.opretDestilat(1000, true, true, destillering2);
 
         Controller.opretPåhældning(fad19, des1, LocalDate.of(2025, 12, 13), 30, Controller.getMedarbejderne().getFirst());
         Controller.opretPåhældning(fad20, des2, LocalDate.of(1999, 12, 12), 90, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad20, des3, LocalDate.of(2024, 11, 11), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad20, des4, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad1, des1, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad2, des2, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad3, des3, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad4, des4, LocalDate.of(2024, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+
+        // modne fade
+        Controller.opretPåhældning(fad6, des2, LocalDate.of(2021, 5, 5), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad7, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad8, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
+        Controller.opretPåhældning(fad9, des2, LocalDate.of(2021, 12, 12), 5, Controller.getMedarbejderne().getFirst());
 
 
         Flaske flaske1 = Controller.opretFlaske(0.5,42,LocalDate.now().plusMonths(1),"Gyldne Dråber",fad20,Controller.getVands().getFirst());
+        Flaske flaske2 = Controller.opretFlaske(0.75,42,LocalDate.now().plusMonths(1),"Dragens elixir",fad1,Controller.getVands().getFirst());
+        Flaske flaske3 = Controller.opretFlaske(5,48,LocalDate.now().plusMonths(1),"Mobbe drengen",fad1,Controller.getVands().getFirst());
+        Flaske flaske4 = Controller.opretFlaske(0.44,44,LocalDate.now().plusMonths(1),"Jhins favorite",fad1,Controller.getVands().getFirst());
 
 
 
